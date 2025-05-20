@@ -3,7 +3,7 @@ import { IdAdapter } from "../../infra/adapters/idAdapter";
 type ConstructorProps = {
   id: string;
   name: string;
-  mail: string;
+  email: string;
   password: string;
   utc: number;
   createdAt: Date;
@@ -12,14 +12,14 @@ type ConstructorProps = {
 
 type CreateUserProps = {
   name: string;
-  mail: string;
+  email: string;
   password: string;
   utc: number;
 };
 
 type UpdateUserProps = {
   name?: string;
-  mail?: string;
+  email?: string;
 };
 
 type RestoreUserProps = ConstructorProps;
@@ -27,7 +27,7 @@ type RestoreUserProps = ConstructorProps;
 class User {
   id: string;
   name: string;
-  mail: string;
+  email: string;
   password: string;
   utc: number;
   createdAt: Date;
@@ -36,7 +36,7 @@ class User {
   private constructor(props: ConstructorProps) {
     this.id = props.id;
     this.name = props.name;
-    this.mail = props.mail;
+    this.email = props.email;
     this.password = props.password;
     this.utc = props.utc;
     this.createdAt = props.createdAt;
@@ -48,7 +48,7 @@ class User {
     return new User({
       id: idAdapter.generate(),
       name: props.name,
-      mail: props.mail,
+      email: props.email,
       password: props.password,
       utc: props.utc,
       createdAt: new Date(),
@@ -60,7 +60,7 @@ class User {
     return new User({
       id: props.id,
       name: props.name,
-      mail: props.mail,
+      email: props.email,
       password: props.password,
       utc: props.utc,
       createdAt: props.createdAt,
@@ -70,7 +70,7 @@ class User {
 
   update(props: UpdateUserProps) {
     this.name = props.name ?? this.name;
-    this.mail = props.mail ?? this.mail;
+    this.email = props.email ?? this.email;
     this.updatedAt = new Date();
   }
 
@@ -78,7 +78,7 @@ class User {
     return {
       id: this.id,
       name: this.name,
-      mail: this.mail,
+      email: this.email,
       utc: this.utc,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,

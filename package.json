@@ -1,16 +1,17 @@
 {
-  "name": "arkyn-logs",
+  "name": "@arkyn/logs-api",
   "type": "module",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
+    "ccm": "./autocommit.sh",
     "test:all": "vitest --config vitest.config.ts",
-    "test:entities": "vitest --config vitest.config.ts src/app/entities/**/*.spec.ts"
+    "test:entities": "vitest --config vitest.config.ts src/app/entities/**/*.spec.ts",
+    "test:repositories": "vitest --config vitest.config.ts src/app/repositories/**/*.spec.ts"
   },
   "dependencies": {
     "@arkyn/server": "^2.2.15",
     "@arkyn/shared": "^2.2.15",
     "@arkyn/templates": "^2.2.15",
-    "ccm": "./autocommit.sh",
     "hono": "^4.7.10"
   },
   "devDependencies": {

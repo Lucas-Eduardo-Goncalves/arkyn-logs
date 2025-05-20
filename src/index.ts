@@ -1,11 +1,11 @@
 import { Hono } from "hono";
-import { User } from "./app/entities/User";
+import { ErrorHandlerAdapter } from "./infra/adapters/errorHandlerAdapter";
+import { userRoutes } from "./routes/user.routes";
 
 const app = new Hono();
+const errorHandlerAdapter = new ErrorHandlerAdapter();
 
-app.get("/", (c) => {
-  const user = User.create({ mail: "", name: "", password: "", utc: 0 });
-  return c.json(user.toJson());
-});
+app.route("/users", userRoutes);
+app.onError(errorHandlerAdapter.handle);
 
 export default app;
