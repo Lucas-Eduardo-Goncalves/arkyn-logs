@@ -1,3 +1,4 @@
+import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
 import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
 import { createUserSchema } from "../../../../infra/schemas/internal/user";
 import { User } from "../../../entities/user";
@@ -8,9 +9,16 @@ class CreateUserUseCase {
 
   async execute(body: any) {
     const schemaValidator = new SchemaValidatorAdapter(createUserSchema);
-    const validatedBody = schemaValidator.validate(body);
+    const { email, name, password, utc } = schemaValidator.validate(body);
 
-    const user = User.create(validatedBody);
+    const existsUser = await this.userRepository.findByEmail(email);
+
+    if (existsUser) {
+      const httpAdapter = new HttpAdapter();
+      return httpAdapter.conflict("User already exists");
+    }
+
+    const user = User.create({ email, name, password, utc });
     await this.userRepository.createUser(user);
 
     return user.toJson();

@@ -13,4 +13,8 @@ const updateUserSchema = z.object({
   utc: z.number().optional(),
 });
 
-export { createUserSchema, updateUserSchema };
+const deleteUserSchema = z.object({
+  id: z.string().uuid("Invalid ID format"),
+});
+
+export { createUserSchema, deleteUserSchema, updateUserSchema };
