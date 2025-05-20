@@ -1,8 +1,7 @@
 import { errorHandler } from "@arkyn/server";
 
 class ErrorHandlerAdapter {
-  handle(error: Error) {
-    console.error(error);
+  handle(error: any) {
     return errorHandler(error);
   }
 }

@@ -12,7 +12,8 @@
     "@arkyn/server": "^2.2.15",
     "@arkyn/shared": "^2.2.15",
     "@arkyn/templates": "^2.2.15",
-    "hono": "^4.7.10"
+    "hono": "^4.7.10",
+    "zod": "^3.25.7"
   },
   "devDependencies": {
     "@arkyn/types": "^2.2.15",
