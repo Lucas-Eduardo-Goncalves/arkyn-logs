@@ -19,7 +19,7 @@ type CreateUserProps = {
 
 type UpdateUserProps = {
   name?: string;
-  email?: string;
+  utc?: number;
 };
 
 type RestoreUserProps = ConstructorProps;
@@ -70,7 +70,7 @@ class User {
 
   update(props: UpdateUserProps) {
     this.name = props.name ?? this.name;
-    this.email = props.email ?? this.email;
+    this.utc = props.utc ?? this.utc;
     this.updatedAt = new Date();
   }
 

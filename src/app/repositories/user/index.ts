@@ -1,4 +1,5 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { UserMapper } from "../../../infra/mappers/user";
 import { User } from "../../entities/user";
 import { UserRepositoryDTO } from "./repositoryDTO";
 
@@ -11,12 +12,14 @@ class UserRepository implements UserRepositoryDTO {
 
   async findById(userId: string): Promise<User | null> {
     const user = UserRepository.users.find((user) => user.id === userId);
-    return user || null;
+    if (!user) return null;
+    return UserMapper.toEntity(user);
   }
 
   async findByEmail(email: string): Promise<User | null> {
     const user = UserRepository.users.find((user) => user.email === email);
-    return user || null;
+    if (!user) return null;
+    return UserMapper.toEntity(user);
   }
 
   async createUser(user: User): Promise<User> {

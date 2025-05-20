@@ -4,7 +4,10 @@ import { ListUsersUseCase } from "./listUsersUseCase";
 
 const userRepository = new UserRepository();
 const listUsersUseCase = new ListUsersUseCase(userRepository);
-const listUsersControler = new ListUsersController(listUsersUseCase);
+const listUsersController = new ListUsersController(listUsersUseCase);
 
-const listUsers = listUsersControler;
+const listUsers = {
+  handle: listUsersController.handle.bind(listUsersController),
+};
+
 export { listUsers };

@@ -4,7 +4,10 @@ import { CreateUserUseCase } from "./createUserUseCase";
 
 const userRepository = new UserRepository();
 const createUserUseCase = new CreateUserUseCase(userRepository);
-const createUserControler = new CreateUserController(createUserUseCase);
+const createUserController = new CreateUserController(createUserUseCase);
 
-const createUser = createUserControler;
+const createUser = {
+  handle: createUserController.handle.bind(createUserController),
+};
+
 export { createUser };

@@ -7,4 +7,10 @@ const createUserSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
-export { createUserSchema };
+const updateUserSchema = z.object({
+  id: z.string().uuid("Invalid ID format"),
+  name: z.string().min(1, "Name is required").optional(),
+  utc: z.number().optional(),
+});
+
+export { createUserSchema, updateUserSchema };
