@@ -1,15 +1,14 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
 import { RouteDTO } from "../../../../shared/types/RouteDTO";
-import { DeleteUserUseCase } from "./deleteUserUseCase";
+import { ListLogChannelsUseCase } from "./listLogChannelsUseCase";
 
-class DeleteUserController {
-  constructor(private deleteUserUseCase: DeleteUserUseCase) {}
+class ListLogChannelsController {
+  constructor(private listLogChannelsUseCase: ListLogChannelsUseCase) {}
 
   async handle(route: RouteDTO) {
     try {
-      const body = route.request.body;
-      const user = await this.deleteUserUseCase.execute(body);
-      return route.response.json(user);
+      const logChannels = await this.listLogChannelsUseCase.execute();
+      return route.response.json(logChannels);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);
@@ -17,4 +16,4 @@ class DeleteUserController {
   }
 }
 
-export { DeleteUserController };
+export { ListLogChannelsController };

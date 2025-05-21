@@ -7,7 +7,8 @@ class CreateUserController {
 
   async handle(route: RouteDTO) {
     try {
-      const user = await this.createUserUseCase.execute(route.request.body);
+      const body = route.request.body;
+      const user = await this.createUserUseCase.execute(body);
       return route.response.json(user, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();

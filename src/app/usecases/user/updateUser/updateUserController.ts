@@ -7,7 +7,8 @@ class UpdateUserController {
 
   async handle(route: RouteDTO) {
     try {
-      const user = await this.updateUserUseCase.execute(route.request.body);
+      const body = route.request.body;
+      const user = await this.updateUserUseCase.execute(body);
       return route.response.json(user);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
