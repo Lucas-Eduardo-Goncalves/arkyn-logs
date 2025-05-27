@@ -1,7 +1,7 @@
 import { LogChannel } from "../../entities/logChannel";
 
 type LogChannelRepositoryDTO = {
-  findAll: () => Promise<LogChannel[]>;
+  findAll: (userId: string) => Promise<LogChannel[]>;
   findById: (logChannelId: string) => Promise<LogChannel | null>;
   createLogChannel: (LogChannel: LogChannel) => Promise<LogChannel>;
   updateLogChannel: (LogChannel: LogChannel) => Promise<LogChannel>;

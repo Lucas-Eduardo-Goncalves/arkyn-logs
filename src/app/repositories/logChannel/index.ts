@@ -6,8 +6,10 @@ import { LogChannelRepositoryDTO } from "./repositoryDTO";
 class LogChannelRepository implements LogChannelRepositoryDTO {
   static logChannels: LogChannel[] = [];
 
-  async findAll(): Promise<LogChannel[]> {
-    return LogChannelRepository.logChannels;
+  async findAll(userId: string): Promise<LogChannel[]> {
+    return LogChannelRepository.logChannels
+      .filter((logChannel) => logChannel.userId === userId)
+      .map((logChannel) => LogChannelMapper.toEntity(logChannel));
   }
 
   async findById(logChannelId: string): Promise<LogChannel | null> {

@@ -19,7 +19,7 @@ class CreateLogChannelUseCase {
 
     if (!existsUser) {
       const httpAdapter = new HttpAdapter();
-      return httpAdapter.notFound("User not found");
+      throw httpAdapter.notFound("User not found");
     }
 
     const logChannel = LogChannel.create({ name, userId });

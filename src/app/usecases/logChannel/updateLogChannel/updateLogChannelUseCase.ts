@@ -14,7 +14,7 @@ class UpdateLogChannelUseCase {
 
     if (!logChannel) {
       const httpAdapter = new HttpAdapter();
-      return httpAdapter.notFound("Log channel not found");
+      throw httpAdapter.notFound("Log channel not found");
     }
 
     logChannel.update({ name });

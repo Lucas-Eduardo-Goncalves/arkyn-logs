@@ -16,7 +16,7 @@ class DeleteLogChannelUseCase {
 
     if (!logChannel) {
       const httpAdapter = new HttpAdapter();
-      return httpAdapter.notFound("Log channel not found");
+      throw httpAdapter.notFound("Log channel not found");
     }
 
     await this.logChannelRepository.deleteLogChannel(logChannel.id);

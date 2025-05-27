@@ -1,7 +1,7 @@
 import { LogError } from "../../entities/logError";
 
 type LogErrorRepositoryDTO = {
-  findAll: () => Promise<LogError[]>;
+  findAll: (logChannelId: string) => Promise<LogError[]>;
   findById: (logErrorId: string) => Promise<LogError | null>;
   createLogError: (LogError: LogError) => Promise<LogError>;
   updateLogError: (LogError: LogError) => Promise<LogError>;

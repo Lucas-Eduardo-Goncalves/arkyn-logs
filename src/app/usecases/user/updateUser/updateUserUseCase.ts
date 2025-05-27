@@ -14,7 +14,7 @@ class UpdateUserUseCase {
 
     if (!user) {
       const httpAdapter = new HttpAdapter();
-      return httpAdapter.notFound("User not found");
+      throw httpAdapter.notFound("User not found");
     }
 
     user.update(validatedBody);

@@ -15,7 +15,7 @@ class CreateUserUseCase {
 
     if (existsUser) {
       const httpAdapter = new HttpAdapter();
-      return httpAdapter.conflict("User already exists");
+      throw httpAdapter.conflict("User already exists");
     }
 
     const user = User.create({ email, name, password, utc });

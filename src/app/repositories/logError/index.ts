@@ -6,8 +6,10 @@ import { LogErrorRepositoryDTO } from "./repositoryDTO";
 class LogErrorRepository implements LogErrorRepositoryDTO {
   static logErrors: LogError[] = [];
 
-  async findAll(): Promise<LogError[]> {
-    return LogErrorRepository.logErrors;
+  async findAll(logChannelId: string): Promise<LogError[]> {
+    return LogErrorRepository.logErrors
+      .filter((logError) => logError.logChannelId === logChannelId)
+      .map((logError) => LogErrorMapper.toEntity(logError));
   }
 
   async findById(logErrorId: string): Promise<LogError | null> {

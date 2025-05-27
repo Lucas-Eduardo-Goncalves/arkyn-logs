@@ -14,7 +14,7 @@ class DeleteUserUseCase {
 
     if (!user) {
       const httpAdapter = new HttpAdapter();
-      return httpAdapter.notFound("User not found");
+      throw httpAdapter.notFound("User not found");
     }
 
     await this.userRepository.deleteUser(user.id);

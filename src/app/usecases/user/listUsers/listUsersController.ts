@@ -1,5 +1,5 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { RouteDTO } from "../../../../shared/types/RouteDTO";
+import { RouteDTO } from "../../../../main/types/RouteDTO";
 import { ListUsersUseCase } from "./listUsersUseCase";
 
 class ListUsersController {
