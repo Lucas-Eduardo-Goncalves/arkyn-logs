@@ -6,8 +6,7 @@
     "ccm": "./autocommit.sh",
     "test:all": "vitest --config vitest.config.ts",
     "test:entities": "vitest --config vitest.config.ts src/app/entities/**/*.spec.ts",
-    "test:repositories": "vitest --config vitest.config.ts src/app/repositories/**/*.spec.ts",
-    "typecheck": "bun run tsc"
+    "test:repositories": "vitest --config vitest.config.ts src/app/repositories/**/*.spec.ts"
   },
   "dependencies": {
     "@arkyn/server": "^2.2.15",
