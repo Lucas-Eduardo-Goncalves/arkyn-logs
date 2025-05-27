@@ -1,5 +1,4 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
 import { RouteDTO } from "../../../../main/types/RouteDTO";
 import { AuthUserUseCase } from "./authUserUseCase";
 
