@@ -12,6 +12,7 @@
     "@arkyn/server": "^2.2.15",
     "@arkyn/shared": "^2.2.15",
     "@arkyn/templates": "^2.2.15",
+    "argon2": "^0.43.0",
     "hono": "^4.7.10",
     "jose": "^6.0.11",
     "zod": "^3.25.7"

@@ -7,11 +7,12 @@ import { HttpAdapter } from "./httpAdapter";
 class JwtAdapter {
   constructor() {}
 
-  async verify(token: string) {
+  async verify(rawToken: string) {
     const httpAdapter = new HttpAdapter();
 
     try {
       const secret = new TextEncoder().encode(env.JWT_KEY);
+      const token = rawToken.replace("Bearer ", "");
       const { payload } = await jwtVerify(token, secret);
       const userId = payload?.id;
 

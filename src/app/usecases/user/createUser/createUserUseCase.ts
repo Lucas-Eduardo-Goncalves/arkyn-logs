@@ -1,4 +1,5 @@
 import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
+import { PasswordAdapter } from "../../../../infra/adapters/passwordAdapter";
 import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
 import { createUserSchema } from "../../../../infra/schemas/internal/user";
 import { User } from "../../../entities/user";
@@ -18,7 +19,10 @@ class CreateUserUseCase {
       throw httpAdapter.conflict("User already exists");
     }
 
-    const user = User.create({ email, name, password, utc });
+    const passwordAdapter = new PasswordAdapter();
+    const hashedPassword = await passwordAdapter.hash(password);
+
+    const user = User.create({ email, name, password: hashedPassword, utc });
     await this.userRepository.createUser(user);
 
     return user.toJson();

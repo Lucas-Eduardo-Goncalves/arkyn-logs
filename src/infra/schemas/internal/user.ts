@@ -1,5 +1,10 @@
 import z from "zod";
 
+const authUserSchema = z.object({
+  email: z.string().email("Invalid email format"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
 const createUserSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email format"),
@@ -17,4 +22,4 @@ const deleteUserSchema = z.object({
   id: z.string().uuid("Invalid ID format"),
 });
 
-export { createUserSchema, deleteUserSchema, updateUserSchema };
+export { authUserSchema, createUserSchema, deleteUserSchema, updateUserSchema };
