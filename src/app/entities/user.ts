@@ -1,3 +1,4 @@
+import { FormatDateAdapter } from "../../infra/adapters/formatDateAdapter";
 import { IdAdapter } from "../../infra/adapters/idAdapter";
 
 type ConstructorProps = {
@@ -75,13 +76,17 @@ class User {
   }
 
   toJson() {
+    const formatDateAdapter = new FormatDateAdapter();
+    const createdAt = formatDateAdapter.format(this.createdAt);
+    const updatedAt = formatDateAdapter.format(this.updatedAt);
+
     return {
       id: this.id,
       name: this.name,
       email: this.email,
       utc: this.utc,
-      createdAt: this.createdAt,
-      updatedAt: this.updatedAt,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     };
   }
 }
