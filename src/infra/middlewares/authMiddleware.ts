@@ -4,7 +4,7 @@ import { JwtAdapter } from "../adapters/jwtAdapter";
 
 class AuthMiddleware {
   static async authenticate(route: RouteDTO) {
-    const token = route.request.headers?.authorization;
+    const token = route?.request?.headers?.authorization;
 
     const httpAdapter = new HttpAdapter();
     if (!token) throw httpAdapter.badRequest("No token provided");

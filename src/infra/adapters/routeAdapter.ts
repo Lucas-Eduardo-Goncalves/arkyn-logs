@@ -19,6 +19,7 @@ class RouteAdapter {
         body: await safeParseJson(),
         params: context.req.param(),
         query: context.req.query(),
+        headers: context.req.header(),
       },
       response: {
         json: (data: any, status?: any) => {

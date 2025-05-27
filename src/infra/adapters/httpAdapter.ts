@@ -8,22 +8,23 @@ import {
 
 class HttpAdapter {
   badRequest(message: string, cause?: any) {
-    new BadRequest(message, cause);
+    throw new BadRequest(message, cause);
   }
+
   serverError(message: string, cause?: any) {
-    new ServerError(message, cause);
+    throw new ServerError(message, cause);
   }
 
   notFound(message: string, cause?: any) {
-    new NotFound(message, cause);
+    throw new NotFound(message, cause);
   }
 
   conflict(message: string, cause?: any) {
-    new Conflict(message, cause);
+    throw new Conflict(message, cause);
   }
 
   unauthorized(message: string, cause?: any) {
-    new Unauthorized(message, cause);
+    throw new Unauthorized(message, cause);
   }
 }
 
