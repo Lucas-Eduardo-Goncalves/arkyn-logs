@@ -1,4 +1,5 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
+import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
 import { RouteDTO } from "../../../../main/types/RouteDTO";
 import { CreateLogChannelUseCase } from "./createLogChannelUseCase";
 
@@ -7,7 +8,8 @@ class CreateLogChannelController {
 
   async handle(route: RouteDTO) {
     try {
-      const body = route.request.body;
+      const { userId } = await AuthMiddleware.authenticate(route);
+      const body = { ...route.request.body, userId };
       const logchannel = await this.createLogChannelUseCase.execute(body);
       return route.response.json(logchannel, 201);
     } catch (error) {

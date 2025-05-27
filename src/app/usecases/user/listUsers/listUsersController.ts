@@ -1,4 +1,5 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
+import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
 import { RouteDTO } from "../../../../main/types/RouteDTO";
 import { ListUsersUseCase } from "./listUsersUseCase";
 
@@ -7,6 +8,7 @@ class ListUsersController {
 
   async handle(route: RouteDTO) {
     try {
+      await AuthMiddleware.authenticate(route);
       const users = await this.listUsersUseCase.execute();
       return route.response.json(users);
     } catch (error) {
