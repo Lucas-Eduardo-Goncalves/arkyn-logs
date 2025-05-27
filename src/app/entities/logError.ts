@@ -17,8 +17,6 @@ type CreateLogErrorProps = {
   hash: string;
   message: string;
   metadata: string;
-  firstSeenAt: Date;
-  lastSeenAt: Date;
   logChannelId: string;
 };
 
@@ -54,8 +52,8 @@ class LogError {
       hash: props.hash,
       message: props.message,
       metadata: props.metadata,
-      firstSeenAt: props.firstSeenAt,
-      lastSeenAt: props.lastSeenAt,
+      firstSeenAt: new Date(),
+      lastSeenAt: new Date(),
       logChannelId: props.logChannelId,
       createdAt: new Date(),
       updatedAt: new Date(),

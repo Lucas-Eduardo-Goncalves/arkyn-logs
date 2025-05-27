@@ -20,6 +20,14 @@ class LogErrorRepository implements LogErrorRepositoryDTO {
     return LogErrorMapper.toEntity(logError);
   }
 
+  async findByHash(hash: string): Promise<LogError | null> {
+    const logError = LogErrorRepository.logErrors.find(
+      (logError) => logError.hash === hash
+    );
+    if (!logError) return null;
+    return LogErrorMapper.toEntity(logError);
+  }
+
   async createLogError(logError: LogError): Promise<LogError> {
     LogErrorRepository.logErrors.push(logError);
     return logError;
