@@ -1,16 +1,12 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
-import { RouteDTO } from "../../../../main/types/RouteDTO";
 import { UpdateLogErrorUseCase } from "./updateLogErrorUseCase";
 
 class UpdateLogErrorController {
   constructor(private updateLogErrorUseCase: UpdateLogErrorUseCase) {}
 
-  async handle(route: RouteDTO, logErrorId: string) {
+  async handle(logErrorId: string) {
     try {
-      await AuthMiddleware.authenticate(route);
-      const logerror = await this.updateLogErrorUseCase.execute(logErrorId);
-      return route.response.json(logerror, 201);
+      await this.updateLogErrorUseCase.execute(logErrorId);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

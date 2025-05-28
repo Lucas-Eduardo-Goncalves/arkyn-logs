@@ -1,6 +1,4 @@
 import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { createLogErrorSchema } from "../../../../infra/schemas/internal/logError";
 import { LogError } from "../../../entities/logError";
 import { LogChannelRepository } from "../../../repositories/logChannel";
 import { LogErrorRepository } from "../../../repositories/logError";
@@ -12,10 +10,7 @@ class CreateLogErrorUseCase {
     private logChannelRepository: LogChannelRepository
   ) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(createLogErrorSchema);
-    const { logChannelId, message, metadata } = schemaValidator.validate(body);
-
+  async execute(logChannelId: string, message: string, metadata: any) {
     const logChannel = await this.logChannelRepository.findById(logChannelId);
 
     if (!logChannel) {
@@ -23,16 +18,12 @@ class CreateLogErrorUseCase {
       throw httpAdapter.notFound("Log channel not found");
     }
 
-    const jsonMetadata = JSON.stringify(metadata || {});
-    const contentToHash = `${logChannelId}:${message}:${jsonMetadata}`;
-    const hash = HashService.hashString(contentToHash);
-
+    const hash = HashService.hashLog(logChannel.id, message, metadata);
     const existingLogError = await this.logErrorRepository.findByHash(hash);
 
     if (existingLogError) {
-      existingLogError.update();
-      this.logErrorRepository.updateLogError(existingLogError);
-      return existingLogError.toJson();
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.conflict("Log error already exists");
     }
 
     const logError = LogError.create({
