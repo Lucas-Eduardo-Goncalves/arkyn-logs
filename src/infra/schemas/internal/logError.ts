@@ -6,7 +6,9 @@ const createLogErrorSchema = z.object({
   metadata: z.any(),
 });
 
-const updateLogErrorSchema = z.object({});
+const updateLogErrorSchema = z.object({
+  id: z.string().uuid("Invalid ID format"),
+});
 
 const deleteLogErrorSchema = z.object({
   id: z.string().uuid("Invalid ID format"),

@@ -8,7 +8,7 @@ class UpdateLogErrorUseCase {
 
   async execute(body: any) {
     const schemaValidator = new SchemaValidatorAdapter(updateLogErrorSchema);
-    const { name, id } = schemaValidator.validate(body);
+    const { id } = schemaValidator.validate(body);
 
     const logError = await this.logErrorRepository.findById(id);
 
@@ -17,7 +17,7 @@ class UpdateLogErrorUseCase {
       throw httpAdapter.notFound("Log channel not found");
     }
 
-    logError.update({ name });
+    logError.update();
     await this.logErrorRepository.updateLogError(logError);
 
     return logError.toJson();
