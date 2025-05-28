@@ -6,11 +6,10 @@ import { LogErrorRepository } from "../../../repositories/logError";
 class UpdateLogErrorUseCase {
   constructor(private logErrorRepository: LogErrorRepository) {}
 
-  async execute(body: any) {
+  async execute(logErrorId: string) {
     const schemaValidator = new SchemaValidatorAdapter(updateLogErrorSchema);
-    const { id } = schemaValidator.validate(body);
 
-    const logError = await this.logErrorRepository.findById(id);
+    const logError = await this.logErrorRepository.findById(logErrorId);
 
     if (!logError) {
       const httpAdapter = new HttpAdapter();
