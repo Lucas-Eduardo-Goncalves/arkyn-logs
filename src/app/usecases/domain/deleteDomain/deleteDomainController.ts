@@ -9,8 +9,12 @@ class DeleteDomainController {
   async handle(route: RouteDTO) {
     try {
       await AuthMiddleware.authenticate(route);
-      const body = route.request.body;
-      const trafficsource = await this.deleteDomainUseCase.execute(body);
+      const domainId = route.request.params?.domainId;
+
+      const trafficsource = await this.deleteDomainUseCase.execute({
+        domainId,
+      });
+
       return route.response.json(trafficsource);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
