@@ -1,5 +1,4 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
-import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 import { TrafficSourceMapper } from "../../../infra/mappers/trafficSource";
 import { TrafficSource } from "../../entities/trafficSource";
 import { TrafficSourceRepositoryDTO } from "./repositoryDTO";

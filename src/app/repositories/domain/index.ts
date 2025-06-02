@@ -1,54 +1,51 @@
-import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { DomainMapper } from "../../../infra/mappers/domain";
 import { Domain } from "../../entities/domain";
 import { DomainRepositoryDTO } from "./repositoryDTO";
 
 class DomainRepository implements DomainRepositoryDTO {
-  static domains: Domain[] = [];
-
   async findAll(trafficSourceId: string): Promise<Domain[]> {
-    return DomainRepository.domains
-      .filter((domain) => domain.trafficSourceId === trafficSourceId)
-      .map((domain) => DomainMapper.toEntity(domain));
+    const domains = await databaseConnection.domain.findMany({
+      where: { trafficSourceId },
+    });
+    return domains.map((domain) => DomainMapper.toEntity(domain));
   }
 
   async findById(domainId: string): Promise<Domain | null> {
-    const domain = DomainRepository.domains.find(
-      (domain) => domain.id === domainId
-    );
+    const domain = await databaseConnection.domain.findUnique({
+      where: { id: domainId },
+    });
     if (!domain) return null;
     return DomainMapper.toEntity(domain);
   }
 
   async findByValue(value: string): Promise<Domain | null> {
-    const domain = DomainRepository.domains.find(
-      (domain) => domain.value === value
-    );
+    const domain = await databaseConnection.domain.findFirst({
+      where: { value },
+    });
 
     if (!domain) return null;
     return DomainMapper.toEntity(domain);
   }
 
   async createDomain(domain: Domain): Promise<Domain> {
-    DomainRepository.domains.push(domain);
+    await databaseConnection.domain.create({ data: domain });
     return domain;
   }
 
   async updateDomain(domain: Domain): Promise<Domain> {
-    const index = DomainRepository.domains.findIndex((u) => u.id === domain.id);
-    const httpAdpter = new HttpAdapter();
-    if (index === -1) httpAdpter.serverError("Domain not found");
-    DomainRepository.domains[index] = domain;
+    await databaseConnection.domain.update({
+      where: { id: domain.id },
+      data: domain,
+    });
+
     return domain;
   }
 
   async deleteDomain(domainId: string): Promise<void> {
-    const index = DomainRepository.domains.findIndex(
-      (domain) => domain.id === domainId
-    );
-    const httpAdpter = new HttpAdapter();
-    if (index === -1) httpAdpter.serverError("Domain not found");
-    DomainRepository.domains.splice(index, 1);
+    await databaseConnection.domain.delete({
+      where: { id: domainId },
+    });
   }
 }
 
