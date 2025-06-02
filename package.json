@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "ccm": "./autocommit.sh",
+    "db:migrate": "bunx prisma migrate dev",
     "db:generate": "bunx prisma generate",
     "db:push": "bunx prisma db push",
     "test:all": "vitest --config vitest.config.ts",
