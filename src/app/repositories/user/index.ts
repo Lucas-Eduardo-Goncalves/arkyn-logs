@@ -1,45 +1,50 @@
-import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { UserMapper } from "../../../infra/mappers/user";
 import { User } from "../../entities/user";
 import { UserRepositoryDTO } from "./repositoryDTO";
 
 class UserRepository implements UserRepositoryDTO {
-  static users: User[] = [];
-
   async findAll(): Promise<User[]> {
-    return UserRepository.users;
+    const users = await databaseConnection.user.findMany();
+    return users.map((user) => UserMapper.toEntity(user));
   }
 
   async findById(userId: string): Promise<User | null> {
-    const user = UserRepository.users.find((user) => user.id === userId);
+    const user = await databaseConnection.user.findUnique({
+      where: { id: userId },
+    });
+
     if (!user) return null;
     return UserMapper.toEntity(user);
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = UserRepository.users.find((user) => user.email === email);
+    const user = await databaseConnection.user.findUnique({
+      where: { email },
+    });
+
     if (!user) return null;
     return UserMapper.toEntity(user);
   }
 
   async createUser(user: User): Promise<User> {
-    UserRepository.users.push(user);
+    await databaseConnection.user.create({ data: user });
     return user;
   }
 
   async updateUser(user: User): Promise<User> {
-    const index = UserRepository.users.findIndex((u) => u.id === user.id);
-    const httpAdpter = new HttpAdapter();
-    if (index === -1) httpAdpter.serverError("User not found");
-    UserRepository.users[index] = user;
+    await databaseConnection.user.update({
+      data: user,
+      where: { id: user.id },
+    });
+
     return user;
   }
 
   async deleteUser(userId: string): Promise<void> {
-    const index = UserRepository.users.findIndex((user) => user.id === userId);
-    const httpAdpter = new HttpAdapter();
-    if (index === -1) httpAdpter.serverError("User not found");
-    UserRepository.users.splice(index, 1);
+    await databaseConnection.user.delete({
+      where: { id: userId },
+    });
   }
 }
 

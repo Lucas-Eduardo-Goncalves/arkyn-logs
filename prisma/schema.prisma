@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String          @id
+  email         String          @unique
+  name          String
+  utc           Int
+  password      String
+  createdAt     DateTime
+  updatedAt     DateTime
+  trafficSource TrafficSource[]
+}
+
+model TrafficSource {
+  id            String     @id
+  name          String
+  trafficDomain String
+  createdAt     DateTime
+  updatedAt     DateTime
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+  domain        Domain[]
+  pathname      Pathname[]
+}
+
+model Domain {
+  id              String        @id
+  value           String
+  createdAt       DateTime
+  trafficSourceId String
+  trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
+  pathname        Pathname[]
+}
+
+model Pathname {
+  id              String        @id
+  value           String
+  createdAt       DateTime
+  trafficSourceId String
+  domainId        String
+  trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
+  domain          Domain        @relation(fields: [domainId], references: [id])
+}

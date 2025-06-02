@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-class HashService {
+class HashAdapter {
   static hashLog(id: string, message: string, metadata: any): string {
     const jsonMetadata = JSON.stringify(metadata || {});
     const contentToHash = `${id}:${message}:${jsonMetadata}`;
@@ -14,4 +14,4 @@ class HashService {
   }
 }
 
-export { HashService };
+export { HashAdapter };

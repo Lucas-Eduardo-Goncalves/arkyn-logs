@@ -10,6 +10,10 @@ class EnvError extends Error {
 const envSchema = z.object({
   // JWT KEY
   JWT_KEY: z.string().min(1),
+
+  // DATABASE URL
+  DATABASE_URL: z.string().url(),
+  DIRECT_URL: z.string().url(),
 });
 
 function formatErrorMessage(error: z.ZodError) {
