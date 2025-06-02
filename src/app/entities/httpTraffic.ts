@@ -1,19 +1,9 @@
 import { FormatDateAdapter } from "../../infra/adapters/formatDateAdapter";
 import { IdAdapter } from "../../infra/adapters/idAdapter";
 
-enum Method {
-  "POST",
-  "PUT",
-  "PATCH",
-  "DELETE",
-  "GET",
-}
+type Method = "POST" | "PUT" | "PATCH" | "DELETE" | "GET";
 
-enum Level {
-  "INFO",
-  "FATAL",
-  "WARNING",
-}
+type Level = "INFO" | "FATAL" | "WARNING";
 
 type ConstructorProps = {
   id: string;
@@ -58,9 +48,9 @@ class HttpTraffic {
   }
 
   private static getLevelByStatus(status: number): Level {
-    if (status >= 400 && status < 500) return Level.WARNING;
-    else if (status >= 500) return Level.FATAL;
-    else return Level.INFO;
+    if (status >= 400 && status < 500) return "WARNING";
+    else if (status >= 500) return "FATAL";
+    else return "INFO";
   }
 
   static create(props: CreateHttpTrafficProps) {
