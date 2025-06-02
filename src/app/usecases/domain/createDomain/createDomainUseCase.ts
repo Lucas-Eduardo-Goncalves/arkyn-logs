@@ -16,14 +16,11 @@ class CreateDomainUseCase {
     const { trafficSourceId, value } = schemaValidator.validate(body);
 
     const [existsTrafficSource, existsDomain] = await Promise.all([
-      this.trafficSourceRepository.findById(trafficSourceId),
-      this.domainRepository.findByValue(value),
+      await this.trafficSourceRepository.findById(trafficSourceId),
+      await this.domainRepository.findByValue(value),
     ]);
 
-    console.log("opa");
-
     if (!existsTrafficSource) {
-      console.log("opa2");
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Traffic source not found");
     }

@@ -13,11 +13,9 @@ class TrafficSourceRepository implements TrafficSourceRepositoryDTO {
   }
 
   async findById(trafficSourceId: string): Promise<TrafficSource | null> {
-    console.log("findById", trafficSourceId);
     const trafficSource = TrafficSourceRepository.trafficSources.find(
       (trafficSource) => trafficSource.id === trafficSourceId
     );
-    console.log(trafficSource || "bykk");
     if (!trafficSource) return null;
     return TrafficSourceMapper.toEntity(trafficSource);
   }
