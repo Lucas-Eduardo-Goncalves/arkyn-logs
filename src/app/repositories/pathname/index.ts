@@ -6,9 +6,16 @@ import { PathnameRepositoryDTO } from "./repositoryDTO";
 class PathnameRepository implements PathnameRepositoryDTO {
   static pathnames: Pathname[] = [];
 
-  async findAll(trafficSourceId: string): Promise<Pathname[]> {
+  async findAll(
+    trafficSourceId: string,
+    domainId: string
+  ): Promise<Pathname[]> {
     return PathnameRepository.pathnames
-      .filter((pathname) => pathname.trafficSourceId === trafficSourceId)
+      .filter(
+        (pathname) =>
+          pathname.trafficSourceId === trafficSourceId &&
+          pathname.domainId === domainId
+      )
       .map((pathname) => PathnameMapper.toEntity(pathname));
   }
 

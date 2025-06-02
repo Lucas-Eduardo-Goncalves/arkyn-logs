@@ -1,6 +1,6 @@
 import z from "zod";
 
-const createDomainSchema = z.object({
+const createPathnameSchema = z.object({
   value: z.string().min(1, "Value is required").url("Invalid URL format"),
   trafficSourceId: z
     .string()
@@ -8,12 +8,12 @@ const createDomainSchema = z.object({
     .uuid("Invalid traffic source id format"),
   domainId: z
     .string()
-    .min(1, "Domain id is required")
+    .min(1, "Pathname id is required")
     .uuid("Invalid domain id format"),
 });
 
-const deleteDomainSchema = z.object({
+const deletePathnameSchema = z.object({
   id: z.string().uuid("Invalid id format"),
 });
 
-export { createDomainSchema, deleteDomainSchema };
+export { createPathnameSchema, deletePathnameSchema };
