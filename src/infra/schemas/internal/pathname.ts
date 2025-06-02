@@ -6,6 +6,10 @@ const createDomainSchema = z.object({
     .string()
     .min(1, "Traffic source id is required")
     .uuid("Invalid traffic source id format"),
+  domainId: z
+    .string()
+    .min(1, "Domain id is required")
+    .uuid("Invalid domain id format"),
 });
 
 const deleteDomainSchema = z.object({

@@ -6,11 +6,11 @@ const createTrafficSourceSchema = z.object({
     .string()
     .min(1, "Traffic domain is required")
     .url("Invalid URL format"),
-  userId: z.string().uuid("Invalid user ID format"),
+  userId: z.string().uuid("Invalid user id format"),
 });
 
 const updateTrafficSourceSchema = z.object({
-  id: z.string().uuid("Invalid ID format"),
+  id: z.string().uuid("Invalid id format"),
   trafficDomain: z
     .string()
     .min(1, "Traffic domain is required")
@@ -20,7 +20,7 @@ const updateTrafficSourceSchema = z.object({
 });
 
 const deleteTrafficSourceSchema = z.object({
-  id: z.string().uuid("Invalid ID format"),
+  id: z.string().uuid("Invalid id format"),
 });
 
 export {
