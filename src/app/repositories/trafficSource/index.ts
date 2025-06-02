@@ -20,6 +20,17 @@ class TrafficSourceRepository implements TrafficSourceRepositoryDTO {
     return TrafficSourceMapper.toEntity(trafficSource);
   }
 
+  async findByDomain(
+    trafficSourceDomain: string
+  ): Promise<TrafficSource | null> {
+    const trafficSource = TrafficSourceRepository.trafficSources.find(
+      (trafficSource) => trafficSource.trafficDomain === trafficSourceDomain
+    );
+
+    if (!trafficSource) return null;
+    return TrafficSourceMapper.toEntity(trafficSource);
+  }
+
   async createTrafficSource(
     trafficSource: TrafficSource
   ): Promise<TrafficSource> {

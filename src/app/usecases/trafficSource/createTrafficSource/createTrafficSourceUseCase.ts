@@ -17,11 +17,19 @@ class CreateTrafficSourceUseCase {
     );
     const { name, userId, trafficDomain } = schemaValidator.validate(body);
 
-    const existsUser = await this.userRepository.findById(userId);
+    const [existsUser, existsDomain] = await Promise.all([
+      await this.userRepository.findById(userId),
+      await this.trafficSourceRepository.findByDomain(trafficDomain),
+    ]);
 
     if (!existsUser) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("User not found");
+    }
+
+    if (existsDomain) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.conflict("Traffic domain already exists");
     }
 
     const trafficSource = TrafficSource.create({ name, userId, trafficDomain });
