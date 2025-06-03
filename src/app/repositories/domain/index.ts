@@ -33,15 +33,6 @@ class DomainRepository implements DomainRepositoryDTO {
     return domain;
   }
 
-  async updateDomain(domain: Domain): Promise<Domain> {
-    await databaseConnection.domain.update({
-      where: { id: domain.id },
-      data: domain,
-    });
-
-    return domain;
-  }
-
   async deleteDomain(domainId: string): Promise<void> {
     await databaseConnection.domain.delete({
       where: { id: domainId },

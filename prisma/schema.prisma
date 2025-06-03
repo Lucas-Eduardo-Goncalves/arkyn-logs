@@ -20,15 +20,16 @@ model User {
 }
 
 model TrafficSource {
-  id            String     @id
+  id            String        @id
   name          String
   trafficDomain String
   createdAt     DateTime
   updatedAt     DateTime
   userId        String
-  user          User       @relation(fields: [userId], references: [id])
+  user          User          @relation(fields: [userId], references: [id])
   domain        Domain[]
   pathname      Pathname[]
+  httpTraffic   HttpTraffic[]
 }
 
 model Domain {
@@ -38,6 +39,7 @@ model Domain {
   trafficSourceId String
   trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
   pathname        Pathname[]
+  httpTraffic     HttpTraffic[]
 }
 
 model Pathname {
@@ -48,4 +50,55 @@ model Pathname {
   domainId        String
   trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
   domain          Domain        @relation(fields: [domainId], references: [id])
+  httpTraffic     HttpTraffic[]
+}
+
+enum Method {
+  POST
+  PUT
+  PATCH
+  DELETE
+  GET
+}
+
+enum Level {
+  INFO
+  FATAL
+  WARNING
+}
+
+model HttpTraffic {
+  id                  String        @id
+  status              Int
+  method              Method
+  level               Level
+  trafficSourceUserId String
+  createdAt           DateTime
+  trafficSourceId     String
+  domainId            String
+  pathnameId          String
+  domain              Domain        @relation(fields: [domainId], references: [id])
+  trafficSource       TrafficSource @relation(fields: [trafficSourceId], references: [id])
+  pathname            Pathname      @relation(fields: [pathnameId], references: [id])
+  request             Request[]
+  response            Response[]
+}
+
+model Request {
+  id            String      @id
+  headers       Json
+  body          Json
+  queryParams   Json
+  createdAt     DateTime
+  httpTrafficId String
+  httpTraffic   HttpTraffic @relation(fields: [httpTrafficId], references: [id])
+}
+
+model Response {
+  id            String      @id
+  headers       Json
+  body          Json
+  createdAt     DateTime
+  httpTrafficId String
+  httpTraffic   HttpTraffic @relation(fields: [httpTrafficId], references: [id])
 }

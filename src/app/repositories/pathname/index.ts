@@ -38,15 +38,6 @@ class PathnameRepository implements PathnameRepositoryDTO {
     return pathname;
   }
 
-  async updatePathname(pathname: Pathname): Promise<Pathname> {
-    await databaseConnection.pathname.update({
-      where: { id: pathname.id },
-      data: pathname,
-    });
-
-    return pathname;
-  }
-
   async deletePathname(pathnameId: string): Promise<void> {
     await databaseConnection.pathname.delete({
       where: { id: pathnameId },
