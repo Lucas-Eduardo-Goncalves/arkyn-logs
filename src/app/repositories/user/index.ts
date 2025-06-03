@@ -6,7 +6,7 @@ import { UserRepositoryDTO } from "./repositoryDTO";
 class UserRepository implements UserRepositoryDTO {
   async findAll(): Promise<User[]> {
     const users = await databaseConnection.user.findMany();
-    return users.map((user) => UserMapper.toEntity(user));
+    return users.map(UserMapper.toEntity);
   }
 
   async findById(userId: string): Promise<User | null> {

@@ -1,21 +1,36 @@
 import { Request } from "../../app/entities/request";
+import { JsonAdapter } from "../adapters/jsonAdapter";
 
 type RequestMapperDTO = {
   id: string;
-  headers: Record<string, string>;
-  body: Record<string, string>;
-  queryParams: Record<string, string>;
+  headers: any;
+  body: any;
+  queryParams: any;
   httpTrafficId: string;
   createdAt: Date;
 };
 
 class RequestMapper {
   static toEntity(request: RequestMapperDTO): Request {
+    const jsonAdapter = new JsonAdapter();
     return Request.restore({
       id: request.id,
-      headers: request.headers,
-      body: request.body,
-      queryParams: request.queryParams,
+      headers: jsonAdapter.jsonValueToStringRecord(request.headers),
+      body: jsonAdapter.jsonValueToStringRecord(request.body),
+      queryParams: jsonAdapter.jsonValueToStringRecord(request.queryParams),
+      httpTrafficId: request.httpTrafficId,
+      createdAt: request.createdAt,
+    });
+  }
+
+  static toSafeEntity(request: RequestMapperDTO | null): Request | null {
+    const jsonAdapter = new JsonAdapter();
+    if (!request) return null;
+    return Request.restore({
+      id: request.id,
+      headers: jsonAdapter.jsonValueToStringRecord(request.headers),
+      body: jsonAdapter.jsonValueToStringRecord(request.body),
+      queryParams: jsonAdapter.jsonValueToStringRecord(request.queryParams),
       httpTrafficId: request.httpTrafficId,
       createdAt: request.createdAt,
     });

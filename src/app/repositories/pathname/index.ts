@@ -12,7 +12,7 @@ class PathnameRepository implements PathnameRepositoryDTO {
       where: { domainId, trafficSourceId },
     });
 
-    return pathnames.map((pathname) => PathnameMapper.toEntity(pathname));
+    return pathnames.map(PathnameMapper.toEntity);
   }
 
   async findById(pathnameId: string): Promise<Pathname | null> {

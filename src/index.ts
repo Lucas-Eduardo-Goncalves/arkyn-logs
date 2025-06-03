@@ -2,6 +2,7 @@ import { Hono } from "hono";
 
 import { handlersFactory } from "./app/handlers/handlersFactory";
 import { domainRoutes } from "./routes/domain.routes";
+import { httpTrafficRoutes } from "./routes/http-traffic.routes";
 import { pathnameRoutes } from "./routes/pathname.routes";
 import { trafficSourceRoutes } from "./routes/trafficSource.routes";
 import { userRoutes } from "./routes/user.routes";
@@ -14,5 +15,6 @@ app.route("/users", userRoutes);
 app.route("/traffic-sources", trafficSourceRoutes);
 app.route("/domains", domainRoutes);
 app.route("/pathnames", pathnameRoutes);
+app.route("/http-traffics", httpTrafficRoutes);
 
 export default app;

@@ -8,7 +8,8 @@ class DomainRepository implements DomainRepositoryDTO {
     const domains = await databaseConnection.domain.findMany({
       where: { trafficSourceId },
     });
-    return domains.map((domain) => DomainMapper.toEntity(domain));
+
+    return domains.map(DomainMapper.toEntity);
   }
 
   async findById(domainId: string): Promise<Domain | null> {

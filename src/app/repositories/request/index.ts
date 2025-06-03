@@ -12,16 +12,7 @@ class RequestRepository implements RequestRepositoryDTO {
       where: { httpTrafficId },
     });
 
-    return requests.map((request) =>
-      RequestMapper.toEntity({
-        id: request.id,
-        body: this.toJson.jsonValueToStringRecord(request.body),
-        headers: this.toJson.jsonValueToStringRecord(request.headers),
-        httpTrafficId: request.httpTrafficId,
-        queryParams: this.toJson.jsonValueToStringRecord(request.queryParams),
-        createdAt: request.createdAt,
-      })
-    );
+    return requests.map(RequestMapper.toEntity);
   }
 
   async findById(requestId: string): Promise<Request | null> {
@@ -30,14 +21,7 @@ class RequestRepository implements RequestRepositoryDTO {
     });
 
     if (!request) return null;
-    return RequestMapper.toEntity({
-      id: request.id,
-      body: this.toJson.jsonValueToStringRecord(request.body),
-      headers: this.toJson.jsonValueToStringRecord(request.headers),
-      httpTrafficId: request.httpTrafficId,
-      queryParams: this.toJson.jsonValueToStringRecord(request.queryParams),
-      createdAt: request.createdAt,
-    });
+    return RequestMapper.toEntity(request);
   }
 
   async createRequest(request: Request): Promise<Request> {

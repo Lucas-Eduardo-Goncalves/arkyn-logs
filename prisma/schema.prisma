@@ -68,20 +68,20 @@ enum Level {
 }
 
 model HttpTraffic {
-  id                  String        @id
-  status              Int
-  method              Method
-  level               Level
-  trafficUserId       String?
-  createdAt           DateTime
-  trafficSourceId     String
-  domainId            String
-  pathnameId          String
-  domain              Domain        @relation(fields: [domainId], references: [id])
-  trafficSource       TrafficSource @relation(fields: [trafficSourceId], references: [id])
-  pathname            Pathname      @relation(fields: [pathnameId], references: [id])
-  request             Request[]
-  response            Response[]
+  id              String        @id
+  status          Int
+  method          Method
+  level           Level
+  trafficUserId   String?
+  createdAt       DateTime
+  trafficSourceId String
+  domainId        String
+  pathnameId      String
+  domain          Domain        @relation(fields: [domainId], references: [id])
+  trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
+  pathname        Pathname      @relation(fields: [pathnameId], references: [id])
+  request         Request?
+  response        Response?
 }
 
 model Request {
@@ -90,7 +90,7 @@ model Request {
   body          Json
   queryParams   Json
   createdAt     DateTime
-  httpTrafficId String
+  httpTrafficId String      @unique
   httpTraffic   HttpTraffic @relation(fields: [httpTrafficId], references: [id])
 }
 
@@ -99,6 +99,6 @@ model Response {
   headers       Json
   body          Json
   createdAt     DateTime
-  httpTrafficId String
+  httpTrafficId String      @unique
   httpTraffic   HttpTraffic @relation(fields: [httpTrafficId], references: [id])
 }

@@ -10,9 +10,7 @@ class TrafficSourceRepository implements TrafficSourceRepositoryDTO {
       orderBy: { createdAt: "desc" },
     });
 
-    return trafficSources.map((trafficSource) =>
-      TrafficSourceMapper.toEntity(trafficSource)
-    );
+    return trafficSources.map(TrafficSourceMapper.toEntity);
   }
 
   async findById(trafficSourceId: string): Promise<TrafficSource | null> {

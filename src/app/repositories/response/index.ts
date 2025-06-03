@@ -12,15 +12,7 @@ class ResponseRepository implements ResponseRepositoryDTO {
       where: { httpTrafficId },
     });
 
-    return responses.map((response) =>
-      ResponseMapper.toEntity({
-        id: response.id,
-        body: this.toJson.jsonValueToStringRecord(response.body),
-        headers: this.toJson.jsonValueToStringRecord(response.headers),
-        httpTrafficId: response.httpTrafficId,
-        createdAt: response.createdAt,
-      })
-    );
+    return responses.map(ResponseMapper.toEntity);
   }
 
   async findById(responseId: string): Promise<Response | null> {
@@ -29,13 +21,7 @@ class ResponseRepository implements ResponseRepositoryDTO {
     });
 
     if (!response) return null;
-    return ResponseMapper.toEntity({
-      id: response.id,
-      body: this.toJson.jsonValueToStringRecord(response.body),
-      headers: this.toJson.jsonValueToStringRecord(response.headers),
-      httpTrafficId: response.httpTrafficId,
-      createdAt: response.createdAt,
-    });
+    return ResponseMapper.toEntity(response);
   }
 
   async createResponse(response: Response): Promise<Response> {
