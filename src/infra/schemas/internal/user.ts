@@ -13,13 +13,13 @@ const createUserSchema = z.object({
 });
 
 const updateUserSchema = z.object({
-  id: z.string().uuid("Invalid id format"),
+  userId: z.string().uuid("Invalid id format"),
   name: z.string().min(1, "Name is required").optional(),
   utc: z.number().optional(),
 });
 
 const deleteUserSchema = z.object({
-  id: z.string().uuid("Invalid id format"),
+  userId: z.string().uuid("Invalid id format"),
 });
 
 export { authUserSchema, createUserSchema, deleteUserSchema, updateUserSchema };

@@ -1,11 +1,11 @@
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-import { DeleteTrafficSourceController } from "./deleteTrafficSourceController";
-import { DeleteTrafficSourceUseCase } from "./deleteTrafficSourceUseCase";
+import { PrismaTrafficSourceRepository } from "../../../app/repositories/trafficSource";
+import { DeleteTrafficSourceUseCase } from "../../../app/usecases/trafficSource/deleteTrafficSourceUseCase";
+import { DeleteTrafficSourceController } from "../../controllers/trafficSource/deleteTrafficSourceController";
 
-const trafficSourceRepository = new TrafficSourceRepository();
+const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
 
 const deleteTrafficSourceUseCase = new DeleteTrafficSourceUseCase(
-  trafficSourceRepository
+  prismaTrafficSourceRepository
 );
 
 const deleteTrafficSourceController = new DeleteTrafficSourceController(

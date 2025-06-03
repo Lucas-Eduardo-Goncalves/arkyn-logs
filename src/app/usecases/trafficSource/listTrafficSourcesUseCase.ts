@@ -1,4 +1,4 @@
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
+import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
 
 class ListTrafficSourcesUseCase {
   constructor(private trafficSourceRepository: TrafficSourceRepository) {}

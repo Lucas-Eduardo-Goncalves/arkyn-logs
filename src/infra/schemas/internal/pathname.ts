@@ -13,7 +13,7 @@ const createPathnameSchema = z.object({
 });
 
 const deletePathnameSchema = z.object({
-  id: z.string().uuid("Invalid id format"),
+  pathnameId: z.string().uuid("Invalid id format"),
 });
 
 export { createPathnameSchema, deletePathnameSchema };

@@ -9,7 +9,7 @@ const createDomainSchema = z.object({
 });
 
 const deleteDomainSchema = z.object({
-  id: z.string().uuid("Invalid id format"),
+  domainId: z.string().uuid("Invalid id format"),
 });
 
 export { createDomainSchema, deleteDomainSchema };

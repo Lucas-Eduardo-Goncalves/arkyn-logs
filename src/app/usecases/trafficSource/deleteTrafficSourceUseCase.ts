@@ -1,20 +1,11 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { deleteTrafficSourceSchema } from "../../../../infra/schemas/internal/trafficSource";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
 
 class DeleteTrafficSourceUseCase {
   constructor(private trafficSourceRepository: TrafficSourceRepository) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(
-      deleteTrafficSourceSchema
-    );
-    const validatedBody = schemaValidator.validate(body);
-
-    const trafficSource = await this.trafficSourceRepository.findById(
-      validatedBody.id
-    );
+  async execute(id: string) {
+    const trafficSource = await this.trafficSourceRepository.findById(id);
 
     if (!trafficSource) {
       const httpAdapter = new HttpAdapter();

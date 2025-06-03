@@ -17,7 +17,7 @@ class DeletePathnameController {
       const validatedBody = schemaValidator.validate({ pathnameId });
 
       const trafficsource = await this.deletePathnameUseCase.execute(
-        validatedBody.id
+        validatedBody.pathnameId
       );
 
       return route.response.json(trafficsource);

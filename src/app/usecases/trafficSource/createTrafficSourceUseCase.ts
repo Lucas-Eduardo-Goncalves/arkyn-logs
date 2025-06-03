@@ -1,9 +1,13 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { createTrafficSourceSchema } from "../../../../infra/schemas/internal/trafficSource";
-import { TrafficSource } from "../../../entities/trafficSource";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-import { UserRepository } from "../../../repositories/user";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { TrafficSource } from "../../entities/trafficSource";
+import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+import { UserRepository } from "../../repositories/user/repository";
+
+type InputProps = {
+  name: string;
+  userId: string;
+  trafficDomain: string;
+};
 
 class CreateTrafficSourceUseCase {
   constructor(
@@ -11,11 +15,8 @@ class CreateTrafficSourceUseCase {
     private userRepository: UserRepository
   ) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(
-      createTrafficSourceSchema
-    );
-    const { name, userId, trafficDomain } = schemaValidator.validate(body);
+  async execute(input: InputProps) {
+    const { name, trafficDomain, userId } = input;
 
     const [existsUser, existsDomain] = await Promise.all([
       await this.userRepository.findById(userId),

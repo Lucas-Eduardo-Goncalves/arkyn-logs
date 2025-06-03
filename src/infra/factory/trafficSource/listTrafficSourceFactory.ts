@@ -1,11 +1,13 @@
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-import { ListTrafficSourcesController } from "./listTrafficSourcesController";
-import { ListTrafficSourcesUseCase } from "./listTrafficSourcesUseCase";
+import { PrismaTrafficSourceRepository } from "../../../app/repositories/trafficSource";
+import { ListTrafficSourcesUseCase } from "../../../app/usecases/trafficSource/listTrafficSourcesUseCase";
+import { ListTrafficSourcesController } from "../../controllers/trafficSource/listTrafficSourcesController";
 
-const trafficSourceRepository = new TrafficSourceRepository();
+const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
+
 const listTrafficSourcesUseCase = new ListTrafficSourcesUseCase(
-  trafficSourceRepository
+  prismaTrafficSourceRepository
 );
+
 const listTrafficSourcesController = new ListTrafficSourcesController(
   listTrafficSourcesUseCase
 );

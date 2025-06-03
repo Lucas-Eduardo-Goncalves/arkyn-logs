@@ -1,14 +1,14 @@
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-import { UserRepository } from "../../../repositories/user";
-import { CreateTrafficSourceController } from "./createTrafficSourceController";
-import { CreateTrafficSourceUseCase } from "./createTrafficSourceUseCase";
+import { PrismaTrafficSourceRepository } from "../../../app/repositories/trafficSource";
+import { PrismaUserRepository } from "../../../app/repositories/user";
+import { CreateTrafficSourceUseCase } from "../../../app/usecases/trafficSource/createTrafficSourceUseCase";
+import { CreateTrafficSourceController } from "../../controllers/trafficSource/createTrafficSourceController";
 
-const trafficSourceRepository = new TrafficSourceRepository();
-const userRepository = new UserRepository();
+const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
+const prismaUserRepository = new PrismaUserRepository();
 
 const createTrafficSourceUseCase = new CreateTrafficSourceUseCase(
-  trafficSourceRepository,
-  userRepository
+  prismaTrafficSourceRepository,
+  prismaUserRepository
 );
 
 const createTrafficSourceController = new CreateTrafficSourceController(
