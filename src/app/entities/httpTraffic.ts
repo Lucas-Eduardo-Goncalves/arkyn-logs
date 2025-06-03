@@ -10,6 +10,7 @@ type ConstructorProps = {
   status: number;
   method: Method;
   level: Level;
+  trafficUserId: string | null;
   trafficSourceId: string;
   domainId: string;
   pathnameId: string;
@@ -19,6 +20,7 @@ type ConstructorProps = {
 type CreateHttpTrafficProps = {
   status: number;
   method: Method;
+  trafficUserId: string | null;
   trafficSourceId: string;
   domainId: string;
   pathnameId: string;
@@ -31,6 +33,7 @@ class HttpTraffic {
   status: number;
   method: Method;
   level: Level;
+  trafficUserId: string | null;
   trafficSourceId: string;
   domainId: string;
   pathnameId: string;
@@ -41,6 +44,7 @@ class HttpTraffic {
     this.status = props.status;
     this.method = props.method;
     this.level = props.level;
+    this.trafficUserId = props.trafficUserId;
     this.trafficSourceId = props.trafficSourceId;
     this.domainId = props.domainId;
     this.pathnameId = props.pathnameId;
@@ -59,6 +63,7 @@ class HttpTraffic {
       status: props.status,
       method: props.method,
       level: this.getLevelByStatus(props.status),
+      trafficUserId: props.trafficUserId || null,
       trafficSourceId: props.trafficSourceId,
       domainId: props.domainId,
       pathnameId: props.pathnameId,
@@ -72,6 +77,7 @@ class HttpTraffic {
       status: props.status,
       method: props.method,
       level: props.level,
+      trafficUserId: props.trafficUserId,
       trafficSourceId: props.trafficSourceId,
       domainId: props.domainId,
       pathnameId: props.pathnameId,

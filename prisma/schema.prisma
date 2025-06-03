@@ -72,7 +72,7 @@ model HttpTraffic {
   status              Int
   method              Method
   level               Level
-  trafficSourceUserId String
+  trafficUserId       String?
   createdAt           DateTime
   trafficSourceId     String
   domainId            String
