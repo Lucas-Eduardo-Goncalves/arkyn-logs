@@ -1,4 +1,4 @@
-import { UserRepository } from "../../../repositories/user";
+import { UserRepository } from "../../repositories/user/repository";
 
 class ListUsersUseCase {
   constructor(private userRepository: UserRepository) {}

@@ -1,7 +1,9 @@
-import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
-import { RouteDTO } from "../../../../main/types/RouteDTO";
-import { UpdateUserUseCase } from "./updateUserUseCase";
+import { UpdateUserUseCase } from "../../../app/usecases/user/updateUserUseCase";
+import { RouteDTO } from "../../../main/types/RouteDTO";
+import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { updateUserSchema } from "../../schemas/internal/user";
 
 class UpdateUserController {
   constructor(private updateUserUseCase: UpdateUserUseCase) {}
@@ -10,7 +12,11 @@ class UpdateUserController {
     try {
       await AuthMiddleware.authenticate(route);
       const body = route.request.body;
-      const user = await this.updateUserUseCase.execute(body);
+
+      const schemaValidator = new SchemaValidatorAdapter(updateUserSchema);
+      const data = schemaValidator.validate(body);
+
+      const user = await this.updateUserUseCase.execute(data);
       return route.response.json(user);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();

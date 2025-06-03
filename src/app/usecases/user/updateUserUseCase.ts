@@ -1,23 +1,26 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { updateUserSchema } from "../../../../infra/schemas/internal/user";
-import { UserRepository } from "../../../repositories/user";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { UserRepository } from "../../repositories/user/repository";
+
+type InputProps = {
+  name?: string;
+  utc?: number;
+  userId: string;
+};
 
 class UpdateUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(updateUserSchema);
-    const validatedBody = schemaValidator.validate(body);
+  async execute(input: InputProps) {
+    const { name, utc, userId } = input;
 
-    const user = await this.userRepository.findById(validatedBody.id);
+    const user = await this.userRepository.findById(userId);
 
     if (!user) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("User not found");
     }
 
-    user.update(validatedBody);
+    user.update({ name, utc });
     await this.userRepository.updateUser(user);
 
     return user.toJson();

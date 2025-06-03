@@ -1,7 +1,7 @@
-import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
-import { RouteDTO } from "../../../../main/types/RouteDTO";
-import { ListUsersUseCase } from "./listUsersUseCase";
+import { ListUsersUseCase } from "../../../app/usecases/user/listUsersUseCase";
+import { RouteDTO } from "../../../main/types/RouteDTO";
+import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
+import { AuthMiddleware } from "../../middlewares/authMiddleware";
 
 class ListUsersController {
   constructor(private listUsersUseCase: ListUsersUseCase) {}

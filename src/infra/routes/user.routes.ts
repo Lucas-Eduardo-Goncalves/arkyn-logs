@@ -1,10 +1,11 @@
 import { Hono } from "hono";
-import { authUser } from "../app/usecases/user/authUser";
-import { createUser } from "../app/usecases/user/createUser";
-import { deleteUser } from "../app/usecases/user/deleteUser";
-import { listUsers } from "../app/usecases/user/listUsers";
-import { updateUser } from "../app/usecases/user/updateUser";
-import { RouteAdapter } from "../infra/adapters/routeAdapter";
+
+import { RouteAdapter } from "../adapters/routeAdapter";
+import { authUser } from "../factory/user/authUserFactory";
+import { createUser } from "../factory/user/createUserFactory";
+import { deleteUser } from "../factory/user/deleteUserFactory";
+import { listUsers } from "../factory/user/listUsersFactory";
+import { updateUser } from "../factory/user/updateUserFactory";
 
 const userRoutes = new Hono();
 const { adaptRoute } = new RouteAdapter();

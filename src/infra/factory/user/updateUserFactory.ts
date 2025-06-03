@@ -1,9 +1,11 @@
-import { UserRepository } from "../../../repositories/user";
-import { UpdateUserController } from "./updateUserController";
-import { UpdateUserUseCase } from "./updateUserUseCase";
+import { PrismaUserRepository } from "../../../app/repositories/user";
+import { UpdateUserUseCase } from "../../../app/usecases/user/updateUserUseCase";
+import { UpdateUserController } from "../../controllers/user/updateUserController";
 
-const userRepository = new UserRepository();
-const updateUserUseCase = new UpdateUserUseCase(userRepository);
+const prismaUserRepository = new PrismaUserRepository();
+
+const updateUserUseCase = new UpdateUserUseCase(prismaUserRepository);
+
 const updateUserController = new UpdateUserController(updateUserUseCase);
 
 const updateUser = {
