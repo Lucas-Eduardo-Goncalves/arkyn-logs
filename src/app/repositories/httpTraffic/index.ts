@@ -1,11 +1,7 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
-import { DomainMapper } from "../../../infra/mappers/domain";
 import { HttpTrafficMapper } from "../../../infra/mappers/httpTraffic";
-import { PathnameMapper } from "../../../infra/mappers/pathname";
-import { RequestMapper } from "../../../infra/mappers/request";
-import { ResponseMapper } from "../../../infra/mappers/response";
 import { HttpTraffic } from "../../entities/httpTraffic";
-import { HttpTrafficRepositoryDTO, Summary } from "./repositoryDTO";
+import { HttpTrafficRepositoryDTO } from "./repositoryDTO";
 
 class HttpTrafficRepository implements HttpTrafficRepositoryDTO {
   async findAll(trafficSourceId: string): Promise<HttpTraffic[]> {
@@ -14,21 +10,6 @@ class HttpTrafficRepository implements HttpTrafficRepositoryDTO {
     });
 
     return httpTraffics.map(HttpTrafficMapper.toEntity);
-  }
-
-  async findAllSummary(trafficSourceId: string): Promise<Summary[]> {
-    const httpTraffics = await databaseConnection.httpTraffic.findMany({
-      where: { trafficSourceId },
-      include: { domain: true, request: true, response: true, pathname: true },
-    });
-
-    return httpTraffics.map((httpTraffic) => ({
-      domain: DomainMapper.toEntity(httpTraffic.domain),
-      httpTraffic: HttpTrafficMapper.toEntity(httpTraffic),
-      request: RequestMapper.toSafeEntity(httpTraffic.request),
-      response: ResponseMapper.toSafeEntity(httpTraffic.response),
-      pathname: PathnameMapper.toEntity(httpTraffic.pathname),
-    }));
   }
 
   async findById(httpTrafficId: string): Promise<HttpTraffic | null> {

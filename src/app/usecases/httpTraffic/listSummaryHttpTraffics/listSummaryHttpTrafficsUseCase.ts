@@ -11,17 +11,13 @@ class ListSummaryHttpTrafficsUseCase {
       throw httpAdapter.notFound(message);
     }
 
-    const httpTraffics = await this.httpTrafficRepository.findAllSummary(
+    const httpTraffics = await this.httpTrafficRepository.findAllAsAggregate(
       trafficSourceId
     );
 
-    return httpTraffics.map((data) => ({
-      httpTraffic: data.httpTraffic,
-      domain: data.domain,
-      pathname: data.pathname,
-      request: data.request,
-      response: data.response,
-    }));
+    return httpTraffics.map((httpTrafficAggregate) =>
+      httpTrafficAggregate.toJson()
+    );
   }
 }
 
