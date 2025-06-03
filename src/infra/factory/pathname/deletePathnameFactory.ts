@@ -1,10 +1,12 @@
-import { PathnameRepository } from "../../../repositories/pathname";
-import { DeletePathnameController } from "./deletePathnameController";
-import { DeletePathnameUseCase } from "./deletePathnameUseCase";
+import { PrismaPathnameRepository } from "../../../app/repositories/pathname";
+import { DeletePathnameUseCase } from "../../../app/usecases/pathname/deletePathnameUseCase";
+import { DeletePathnameController } from "../../controllers/pathname/deletePathnameController";
 
-const pathnameRepository = new PathnameRepository();
+const prismaPathnameRepository = new PrismaPathnameRepository();
 
-const deletePathnameUseCase = new DeletePathnameUseCase(pathnameRepository);
+const deletePathnameUseCase = new DeletePathnameUseCase(
+  prismaPathnameRepository
+);
 
 const deletePathnameController = new DeletePathnameController(
   deletePathnameUseCase

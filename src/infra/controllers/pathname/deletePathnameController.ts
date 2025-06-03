@@ -1,7 +1,9 @@
-import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
-import { RouteDTO } from "../../../../main/types/RouteDTO";
-import { DeletePathnameUseCase } from "./deletePathnameUseCase";
+import { DeletePathnameUseCase } from "../../../app/usecases/pathname/deletePathnameUseCase";
+import { RouteDTO } from "../../../main/types/RouteDTO";
+import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { deletePathnameSchema } from "../../schemas/internal/pathname";
 
 class DeletePathnameController {
   constructor(private deletePathnameUseCase: DeletePathnameUseCase) {}
@@ -11,9 +13,12 @@ class DeletePathnameController {
       await AuthMiddleware.authenticate(route);
       const pathnameId = route.request.params?.pathnameId;
 
-      const trafficsource = await this.deletePathnameUseCase.execute({
-        pathnameId,
-      });
+      const schemaValidator = new SchemaValidatorAdapter(deletePathnameSchema);
+      const validatedBody = schemaValidator.validate({ pathnameId });
+
+      const trafficsource = await this.deletePathnameUseCase.execute(
+        validatedBody.id
+      );
 
       return route.response.json(trafficsource);
     } catch (error) {

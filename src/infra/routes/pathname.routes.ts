@@ -1,9 +1,9 @@
 import { Hono } from "hono";
 
-import { createPathname } from "../app/usecases/pathname/createPathname";
-import { deletePathname } from "../app/usecases/pathname/deletePathname";
-import { listPathnames } from "../app/usecases/pathname/listPathnames";
-import { RouteAdapter } from "../infra/adapters/routeAdapter";
+import { RouteAdapter } from "../adapters/routeAdapter";
+import { createPathname } from "../factory/pathname/createPathnameFactory";
+import { deletePathname } from "../factory/pathname/deletePathnameFactory";
+import { listPathnames } from "../factory/pathname/listPathnameFactory";
 
 const pathnameRoutes = new Hono();
 const { adaptRoute } = new RouteAdapter();

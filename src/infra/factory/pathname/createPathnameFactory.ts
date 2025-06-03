@@ -1,17 +1,17 @@
-import { DomainRepository } from "../../../repositories/domain";
-import { PathnameRepository } from "../../../repositories/pathname";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-import { CreatePathnameController } from "./createPathnameController";
-import { CreatePathnameUseCase } from "./createPathnameUseCase";
+import { PrismaDomainRepository } from "../../../app/repositories/domain";
+import { PrismaPathnameRepository } from "../../../app/repositories/pathname";
+import { PrismaTrafficSourceRepository } from "../../../app/repositories/trafficSource";
+import { CreatePathnameUseCase } from "../../../app/usecases/pathname/createPathnameUseCase";
+import { CreatePathnameController } from "../../controllers/pathname/createPathnameController";
 
-const pathnameRepository = new PathnameRepository();
-const domainRepository = new DomainRepository();
-const trafficSourceRepository = new TrafficSourceRepository();
+const prismaPathnameRepository = new PrismaPathnameRepository();
+const prismaDomainRepository = new PrismaDomainRepository();
+const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
 
 const createPathnameUseCase = new CreatePathnameUseCase(
-  pathnameRepository,
-  domainRepository,
-  trafficSourceRepository
+  prismaPathnameRepository,
+  prismaDomainRepository,
+  prismaTrafficSourceRepository
 );
 
 const createPathnameController = new CreatePathnameController(

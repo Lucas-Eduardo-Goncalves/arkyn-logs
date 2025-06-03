@@ -1,9 +1,9 @@
-import { PathnameRepository } from "../../../repositories/pathname";
-import { ListPathnamesController } from "./listPathnamesController";
-import { ListPathnamesUseCase } from "./listPathnamesUseCase";
+import { PrismaPathnameRepository } from "../../../app/repositories/pathname";
+import { ListPathnamesUseCase } from "../../../app/usecases/pathname/listPathnamesUseCase";
+import { ListPathnamesController } from "../../controllers/pathname/listPathnamesController";
 
-const pathnameRepository = new PathnameRepository();
-const listPathnamesUseCase = new ListPathnamesUseCase(pathnameRepository);
+const prismaPathnameRepository = new PrismaPathnameRepository();
+const listPathnamesUseCase = new ListPathnamesUseCase(prismaPathnameRepository);
 const listPathnamesController = new ListPathnamesController(
   listPathnamesUseCase
 );

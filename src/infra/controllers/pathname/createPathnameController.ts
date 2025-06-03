@@ -1,3 +1,10 @@
+import { CreatePathnameUseCase } from "../../../app/usecases/pathname/createPathnameUseCase";
+import { RouteDTO } from "../../../main/types/RouteDTO";
+import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { createPathnameSchema } from "../../schemas/internal/pathname";
+
 class CreatePathnameController {
   constructor(private createPathnameUseCase: CreatePathnameUseCase) {}
 
@@ -10,6 +17,7 @@ class CreatePathnameController {
       const body = route.request.body;
 
       const schemaValidator = new SchemaValidatorAdapter(createPathnameSchema);
+
       const data = schemaValidator.validate({
         ...body,
         trafficSourceId,

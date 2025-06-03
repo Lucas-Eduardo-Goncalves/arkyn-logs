@@ -1,3 +1,15 @@
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { Pathname } from "../../entities/pathname";
+import { DomainRepository } from "../../repositories/domain/repository";
+import { PathnameRepository } from "../../repositories/pathname/repository";
+import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+
+type InputProps = {
+  trafficSourceId: string;
+  domainId: string;
+  value: string;
+};
+
 class CreatePathnameUseCase {
   constructor(
     private pathnameRepository: PathnameRepository,
@@ -5,7 +17,9 @@ class CreatePathnameUseCase {
     private trafficSourceRepository: TrafficSourceRepository
   ) {}
 
-  async execute(body: any) {
+  async execute(input: InputProps) {
+    const { trafficSourceId, domainId, value } = input;
+
     const [existsTrafficSource, existsDomain, existsPathname] =
       await Promise.all([
         await this.trafficSourceRepository.findById(trafficSourceId),
