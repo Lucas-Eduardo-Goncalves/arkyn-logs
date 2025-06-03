@@ -3,7 +3,7 @@ import { HttpTrafficMapper } from "../../../infra/mappers/httpTraffic";
 import { HttpTraffic } from "../../entities/httpTraffic";
 import { HttpTrafficRepository } from "./repository";
 
-class PrisaHttpTrafficRepository implements HttpTrafficRepository {
+class PrismaHttpTrafficRepository implements HttpTrafficRepository {
   async findAll(trafficSourceId: string): Promise<HttpTraffic[]> {
     const httpTraffics = await databaseConnection.httpTraffic.findMany({
       where: { trafficSourceId },
@@ -32,4 +32,4 @@ class PrisaHttpTrafficRepository implements HttpTrafficRepository {
   }
 }
 
-export { PrisaHttpTrafficRepository };
+export { PrismaHttpTrafficRepository };

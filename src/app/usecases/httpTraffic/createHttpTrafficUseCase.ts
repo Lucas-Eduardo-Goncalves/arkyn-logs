@@ -1,11 +1,18 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { createHttpTrafficSchema } from "../../../../infra/schemas/internal/httpTraffic";
-import { HttpTraffic } from "../../../entities/httpTraffic";
-import { DomainRepository } from "../../../repositories/domain";
-import { HttpTrafficRepository } from "../../../repositories/httpTraffic";
-import { PathnameRepository } from "../../../repositories/pathname";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { HttpTraffic } from "../../entities/httpTraffic";
+import { DomainRepository } from "../../repositories/domain/repository";
+import { HttpTrafficRepository } from "../../repositories/httpTraffic/repository";
+import { PathnameRepository } from "../../repositories/pathname/repository";
+import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+
+type InputProps = {
+  trafficSourceId: string;
+  status: number;
+  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  trafficUserId: string | null;
+  domainId: string;
+  pathnameId: string;
+};
 
 class CreateHttpTrafficUseCase {
   constructor(
@@ -15,16 +22,15 @@ class CreateHttpTrafficUseCase {
     private pathnameRepository: PathnameRepository
   ) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(createHttpTrafficSchema);
+  async execute(input: InputProps) {
     const {
-      domainId,
-      method,
-      pathnameId,
-      status,
       trafficSourceId,
+      status,
+      method,
       trafficUserId,
-    } = schemaValidator.validate(body);
+      domainId,
+      pathnameId,
+    } = input;
 
     const [existsTrafficSource, existsDomain, existsPathname] =
       await Promise.all([

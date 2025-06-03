@@ -1,10 +1,10 @@
-import { HttpTrafficRepository } from "../../../repositories/httpTraffic";
-import { ListHttpTrafficsController } from "./listHttpTrafficsController";
-import { ListHttpTrafficsUseCase } from "./listHttpTrafficsUseCase";
+import { PrismaHttpTrafficRepository } from "../../../app/repositories/httpTraffic";
+import { ListHttpTrafficsUseCase } from "../../../app/usecases/httpTraffic/listHttpTrafficsUseCase";
+import { ListHttpTrafficsController } from "../../controllers/httpTraffic/listHttpTrafficsController";
 
-const httpTrafficRepository = new HttpTrafficRepository();
+const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
 const listHttpTrafficsUseCase = new ListHttpTrafficsUseCase(
-  httpTrafficRepository
+  prismaHttpTrafficRepository
 );
 const listHttpTrafficsController = new ListHttpTrafficsController(
   listHttpTrafficsUseCase

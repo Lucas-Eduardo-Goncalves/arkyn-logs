@@ -1,20 +1,20 @@
-import { DomainRepository } from "../../../repositories/domain";
-import { HttpTrafficRepository } from "../../../repositories/httpTraffic";
-import { PathnameRepository } from "../../../repositories/pathname";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-import { CreateHttpTrafficController } from "./createHttpTrafficController";
-import { CreateHttpTrafficUseCase } from "./createHttpTrafficUseCase";
+import { PrismaDomainRepository } from "../../../app/repositories/domain";
+import { PrismaHttpTrafficRepository } from "../../../app/repositories/httpTraffic";
+import { PrismaPathnameRepository } from "../../../app/repositories/pathname";
+import { PrismaTrafficSourceRepository } from "../../../app/repositories/trafficSource";
+import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/createHttpTrafficUseCase";
+import { CreateHttpTrafficController } from "../../controllers/httpTraffic/createHttpTrafficController";
 
-const httpTrafficRepository = new HttpTrafficRepository();
-const trafficSourceRepository = new TrafficSourceRepository();
-const domainRepository = new DomainRepository();
-const pathnameSourceRepository = new PathnameRepository();
+const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
+const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
+const prismaDomainRepository = new PrismaDomainRepository();
+const prismaPathnameSourceRepository = new PrismaPathnameRepository();
 
 const createHttpTrafficUseCase = new CreateHttpTrafficUseCase(
-  httpTrafficRepository,
-  trafficSourceRepository,
-  domainRepository,
-  pathnameSourceRepository
+  prismaHttpTrafficRepository,
+  prismaTrafficSourceRepository,
+  prismaDomainRepository,
+  prismaPathnameSourceRepository
 );
 
 const createHttpTrafficController = new CreateHttpTrafficController(

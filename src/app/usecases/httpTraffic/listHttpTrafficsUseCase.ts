@@ -1,16 +1,9 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { HttpTrafficRepository } from "../../../repositories/httpTraffic";
+import { HttpTrafficRepository } from "../../repositories/httpTraffic/repository";
 
 class ListHttpTrafficsUseCase {
   constructor(private httpTrafficRepository: HttpTrafficRepository) {}
 
-  async execute(trafficSourceId?: string) {
-    if (!trafficSourceId) {
-      const httpAdapter = new HttpAdapter();
-      const message = "Traffic source ID is required to list httpTraffics.";
-      throw httpAdapter.notFound(message);
-    }
-
+  async execute(trafficSourceId: string) {
     const httpTraffics = await this.httpTrafficRepository.findAll(
       trafficSourceId
     );
