@@ -19,15 +19,12 @@
     "argon2": "^0.43.0",
     "hono": "^4.7.10",
     "jose": "^6.0.11",
-    "remove": "^0.1.5",
     "zod": "^3.25.7"
   },
   "devDependencies": {
     "@arkyn/types": "^2.2.15",
-    "@prisma/cli-init": "^0.1.1",
     "@types/bun": "latest",
     "prisma": "5.22.0",
-    "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^3.1.3"
   }
