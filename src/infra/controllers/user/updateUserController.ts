@@ -12,9 +12,10 @@ class UpdateUserController {
     try {
       await AuthMiddleware.authenticate(route);
       const body = route.request.body;
+      const userId = route.request.params?.userId;
 
       const schemaValidator = new SchemaValidatorAdapter(updateUserSchema);
-      const data = schemaValidator.validate(body);
+      const data = schemaValidator.validate({ ...body, userId });
 
       const user = await this.updateUserUseCase.execute(data);
       return route.response.json(user);
