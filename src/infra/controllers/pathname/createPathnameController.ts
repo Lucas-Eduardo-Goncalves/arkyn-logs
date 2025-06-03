@@ -1,8 +1,3 @@
-import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
-import { RouteDTO } from "../../../../main/types/RouteDTO";
-import { CreatePathnameUseCase } from "./createPathnameUseCase";
-
 class CreatePathnameController {
   constructor(private createPathnameUseCase: CreatePathnameUseCase) {}
 
@@ -14,11 +9,14 @@ class CreatePathnameController {
       const domainId = route.request.params?.domainId;
       const body = route.request.body;
 
-      const trafficsource = await this.createPathnameUseCase.execute({
+      const schemaValidator = new SchemaValidatorAdapter(createPathnameSchema);
+      const data = schemaValidator.validate({
         ...body,
         trafficSourceId,
         domainId,
       });
+
+      const trafficsource = await this.createPathnameUseCase.execute(data);
 
       return route.response.json(trafficsource, 201);
     } catch (error) {

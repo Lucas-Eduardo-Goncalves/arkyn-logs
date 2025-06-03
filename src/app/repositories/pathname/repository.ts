@@ -1,6 +1,6 @@
 import { Pathname } from "../../entities/pathname";
 
-type PathnameRepositoryDTO = {
+type PathnameRepository = {
   findAll: (trafficSourceId: string, domainId: string) => Promise<Pathname[]>;
   findById: (pathnameId: string) => Promise<Pathname | null>;
   findByValue: (value: string) => Promise<Pathname | null>;
@@ -8,4 +8,4 @@ type PathnameRepositoryDTO = {
   deletePathname: (pathnameId: string) => Promise<void>;
 };
 
-export type { PathnameRepositoryDTO };
+export type { PathnameRepository };

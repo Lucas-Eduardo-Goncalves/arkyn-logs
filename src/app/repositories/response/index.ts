@@ -2,9 +2,9 @@ import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { JsonAdapter } from "../../../infra/adapters/jsonAdapter";
 import { ResponseMapper } from "../../../infra/mappers/response";
 import { Response } from "../../entities/response";
-import { ResponseRepositoryDTO } from "./repositoryDTO";
+import { ResponseRepository } from "./repository";
 
-class ResponseRepository implements ResponseRepositoryDTO {
+class PrismaResponseRepository implements ResponseRepository {
   toJson = new JsonAdapter();
 
   async findAll(httpTrafficId: string): Promise<Response[]> {
@@ -36,4 +36,4 @@ class ResponseRepository implements ResponseRepositoryDTO {
   }
 }
 
-export { ResponseRepository };
+export { PrismaResponseRepository };

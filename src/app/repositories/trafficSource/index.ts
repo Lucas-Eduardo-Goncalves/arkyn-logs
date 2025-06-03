@@ -1,7 +1,7 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { TrafficSourceMapper } from "../../../infra/mappers/trafficSource";
 import { TrafficSource } from "../../entities/trafficSource";
-import { TrafficSourceRepository } from "./repositoryDTO";
+import { TrafficSourceRepository } from "./repository";
 
 class PrismaTrafficSourceRepository implements TrafficSourceRepository {
   async findAll(userId: string): Promise<TrafficSource[]> {

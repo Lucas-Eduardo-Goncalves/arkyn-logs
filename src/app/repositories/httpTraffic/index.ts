@@ -1,9 +1,9 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { HttpTrafficMapper } from "../../../infra/mappers/httpTraffic";
 import { HttpTraffic } from "../../entities/httpTraffic";
-import { HttpTrafficRepositoryDTO } from "./repositoryDTO";
+import { HttpTrafficRepository } from "./repository";
 
-class HttpTrafficRepository implements HttpTrafficRepositoryDTO {
+class PrisaHttpTrafficRepository implements HttpTrafficRepository {
   async findAll(trafficSourceId: string): Promise<HttpTraffic[]> {
     const httpTraffics = await databaseConnection.httpTraffic.findMany({
       where: { trafficSourceId },
@@ -32,4 +32,4 @@ class HttpTrafficRepository implements HttpTrafficRepositoryDTO {
   }
 }
 
-export { HttpTrafficRepository };
+export { PrisaHttpTrafficRepository };

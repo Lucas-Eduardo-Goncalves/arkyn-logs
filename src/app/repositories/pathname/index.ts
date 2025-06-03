@@ -1,9 +1,9 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { PathnameMapper } from "../../../infra/mappers/pathname";
 import { Pathname } from "../../entities/pathname";
-import { PathnameRepositoryDTO } from "./repositoryDTO";
+import { PathnameRepository } from "./repository";
 
-class PathnameRepository implements PathnameRepositoryDTO {
+class PrismaPathnameRepository implements PathnameRepository {
   async findAll(
     trafficSourceId: string,
     domainId: string
@@ -45,4 +45,4 @@ class PathnameRepository implements PathnameRepositoryDTO {
   }
 }
 
-export { PathnameRepository };
+export { PrismaPathnameRepository };

@@ -1,11 +1,3 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { createPathnameSchema } from "../../../../infra/schemas/internal/pathname";
-import { Pathname } from "../../../entities/pathname";
-import { DomainRepository } from "../../../repositories/domain";
-import { PathnameRepository } from "../../../repositories/pathname";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
-
 class CreatePathnameUseCase {
   constructor(
     private pathnameRepository: PathnameRepository,
@@ -14,9 +6,6 @@ class CreatePathnameUseCase {
   ) {}
 
   async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(createPathnameSchema);
-    const { trafficSourceId, value, domainId } = schemaValidator.validate(body);
-
     const [existsTrafficSource, existsDomain, existsPathname] =
       await Promise.all([
         await this.trafficSourceRepository.findById(trafficSourceId),

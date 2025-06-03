@@ -1,9 +1,9 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { UserMapper } from "../../../infra/mappers/user";
 import { User } from "../../entities/user";
-import { UserRepositoryDTO } from "./repositoryDTO";
+import { UserRepository } from "./repository";
 
-class UserRepository implements UserRepositoryDTO {
+class PrismaUserRepository implements UserRepository {
   async findAll(): Promise<User[]> {
     const users = await databaseConnection.user.findMany();
     return users.map(UserMapper.toEntity);
@@ -48,4 +48,4 @@ class UserRepository implements UserRepositoryDTO {
   }
 }
 
-export { UserRepository };
+export { PrismaUserRepository };

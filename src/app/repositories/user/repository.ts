@@ -1,6 +1,6 @@
 import { User } from "../../entities/user";
 
-type UserRepositoryDTO = {
+type UserRepository = {
   findAll: () => Promise<User[]>;
   findById: (userId: string) => Promise<User | null>;
   findByEmail: (email: string) => Promise<User | null>;
@@ -9,4 +9,4 @@ type UserRepositoryDTO = {
   deleteUser: (userId: string) => Promise<void>;
 };
 
-export type { UserRepositoryDTO };
+export type { UserRepository };
