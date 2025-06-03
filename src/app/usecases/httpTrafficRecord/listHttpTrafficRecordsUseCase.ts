@@ -1,19 +1,10 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { HttpTrafficRecordRepository } from "../../../repositories/httpTrafficRecord";
+import { HttpTrafficRecordDAL } from "../../dal/httpTrafficRecord/dal";
 
 class ListHttpTrafficRecordsUseCase {
-  constructor(
-    private httpTrafficRecordRepository: HttpTrafficRecordRepository
-  ) {}
+  constructor(private httpTrafficRecordDAL: HttpTrafficRecordDAL) {}
 
-  async execute(trafficSourceId?: string) {
-    if (!trafficSourceId) {
-      const httpAdapter = new HttpAdapter();
-      const message = "Traffic source ID is required to list httpTraffics.";
-      throw httpAdapter.notFound(message);
-    }
-
-    const httpTraffics = await this.httpTrafficRecordRepository.findAll(
+  async execute(trafficSourceId: string) {
+    const httpTraffics = await this.httpTrafficRecordDAL.findAll(
       trafficSourceId
     );
 

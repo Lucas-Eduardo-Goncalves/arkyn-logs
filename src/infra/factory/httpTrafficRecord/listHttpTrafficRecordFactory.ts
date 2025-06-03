@@ -1,12 +1,13 @@
-import { HttpTrafficRepository } from "../../../repositories/httpTraffic";
-import { HttpTrafficRecordRepository } from "../../../repositories/httpTrafficRecord";
-import { ListHttpTrafficRecordsController } from "./listHttpTrafficRecordsController";
-import { ListHttpTrafficRecordsUseCase } from "./listHttpTrafficRecordsUseCase";
+import { PrismaHttpTrafficRecordDAL } from "../../../app/dal/httpTrafficRecord";
+import { ListHttpTrafficRecordsUseCase } from "../../../app/usecases/httpTrafficRecord/listHttpTrafficRecordsUseCase";
+import { ListHttpTrafficRecordsController } from "../../controllers/httpTrafficRecord/listHttpTrafficRecordsController";
 
-const httpTrafficRecordRepository = new HttpTrafficRecordRepository();
+const prismaHttpTrafficRecordDAL = new PrismaHttpTrafficRecordDAL();
+
 const listHttpTrafficRecordsUseCase = new ListHttpTrafficRecordsUseCase(
-  httpTrafficRecordRepository
+  prismaHttpTrafficRecordDAL
 );
+
 const listHttpTrafficRecordsController = new ListHttpTrafficRecordsController(
   listHttpTrafficRecordsUseCase
 );

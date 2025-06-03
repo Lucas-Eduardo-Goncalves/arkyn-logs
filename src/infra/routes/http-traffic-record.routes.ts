@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 
-import { listHttpTrafficRecords } from "../app/usecases/httpTrafficRecord/listHttpTrafficRecords";
-import { RouteAdapter } from "../infra/adapters/routeAdapter";
+import { RouteAdapter } from "../adapters/routeAdapter";
+import { listHttpTrafficRecords } from "../factory/httpTrafficRecord/listHttpTrafficRecordFactory";
 
 const httpTrafficRecordRoutes = new Hono();
 const { adaptRoute } = new RouteAdapter();
