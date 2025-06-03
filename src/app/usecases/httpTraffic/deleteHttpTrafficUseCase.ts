@@ -1,7 +1,7 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 import { HttpTrafficRepository } from "../../repositories/httpTraffic/repository";
 
-class DeletePathnameUseCase {
+class DeleteHttpTrafficUseCase {
   constructor(private httpTrafficRepository: HttpTrafficRepository) {}
 
   async execute(httpTrafficId: string) {
@@ -18,4 +18,4 @@ class DeletePathnameUseCase {
   }
 }
 
-export { DeletePathnameUseCase };
+export { DeleteHttpTrafficUseCase };

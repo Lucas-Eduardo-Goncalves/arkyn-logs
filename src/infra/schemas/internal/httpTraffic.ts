@@ -12,4 +12,8 @@ const createHttpTrafficSchema = z.object({
   pathnameId: z.string().uuid("Invalid pathname id format"),
 });
 
-export { createHttpTrafficSchema };
+const deleteHttpTrafficSchema = z.object({
+  httpTrafficId: z.string().uuid("Invalid HTTP traffic ID format"),
+});
+
+export { createHttpTrafficSchema, deleteHttpTrafficSchema };
