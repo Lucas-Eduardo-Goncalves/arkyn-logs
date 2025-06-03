@@ -1,4 +1,4 @@
-import { HttpTrafficRecord } from "../../app/entities/httpTrafficRecord";
+import { HttpTrafficRecord } from "../../app/views/httpTrafficRecord";
 import { DomainMapper } from "./domain";
 import { HttpTrafficMapper } from "./httpTraffic";
 import { PathnameMapper } from "./pathname";

@@ -1,4 +1,6 @@
 {
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["./node_modules", "dist", "build"],
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
