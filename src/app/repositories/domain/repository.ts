@@ -1,6 +1,6 @@
 import { Domain } from "../../entities/domain";
 
-type DomainRepositoryDTO = {
+type DomainRepository = {
   findAll: (trafficSourceId: string) => Promise<Domain[]>;
   findById: (domainId: string) => Promise<Domain | null>;
   findByValue: (value: string) => Promise<Domain | null>;
@@ -8,4 +8,4 @@ type DomainRepositoryDTO = {
   deleteDomain: (domainId: string) => Promise<void>;
 };
 
-export type { DomainRepositoryDTO };
+export type { DomainRepository };

@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 
-import { createDomain } from "../app/usecases/domain/createDomain";
+import { createDomain } from "../infra/factory/domain/createDomainFactory";
 import { deleteDomain } from "../app/usecases/domain/deleteDomain";
 import { listDomains } from "../app/usecases/domain/listDomains";
 import { RouteAdapter } from "../infra/adapters/routeAdapter";

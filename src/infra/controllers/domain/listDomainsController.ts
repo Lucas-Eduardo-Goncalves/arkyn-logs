@@ -1,18 +1,19 @@
 import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
 import { AuthMiddleware } from "../../../../infra/middlewares/authMiddleware";
 import { RouteDTO } from "../../../../main/types/RouteDTO";
-import { CreateDomainUseCase } from "./createDomainUseCase";
+import { ListDomainsUseCase } from "./listDomainsUseCase";
 
-class CreateDomainController {
-  constructor(private createDomainUseCase: CreateDomainUseCase) {}
+class ListDomainsController {
+  constructor(private listDomainsUseCase: ListDomainsUseCase) {}
 
   async handle(route: RouteDTO) {
     try {
       await AuthMiddleware.authenticate(route);
       const trafficSourceId = route.request.params?.trafficSourceId;
-      const body = { ...route.request.body, trafficSourceId };
-      const trafficsource = await this.createDomainUseCase.execute(body);
-      return route.response.json(trafficsource, 201);
+      const trafficsources = await this.listDomainsUseCase.execute(
+        trafficSourceId
+      );
+      return route.response.json(trafficsources);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);
@@ -20,4 +21,4 @@ class CreateDomainController {
   }
 }
 
-export { CreateDomainController };
+export { ListDomainsController };

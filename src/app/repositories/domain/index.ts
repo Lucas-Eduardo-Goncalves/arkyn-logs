@@ -1,9 +1,9 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { DomainMapper } from "../../../infra/mappers/domain";
 import { Domain } from "../../entities/domain";
-import { DomainRepositoryDTO } from "./repositoryDTO";
+import { DomainRepository } from "./repository";
 
-class DomainRepository implements DomainRepositoryDTO {
+class PrismaDomainRepository implements DomainRepository {
   async findAll(trafficSourceId: string): Promise<Domain[]> {
     const domains = await databaseConnection.domain.findMany({
       where: { trafficSourceId },
@@ -41,4 +41,4 @@ class DomainRepository implements DomainRepositoryDTO {
   }
 }
 
-export { DomainRepository };
+export { PrismaDomainRepository };

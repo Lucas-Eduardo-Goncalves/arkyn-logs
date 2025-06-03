@@ -1,9 +1,12 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { createDomainSchema } from "../../../../infra/schemas/internal/domain";
-import { Domain } from "../../../entities/domain";
-import { DomainRepository } from "../../../repositories/domain";
-import { TrafficSourceRepository } from "../../../repositories/trafficSource";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { Domain } from "../../entities/domain";
+import { DomainRepository } from "../../repositories/domain/repository";
+import { TrafficSourceRepository } from "../../repositories/trafficSource";
+
+type InputProps = {
+  trafficSourceId: string;
+  value: string;
+};
 
 class CreateDomainUseCase {
   constructor(
@@ -11,9 +14,8 @@ class CreateDomainUseCase {
     private trafficSourceRepository: TrafficSourceRepository
   ) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(createDomainSchema);
-    const { trafficSourceId, value } = schemaValidator.validate(body);
+  async execute(input: InputProps) {
+    const { trafficSourceId, value } = input;
 
     const [existsTrafficSource, existsDomain] = await Promise.all([
       await this.trafficSourceRepository.findById(trafficSourceId),

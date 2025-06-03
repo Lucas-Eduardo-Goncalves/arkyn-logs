@@ -1,9 +1,9 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { HttpTrafficRecordMapper } from "../../../infra/mappers/httpTrafficRecord";
-import { HttpTrafficRecord } from "../../entities/httpTrafficRecord";
-import { HttpTrafficRecordRepositoryDTO } from "./repositoryDTO";
+import { HttpTrafficRecord } from "../../views/httpTrafficRecord";
+import { HttpTrafficRecordDAL } from "./dal";
 
-class HttpTrafficRecordRepository implements HttpTrafficRecordRepositoryDTO {
+class PrismaHttpTrafficRecordDAL implements HttpTrafficRecordDAL {
   async findAll(trafficSourceId: string): Promise<HttpTrafficRecord[]> {
     const httpTraffics = await databaseConnection.httpTraffic.findMany({
       where: { trafficSourceId },
@@ -13,4 +13,4 @@ class HttpTrafficRecordRepository implements HttpTrafficRecordRepositoryDTO {
   }
 }
 
-export { HttpTrafficRecordRepository };
+export { PrismaHttpTrafficRecordDAL };
