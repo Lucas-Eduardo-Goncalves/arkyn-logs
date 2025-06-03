@@ -1,13 +1,13 @@
 import { PrismaDomainRepository } from "../../../app/repositories/domain";
-import { TrafficSourceRepository } from "../../../app/repositories/trafficSource";
+import { PrismaTrafficSourceRepository } from "../../../app/repositories/trafficSource";
 import { CreateDomainUseCase } from "../../../app/usecases/domain/createDomainUseCase";
 import { CreateDomainController } from "../../controllers/domain/createDomainController";
 
-const domainRepository = new PrismaDomainRepository();
-const trafficSourceRepository = new TrafficSourceRepository();
+const prismaDomainRepository = new PrismaDomainRepository();
+const trafficSourceRepository = new PrismaTrafficSourceRepository();
 
 const createDomainUseCase = new CreateDomainUseCase(
-  domainRepository,
+  prismaDomainRepository,
   trafficSourceRepository
 );
 

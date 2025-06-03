@@ -1,9 +1,9 @@
 import { databaseConnection } from "../../../infra/adapters/dbAdapter";
 import { TrafficSourceMapper } from "../../../infra/mappers/trafficSource";
 import { TrafficSource } from "../../entities/trafficSource";
-import { TrafficSourceRepositoryDTO } from "./repositoryDTO";
+import { TrafficSourceRepository } from "./repositoryDTO";
 
-class TrafficSourceRepository implements TrafficSourceRepositoryDTO {
+class PrismaTrafficSourceRepository implements TrafficSourceRepository {
   async findAll(userId: string): Promise<TrafficSource[]> {
     const trafficSources = await databaseConnection.trafficSource.findMany({
       where: { userId },
@@ -57,4 +57,4 @@ class TrafficSourceRepository implements TrafficSourceRepositoryDTO {
   }
 }
 
-export { TrafficSourceRepository };
+export { PrismaTrafficSourceRepository };

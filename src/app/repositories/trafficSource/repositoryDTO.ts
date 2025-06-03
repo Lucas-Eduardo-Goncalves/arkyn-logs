@@ -1,6 +1,6 @@
 import { TrafficSource } from "../../entities/trafficSource";
 
-type TrafficSourceRepositoryDTO = {
+type TrafficSourceRepository = {
   findAll: (userId: string) => Promise<TrafficSource[]>;
   findById: (trafficSourceId: string) => Promise<TrafficSource | null>;
   findByDomain: (trafficSourceDomain: string) => Promise<TrafficSource | null>;
@@ -9,4 +9,4 @@ type TrafficSourceRepositoryDTO = {
   deleteTrafficSource: (trafficSourceId: string) => Promise<void>;
 };
 
-export type { TrafficSourceRepositoryDTO };
+export type { TrafficSourceRepository };

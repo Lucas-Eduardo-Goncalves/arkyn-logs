@@ -1,16 +1,9 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { DomainRepository } from "../../../repositories/domain";
+import { DomainRepository } from "../../repositories/domain/repository";
 
 class ListDomainsUseCase {
   constructor(private domainRepository: DomainRepository) {}
 
-  async execute(trafficSourceId?: string) {
-    if (!trafficSourceId) {
-      const httpAdapter = new HttpAdapter();
-      const message = "Traffic source ID is required to list domains.";
-      throw httpAdapter.notFound(message);
-    }
-
+  async execute(trafficSourceId: string) {
     const domains = await this.domainRepository.findAll(trafficSourceId);
     return domains.map((user) => user.toJson());
   }

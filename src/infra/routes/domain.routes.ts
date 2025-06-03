@@ -1,9 +1,9 @@
 import { Hono } from "hono";
 
-import { createDomain } from "../infra/factory/domain/createDomainFactory";
-import { deleteDomain } from "../app/usecases/domain/deleteDomain";
-import { listDomains } from "../app/usecases/domain/listDomains";
-import { RouteAdapter } from "../infra/adapters/routeAdapter";
+import { RouteAdapter } from "../adapters/routeAdapter";
+import { createDomain } from "../factory/domain/createDomainFactory";
+import { deleteDomain } from "../factory/domain/deleteDomainFactory";
+import { listDomains } from "../factory/domain/listDomainFactory";
 
 const domainRoutes = new Hono();
 const { adaptRoute } = new RouteAdapter();
