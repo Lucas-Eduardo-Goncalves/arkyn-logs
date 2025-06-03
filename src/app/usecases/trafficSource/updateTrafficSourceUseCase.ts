@@ -19,7 +19,7 @@ class UpdateTrafficSourceUseCase {
 
     if (!trafficSource) {
       const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Log channel not found");
+      throw httpAdapter.notFound("Traffic source not found");
     }
 
     trafficSource.update({ name, trafficDomain });

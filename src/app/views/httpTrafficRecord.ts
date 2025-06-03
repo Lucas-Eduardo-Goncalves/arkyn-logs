@@ -4,16 +4,23 @@ import { HttpTraffic } from "../entities/httpTraffic";
 import { Request } from "../entities/request";
 import { Response } from "../entities/response";
 import { Domain } from "../entities/domain";
+import { HttpAdapter } from "../../infra/adapters/httpAdapter";
 
 type ConstructorProps = {
+  _httpTraffic: HttpTraffic;
+  _request: Request;
+  _response: Response;
+  _domain: Domain;
+  _pathname: Pathname;
+};
+
+type RestoreHttpTrafficRecordProps = {
   _httpTraffic: HttpTraffic;
   _request: Request | null;
   _response: Response | null;
   _domain: Domain;
   _pathname: Pathname;
 };
-
-type RestoreHttpTrafficAggregateProps = ConstructorProps;
 
 class HttpTrafficRecord {
   _httpTraffic: HttpTraffic;
@@ -30,7 +37,19 @@ class HttpTrafficRecord {
     this._pathname = props._pathname;
   }
 
-  static restore(props: RestoreHttpTrafficAggregateProps) {
+  static restore(props: RestoreHttpTrafficRecordProps) {
+    if (!props._request) {
+      const httpAdapter = new HttpAdapter();
+      const errorMessage = "_request is required to restore HttpTrafficRecord";
+      throw httpAdapter.serverError(errorMessage);
+    }
+
+    if (!props._response) {
+      const httpAdapter = new HttpAdapter();
+      const errorMessage = "_response is required to restore HttpTrafficRecord";
+      throw httpAdapter.serverError(errorMessage);
+    }
+
     return new HttpTrafficRecord({
       _httpTraffic: props._httpTraffic,
       _request: props._request,
@@ -49,6 +68,7 @@ class HttpTrafficRecord {
       status: this._httpTraffic.status,
       method: this._httpTraffic.method,
       level: this._httpTraffic.level,
+      trafficUserId: this._httpTraffic.trafficUserId,
       trafficSourceId: this._httpTraffic.trafficSourceId,
       domain: this._domain.value,
       pathname: this._pathname.value,

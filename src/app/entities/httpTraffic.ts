@@ -94,6 +94,7 @@ class HttpTraffic {
       status: this.status,
       method: this.method,
       level: this.level,
+      trafficUserId: this.trafficUserId,
       trafficSourceId: this.trafficSourceId,
       domainId: this.domainId,
       pathnameId: this.pathnameId,

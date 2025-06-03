@@ -9,7 +9,7 @@ class DeleteDomainUseCase {
 
     if (!domain) {
       const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Log channel not found");
+      throw httpAdapter.notFound("Domain not found");
     }
 
     await this.domainRepository.deleteDomain(domain.id);

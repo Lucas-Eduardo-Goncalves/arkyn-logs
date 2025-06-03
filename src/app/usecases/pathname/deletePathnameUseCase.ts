@@ -9,7 +9,7 @@ class DeletePathnameUseCase {
 
     if (!pathname) {
       const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Log channel not found");
+      throw httpAdapter.notFound("Pathname not found");
     }
 
     await this.pathnameRepository.deletePathname(pathname.id);

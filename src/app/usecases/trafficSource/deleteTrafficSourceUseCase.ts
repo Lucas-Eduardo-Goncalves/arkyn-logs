@@ -11,7 +11,7 @@ class DeleteTrafficSourceUseCase {
 
     if (!trafficSource) {
       const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Log channel not found");
+      throw httpAdapter.notFound("Traffic source not found");
     }
 
     await this.trafficSourceRepository.deleteTrafficSource(trafficSource.id);
