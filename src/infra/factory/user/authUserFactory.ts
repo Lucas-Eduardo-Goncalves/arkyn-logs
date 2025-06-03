@@ -1,9 +1,11 @@
-import { UserRepository } from "../../../repositories/user";
-import { AuthUserController } from "./authUserController";
-import { AuthUserUseCase } from "./authUserUseCase";
+import { PrismaUserRepository } from "../../../app/repositories/user";
+import { AuthUserUseCase } from "../../../app/usecases/user/authUserUseCase";
+import { AuthUserController } from "../../controllers/user/authUserController";
 
-const userRepository = new UserRepository();
-const authUserUseCase = new AuthUserUseCase(userRepository);
+const prismaUserRepository = new PrismaUserRepository();
+
+const authUserUseCase = new AuthUserUseCase(prismaUserRepository);
+
 const authUserController = new AuthUserController(authUserUseCase);
 
 const authUser = {

@@ -1,9 +1,11 @@
-import { UserRepository } from "../../../repositories/user";
-import { CreateUserController } from "./createUserController";
-import { CreateUserUseCase } from "./createUserUseCase";
+import { PrismaUserRepository } from "../../../app/repositories/user";
+import { CreateUserUseCase } from "../../../app/usecases/user/createUserUseCase";
+import { CreateUserController } from "../../controllers/user/createUserController";
 
-const userRepository = new UserRepository();
-const createUserUseCase = new CreateUserUseCase(userRepository);
+const prismaUserRepository = new PrismaUserRepository();
+
+const createUserUseCase = new CreateUserUseCase(prismaUserRepository);
+
 const createUserController = new CreateUserController(createUserUseCase);
 
 const createUser = {

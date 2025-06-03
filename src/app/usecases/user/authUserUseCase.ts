@@ -1,16 +1,18 @@
-import { HttpAdapter } from "../../../../infra/adapters/httpAdapter";
-import { JwtAdapter } from "../../../../infra/adapters/jwtAdapter";
-import { PasswordAdapter } from "../../../../infra/adapters/passwordAdapter";
-import { SchemaValidatorAdapter } from "../../../../infra/adapters/schemaValidatorAdapter";
-import { authUserSchema } from "../../../../infra/schemas/internal/user";
-import { UserRepository } from "../../../repositories/user";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { JwtAdapter } from "../../../infra/adapters/jwtAdapter";
+import { PasswordAdapter } from "../../../infra/adapters/passwordAdapter";
+import { UserRepository } from "../../repositories/user/repository";
+
+type InputProps = {
+  email: string;
+  password: string;
+};
 
 class AuthUserUseCase {
   constructor(private userRepository: UserRepository) {}
 
-  async execute(body: any) {
-    const schemaValidator = new SchemaValidatorAdapter(authUserSchema);
-    const { email, password } = schemaValidator.validate(body);
+  async execute(input: InputProps) {
+    const { email, password } = input;
 
     const existsUser = await this.userRepository.findByEmail(email);
 

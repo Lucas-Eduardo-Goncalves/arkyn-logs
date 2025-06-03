@@ -1,9 +1,11 @@
-import { UserRepository } from "../../../repositories/user";
-import { DeleteUserController } from "./deleteUserController";
-import { DeleteUserUseCase } from "./deleteUserUseCase";
+import { PrismaUserRepository } from "../../../app/repositories/user";
+import { DeleteUserUseCase } from "../../../app/usecases/user/deleteUserUseCase";
+import { DeleteUserController } from "../../controllers/user/deleteUserController";
 
-const userRepository = new UserRepository();
-const deleteUserUseCase = new DeleteUserUseCase(userRepository);
+const prismaUserRepository = new PrismaUserRepository();
+
+const deleteUserUseCase = new DeleteUserUseCase(prismaUserRepository);
+
 const deleteUserController = new DeleteUserController(deleteUserUseCase);
 
 const deleteUser = {

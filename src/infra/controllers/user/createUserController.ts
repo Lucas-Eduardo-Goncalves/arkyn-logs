@@ -1,6 +1,8 @@
-import { ErrorHandlerAdapter } from "../../../../infra/adapters/errorHandlerAdapter";
-import { RouteDTO } from "../../../../main/types/RouteDTO";
-import { CreateUserUseCase } from "./createUserUseCase";
+import { CreateUserUseCase } from "../../../app/usecases/user/createUserUseCase";
+import { RouteDTO } from "../../../main/types/RouteDTO";
+import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { createUserSchema } from "../../schemas/internal/user";
 
 class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -8,7 +10,11 @@ class CreateUserController {
   async handle(route: RouteDTO) {
     try {
       const body = route.request.body;
-      const user = await this.createUserUseCase.execute(body);
+
+      const schemaValidator = new SchemaValidatorAdapter(createUserSchema);
+      const data = schemaValidator.validate(body);
+
+      const user = await this.createUserUseCase.execute(data);
       return route.response.json(user, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();

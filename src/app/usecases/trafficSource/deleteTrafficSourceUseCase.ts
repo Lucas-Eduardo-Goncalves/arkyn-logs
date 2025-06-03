@@ -4,8 +4,10 @@ import { TrafficSourceRepository } from "../../repositories/trafficSource/reposi
 class DeleteTrafficSourceUseCase {
   constructor(private trafficSourceRepository: TrafficSourceRepository) {}
 
-  async execute(id: string) {
-    const trafficSource = await this.trafficSourceRepository.findById(id);
+  async execute(trafficSourceId: string) {
+    const trafficSource = await this.trafficSourceRepository.findById(
+      trafficSourceId
+    );
 
     if (!trafficSource) {
       const httpAdapter = new HttpAdapter();

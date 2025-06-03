@@ -4,8 +4,8 @@ import { PathnameRepository } from "../../repositories/pathname/repository";
 class DeletePathnameUseCase {
   constructor(private pathnameRepository: PathnameRepository) {}
 
-  async execute(id: string) {
-    const pathname = await this.pathnameRepository.findById(id);
+  async execute(pathnameId: string) {
+    const pathname = await this.pathnameRepository.findById(pathnameId);
 
     if (!pathname) {
       const httpAdapter = new HttpAdapter();
