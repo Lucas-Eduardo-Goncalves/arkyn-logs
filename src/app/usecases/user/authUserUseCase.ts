@@ -25,7 +25,10 @@ class AuthUserUseCase {
     await passwordAdapter.verify(existsUser.password, password);
 
     const tokenAdapter = new JwtAdapter();
-    return { ...existsUser, token: await tokenAdapter.sign(existsUser) };
+    return {
+      ...existsUser.toJson(),
+      token: await tokenAdapter.sign(existsUser),
+    };
   }
 }
 
