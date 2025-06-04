@@ -1,15 +1,14 @@
 import { Pathname } from "@prisma/client";
 import { FormatDateAdapter } from "../../infra/adapters/formatDateAdapter";
+import { Domain } from "../entities/domain";
 import { HttpTraffic } from "../entities/httpTraffic";
 import { Request } from "../entities/request";
 import { Response } from "../entities/response";
-import { Domain } from "../entities/domain";
-import { HttpAdapter } from "../../infra/adapters/httpAdapter";
 
 type ConstructorProps = {
   _httpTraffic: HttpTraffic;
-  _request: Request;
-  _response: Response;
+  _request: Request | null;
+  _response: Response | null;
   _domain: Domain;
   _pathname: Pathname;
 };
@@ -38,18 +37,6 @@ class HttpTrafficRecord {
   }
 
   static restore(props: RestoreHttpTrafficRecordProps) {
-    if (!props._request) {
-      const httpAdapter = new HttpAdapter();
-      const errorMessage = "_request is required to restore HttpTrafficRecord";
-      throw httpAdapter.serverError(errorMessage);
-    }
-
-    if (!props._response) {
-      const httpAdapter = new HttpAdapter();
-      const errorMessage = "_response is required to restore HttpTrafficRecord";
-      throw httpAdapter.serverError(errorMessage);
-    }
-
     return new HttpTrafficRecord({
       _httpTraffic: props._httpTraffic,
       _request: props._request,
@@ -57,6 +44,29 @@ class HttpTrafficRecord {
       _domain: props._domain,
       _pathname: props._pathname,
     });
+  }
+
+  makeRequest() {
+    if (!this._request) return null;
+    const formatDateAdapter = new FormatDateAdapter();
+    const createdAt = formatDateAdapter.format(this._request.createdAt);
+    return {
+      headers: this._request.headers,
+      body: this._request.body,
+      queryParams: this._request.queryParams,
+      createdAt,
+    };
+  }
+
+  makeResponse() {
+    if (!this._response) return null;
+    const formatDateAdapter = new FormatDateAdapter();
+    const createdAt = formatDateAdapter.format(this._response.createdAt);
+    return {
+      headers: this._response.headers,
+      body: this._response.body,
+      createdAt,
+    };
   }
 
   toJson() {
@@ -72,8 +82,8 @@ class HttpTrafficRecord {
       trafficSourceId: this._httpTraffic.trafficSourceId,
       domain: this._domain.value,
       pathname: this._pathname.value,
-      request: this._request?.toJson() ?? null,
-      response: this._response?.toJson() ?? null,
+      request: this.makeRequest(),
+      response: this.makeResponse(),
       createdAt: createdAt,
     };
   }
