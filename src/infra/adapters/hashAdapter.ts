@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 class HashAdapter {
-  static hashLog(id: string, message: string, metadata: any): string {
+  static hash(id: string, message: string, metadata: any): string {
     const jsonMetadata = JSON.stringify(metadata || {});
     const contentToHash = `${id}:${message}:${jsonMetadata}`;
 
