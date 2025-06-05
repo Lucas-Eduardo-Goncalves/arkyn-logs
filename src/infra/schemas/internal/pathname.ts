@@ -1,7 +1,21 @@
 import z from "zod";
 
 const createPathnameSchema = z.object({
-  value: z.string().min(1, "Value is required").url("Invalid URL format"),
+  value: z
+    .string()
+    .min(1, "Value is required")
+    .regex(/^\//, "Pathname must start with /")
+    .refine(
+      (val) => {
+        try {
+          new URL(`http://example.com${val}`);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      },
+      { message: "Invalid pathname format" }
+    ),
   trafficSourceId: z
     .string()
     .min(1, "Traffic source id is required")

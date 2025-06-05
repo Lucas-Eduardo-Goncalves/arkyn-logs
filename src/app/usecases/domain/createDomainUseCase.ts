@@ -29,7 +29,8 @@ class CreateDomainUseCase {
 
     if (existsDomain) return existsDomain.toJson();
 
-    const domain = Domain.create({ trafficSourceId, value });
+    const normalizedValue = value.endsWith("/") ? value.slice(0, -1) : value;
+    const domain = Domain.create({ trafficSourceId, value: normalizedValue });
     await this.domainRepository.createDomain(domain);
 
     return domain.toJson();
