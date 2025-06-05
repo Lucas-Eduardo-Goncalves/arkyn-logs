@@ -34,9 +34,15 @@ model TrafficSource {
   exception         Exception[]
 }
 
+enum Protocol {
+  HTTP
+  HTTPS
+}
+
 model Domain {
   id              String        @id
   value           String
+  protocol        Protocol
   createdAt       DateTime
   trafficSourceId String
   trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])

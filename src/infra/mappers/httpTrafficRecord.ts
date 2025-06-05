@@ -19,6 +19,7 @@ type HttpTrafficRecordMapperDTO = {
   domain: {
     id: string;
     value: string;
+    protocol: "HTTP" | "HTTPS";
     trafficSourceId: string;
     createdAt: Date;
   };

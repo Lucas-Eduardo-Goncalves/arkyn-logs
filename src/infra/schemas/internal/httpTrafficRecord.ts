@@ -25,6 +25,7 @@ const composeHttpTrafficRecordSchema = z.object({
     .min(1, "Traffic source id is required")
     .uuid("Invalid traffic source id format"),
   status: z.number().int("Status must be an integer"),
+  protocol: z.enum(["HTTP", "HTTPS"]),
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]),
   trafficUserId: z.string().uuid("Invalid traffic user id format").nullable(),
   requestHeaders: z.record(z.string()),

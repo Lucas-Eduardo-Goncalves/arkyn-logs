@@ -77,6 +77,7 @@ class HttpTrafficRecord {
       id: this._httpTraffic.id,
       status: this._httpTraffic.status,
       method: this._httpTraffic.method,
+      protocol: this._domain.protocol,
       level: this._httpTraffic.level,
       trafficUserId: this._httpTraffic.trafficUserId,
       trafficSourceId: this._httpTraffic.trafficSourceId,

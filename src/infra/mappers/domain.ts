@@ -3,6 +3,7 @@ import { Domain } from "../../app/entities/domain";
 type DomainMapperDTO = {
   id: string;
   value: string;
+  protocol: "HTTP" | "HTTPS";
   trafficSourceId: string;
   createdAt: Date;
 };
@@ -12,6 +13,7 @@ class DomainMapper {
     return Domain.restore({
       id: domain.id,
       value: domain.value,
+      protocol: domain.protocol,
       trafficSourceId: domain.trafficSourceId,
       createdAt: domain.createdAt,
     });

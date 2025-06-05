@@ -20,6 +20,7 @@ class OnComposeHttpTrafficRecordEvent {
       pathnameUrl,
       trafficSourceId,
       status,
+      protocol,
       method,
       trafficUserId,
       requestHeaders,
@@ -32,6 +33,7 @@ class OnComposeHttpTrafficRecordEvent {
     const domain = await this.createDomainUseCase.execute({
       trafficSourceId,
       value: domainUrl,
+      protocol,
     });
 
     const pathname = await this.createPathnameUseCase.execute({

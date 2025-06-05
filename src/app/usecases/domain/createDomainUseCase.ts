@@ -6,6 +6,7 @@ import { TrafficSourceRepository } from "../../repositories/trafficSource/reposi
 type InputProps = {
   trafficSourceId: string;
   value: string;
+  protocol: "HTTP" | "HTTPS";
 };
 
 class CreateDomainUseCase {
@@ -15,7 +16,7 @@ class CreateDomainUseCase {
   ) {}
 
   async execute(input: InputProps) {
-    const { trafficSourceId, value } = input;
+    const { trafficSourceId, value, protocol } = input;
 
     const [existsTrafficSource, existsDomain] = await Promise.all([
       await this.trafficSourceRepository.findById(trafficSourceId),
@@ -30,7 +31,13 @@ class CreateDomainUseCase {
     if (existsDomain) return existsDomain.toJson();
 
     const normalizedValue = value.endsWith("/") ? value.slice(0, -1) : value;
-    const domain = Domain.create({ trafficSourceId, value: normalizedValue });
+
+    const domain = Domain.create({
+      trafficSourceId,
+      value: normalizedValue,
+      protocol,
+    });
+
     await this.domainRepository.createDomain(domain);
 
     return domain.toJson();

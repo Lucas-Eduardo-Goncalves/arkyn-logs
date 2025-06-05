@@ -6,6 +6,7 @@ type InputProps = {
   pathnameUrl: string;
   trafficSourceId: string;
   status: number;
+  protocol: "HTTP" | "HTTPS";
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   trafficUserId: string | null;
   requestHeaders: Record<string, string>;
@@ -24,6 +25,7 @@ class ComposeHttpTrafficRecordUseCase {
       pathnameUrl,
       trafficSourceId,
       status,
+      protocol,
       method,
       trafficUserId,
       requestHeaders,
@@ -40,6 +42,7 @@ class ComposeHttpTrafficRecordUseCase {
         pathnameUrl,
         trafficSourceId,
         status,
+        protocol,
         method,
         trafficUserId,
         requestHeaders,
