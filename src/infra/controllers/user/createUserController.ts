@@ -10,7 +10,7 @@ class CreateUserController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      // await AuthMiddleware.authenticate(route);
       const body = route.request.body;
 
       const schemaValidator = new SchemaValidatorAdapter(createUserSchema);
