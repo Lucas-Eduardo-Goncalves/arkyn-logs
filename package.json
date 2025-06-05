@@ -1,6 +1,9 @@
 {
   "name": "@arkyn/logs-api",
+  "version": "1.0.0",
   "type": "module",
+  "license": "Apache-2.0",
+  "author": "Arkyn | Lucas Gonçalves",
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "ccm": "./autocommit.sh",
