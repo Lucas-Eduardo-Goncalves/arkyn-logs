@@ -28,6 +28,7 @@ class OnComposeHttpTrafficRecordEvent {
       queryParams,
       responseHeaders,
       responseBody,
+      elapsedTime,
     } = input;
 
     const domain = await this.createDomainUseCase.execute({
@@ -49,6 +50,7 @@ class OnComposeHttpTrafficRecordEvent {
       status,
       method,
       trafficUserId,
+      elapsedTime,
     });
 
     await Promise.all([

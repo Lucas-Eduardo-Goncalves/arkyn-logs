@@ -12,6 +12,7 @@ type InputProps = {
   trafficUserId: string | null;
   domainId: string;
   pathnameId: string;
+  elapsedTime: number;
 };
 
 class CreateHttpTrafficUseCase {
@@ -30,6 +31,7 @@ class CreateHttpTrafficUseCase {
       trafficUserId,
       domainId,
       pathnameId,
+      elapsedTime,
     } = input;
 
     const [existsTrafficSource, existsDomain, existsPathname] =
@@ -61,6 +63,7 @@ class CreateHttpTrafficUseCase {
       pathnameId,
       status,
       trafficUserId,
+      elapsedTime,
     });
 
     await this.httpTrafficRepository.createHttpTraffic(httpTraffic);

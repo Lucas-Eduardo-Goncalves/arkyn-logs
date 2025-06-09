@@ -10,6 +10,7 @@ type ConstructorProps = {
   status: number;
   method: Method;
   level: Level;
+  elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
   domainId: string;
@@ -20,6 +21,7 @@ type ConstructorProps = {
 type CreateHttpTrafficProps = {
   status: number;
   method: Method;
+  elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
   domainId: string;
@@ -33,6 +35,7 @@ class HttpTraffic {
   status: number;
   method: Method;
   level: Level;
+  elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
   domainId: string;
@@ -44,6 +47,7 @@ class HttpTraffic {
     this.status = props.status;
     this.method = props.method;
     this.level = props.level;
+    this.elapsedTime = props.elapsedTime;
     this.trafficUserId = props.trafficUserId;
     this.trafficSourceId = props.trafficSourceId;
     this.domainId = props.domainId;
@@ -62,6 +66,7 @@ class HttpTraffic {
       id: new IdAdapter().generate(),
       status: props.status,
       method: props.method,
+      elapsedTime: props.elapsedTime,
       level: this.getLevelByStatus(props.status),
       trafficUserId: props.trafficUserId || null,
       trafficSourceId: props.trafficSourceId,
@@ -77,6 +82,7 @@ class HttpTraffic {
       status: props.status,
       method: props.method,
       level: props.level,
+      elapsedTime: props.elapsedTime,
       trafficUserId: props.trafficUserId,
       trafficSourceId: props.trafficSourceId,
       domainId: props.domainId,
@@ -94,6 +100,7 @@ class HttpTraffic {
       status: this.status,
       method: this.method,
       level: this.level,
+      elapsedTime: this.elapsedTime,
       trafficUserId: this.trafficUserId,
       trafficSourceId: this.trafficSourceId,
       domainId: this.domainId,

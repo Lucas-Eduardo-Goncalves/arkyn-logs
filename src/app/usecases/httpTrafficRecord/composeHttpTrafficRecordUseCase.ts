@@ -14,6 +14,7 @@ type InputProps = {
   queryParams: Record<string, string>;
   responseHeaders: Record<string, string>;
   responseBody: Record<string, string>;
+  elapsedTime: number;
 };
 
 class ComposeHttpTrafficRecordUseCase {
@@ -33,6 +34,7 @@ class ComposeHttpTrafficRecordUseCase {
       queryParams,
       responseHeaders,
       responseBody,
+      elapsedTime,
     } = input;
 
     await eventMediator.publish(
@@ -50,6 +52,7 @@ class ComposeHttpTrafficRecordUseCase {
         queryParams,
         responseHeaders,
         responseBody,
+        elapsedTime,
       })
     );
 

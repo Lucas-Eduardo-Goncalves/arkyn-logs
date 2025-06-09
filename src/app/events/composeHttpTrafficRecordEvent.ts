@@ -6,6 +6,7 @@ class ComposeHttpTrafficRecordEvent {
   readonly protocol: "HTTP" | "HTTPS";
   readonly method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   readonly trafficUserId: string | null;
+  readonly elapsedTime: number;
   readonly requestHeaders: Record<string, string>;
   readonly requestBody: Record<string, string>;
   readonly queryParams: Record<string, string>;
@@ -19,6 +20,7 @@ class ComposeHttpTrafficRecordEvent {
     this.status = data.status;
     this.protocol = data.protocol;
     this.method = data.method;
+    this.elapsedTime = data.elapsedTime;
     this.trafficUserId = data.trafficUserId;
     this.requestHeaders = data.requestHeaders;
     this.requestBody = data.requestBody;

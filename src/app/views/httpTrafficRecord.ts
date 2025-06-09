@@ -79,6 +79,7 @@ class HttpTrafficRecord {
       method: this._httpTraffic.method,
       protocol: this._domain.protocol,
       level: this._httpTraffic.level,
+      elapsedTime: this._httpTraffic.elapsedTime,
       trafficUserId: this._httpTraffic.trafficUserId,
       trafficSourceId: this._httpTraffic.trafficSourceId,
       domain: this._domain.value,

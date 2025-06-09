@@ -28,6 +28,7 @@ const composeHttpTrafficRecordSchema = z.object({
   protocol: z.enum(["HTTP", "HTTPS"]),
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]),
   trafficUserId: z.string().uuid("Invalid traffic user id format").nullable(),
+  elapsedTime: z.number().min(0, "Elapsed time must be a non-negative number"),
   requestHeaders: z.record(z.string()),
   requestBody: z.record(z.string()),
   queryParams: z.record(z.string()),

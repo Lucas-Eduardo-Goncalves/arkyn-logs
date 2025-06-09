@@ -12,6 +12,7 @@ type HttpTrafficRecordMapperDTO = {
   method: "POST" | "PUT" | "PATCH" | "DELETE" | "GET";
   pathnameId: string;
   status: number;
+  elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
   createdAt: Date;

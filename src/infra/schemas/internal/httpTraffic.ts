@@ -9,6 +9,7 @@ const createHttpTrafficSchema = z.object({
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]),
   trafficUserId: z.string().uuid("Invalid traffic user id format").nullable(),
   domainId: z.string().uuid("Invalid domain id format"),
+  elapsedTime: z.number().min(0, "Elapsed time must be a non-negative number"),
   pathnameId: z.string().uuid("Invalid pathname id format"),
 });
 

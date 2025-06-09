@@ -83,6 +83,7 @@ model HttpTraffic {
   trafficUserId   String?
   createdAt       DateTime
   trafficSourceId String
+  elapsedTime     Int
   domainId        String
   pathnameId      String
   domain          Domain        @relation(fields: [domainId], references: [id])
