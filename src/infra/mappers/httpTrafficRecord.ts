@@ -1,4 +1,5 @@
 import { HttpTrafficRecord } from "../../app/views/httpTrafficRecord";
+import { HttpMethod } from "../../main/types/HttpMethod";
 import { DomainMapper } from "./domain";
 import { HttpTrafficMapper } from "./httpTraffic";
 import { PathnameMapper } from "./pathname";
@@ -9,7 +10,7 @@ type HttpTrafficRecordMapperDTO = {
   id: string;
   domainId: string;
   level: "INFO" | "FATAL" | "WARNING";
-  method: "POST" | "PUT" | "PATCH" | "DELETE" | "GET";
+  method: HttpMethod;
   pathnameId: string;
   status: number;
   elapsedTime: number;

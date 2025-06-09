@@ -12,37 +12,35 @@ type ConstructorProps = {
   elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
-  domainId: string;
-  pathnameId: string;
+  corePathnameId: string;
   requestId: string;
   responseId: string;
   createdAt: Date;
 };
 
-type CreateHttpTrafficProps = {
+type CreateCoreLogProps = {
   status: number;
   method: HttpMethod;
   elapsedTime: number;
   trafficUserId: string | null;
+  value: string;
   trafficSourceId: string;
-  domainId: string;
-  pathnameId: string;
+  corePathnameId: string;
   requestId: string;
   responseId: string;
 };
 
-type RestoreHttpTrafficProps = ConstructorProps;
+type RestoreCoreLogProps = ConstructorProps;
 
-class HttpTraffic {
+class CoreLog {
   id: string;
   status: number;
-  method: HttpMethod;
+  method: Method;
   level: Level;
   elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
-  domainId: string;
-  pathnameId: string;
+  corePathnameId: string;
   requestId: string;
   responseId: string;
   createdAt: Date;
@@ -55,8 +53,7 @@ class HttpTraffic {
     this.elapsedTime = props.elapsedTime;
     this.trafficUserId = props.trafficUserId;
     this.trafficSourceId = props.trafficSourceId;
-    this.domainId = props.domainId;
-    this.pathnameId = props.pathnameId;
+    this.corePathnameId = props.corePathnameId;
     this.requestId = props.requestId;
     this.responseId = props.responseId;
     this.createdAt = props.createdAt;
@@ -68,25 +65,24 @@ class HttpTraffic {
     else return "INFO";
   }
 
-  static create(props: CreateHttpTrafficProps) {
-    return new HttpTraffic({
+  static create(props: CreateCoreLogProps) {
+    return new CoreLog({
       id: new IdAdapter().generate(),
       status: props.status,
       method: props.method,
-      elapsedTime: props.elapsedTime,
       level: this.getLevelByStatus(props.status),
-      trafficUserId: props.trafficUserId || null,
+      elapsedTime: props.elapsedTime,
+      trafficUserId: props.trafficUserId,
       trafficSourceId: props.trafficSourceId,
-      domainId: props.domainId,
-      pathnameId: props.pathnameId,
-      requestId: props.requestId,
-      responseId: props.responseId,
+      corePathnameId: props.corePathnameId || "",
+      requestId: props.requestId || "",
+      responseId: props.responseId || "",
       createdAt: new Date(),
     });
   }
 
-  static restore(props: RestoreHttpTrafficProps) {
-    return new HttpTraffic({
+  static restore(props: RestoreCoreLogProps) {
+    return new CoreLog({
       id: props.id,
       status: props.status,
       method: props.method,
@@ -94,8 +90,7 @@ class HttpTraffic {
       elapsedTime: props.elapsedTime,
       trafficUserId: props.trafficUserId,
       trafficSourceId: props.trafficSourceId,
-      domainId: props.domainId,
-      pathnameId: props.pathnameId,
+      corePathnameId: props.corePathnameId,
       requestId: props.requestId,
       responseId: props.responseId,
       createdAt: props.createdAt,
@@ -111,11 +106,9 @@ class HttpTraffic {
       status: this.status,
       method: this.method,
       level: this.level,
-      elapsedTime: this.elapsedTime,
       trafficUserId: this.trafficUserId,
       trafficSourceId: this.trafficSourceId,
-      domainId: this.domainId,
-      pathnameId: this.pathnameId,
+      corePathnameId: this.corePathnameId,
       requestId: this.requestId,
       responseId: this.responseId,
       createdAt: createdAt,
@@ -123,4 +116,4 @@ class HttpTraffic {
   }
 }
 
-export { HttpTraffic };
+export { CoreLog };

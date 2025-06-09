@@ -1,10 +1,11 @@
 import { HttpTraffic } from "../../app/entities/httpTraffic";
+import { HttpMethod } from "../../main/types/HttpMethod";
 
 type HttpTrafficMapperDTO = {
   id: string;
   domainId: string;
   level: "INFO" | "FATAL" | "WARNING";
-  method: "POST" | "PUT" | "PATCH" | "DELETE" | "GET";
+  method: HttpMethod;
   pathnameId: string;
   status: number;
   elapsedTime: number;

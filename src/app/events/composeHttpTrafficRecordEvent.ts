@@ -1,10 +1,12 @@
+import { HttpMethod } from "../../main/types/HttpMethod";
+
 class ComposeHttpTrafficRecordEvent {
   readonly domainUrl: string;
   readonly pathnameUrl: string;
   readonly trafficSourceId: string;
   readonly status: number;
   readonly protocol: "HTTP" | "HTTPS";
-  readonly method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  readonly method: HttpMethod;
   readonly trafficUserId: string | null;
   readonly elapsedTime: number;
   readonly requestHeaders: Record<string, string>;

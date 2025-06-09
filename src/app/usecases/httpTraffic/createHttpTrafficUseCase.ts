@@ -1,4 +1,5 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { HttpMethod } from "../../../main/types/HttpMethod";
 import { HttpTraffic } from "../../entities/httpTraffic";
 import { DomainRepository } from "../../repositories/domain/repository";
 import { HttpTrafficRepository } from "../../repositories/httpTraffic/repository";
@@ -10,7 +11,7 @@ import { TrafficSourceRepository } from "../../repositories/trafficSource/reposi
 type InputProps = {
   trafficSourceId: string;
   status: number;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  method: HttpMethod;
   trafficUserId: string | null;
   domainId: string;
   pathnameId: string;

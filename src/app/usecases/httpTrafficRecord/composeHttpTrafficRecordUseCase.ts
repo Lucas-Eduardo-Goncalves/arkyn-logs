@@ -1,3 +1,4 @@
+import { HttpMethod } from "../../../main/types/HttpMethod";
 import { ComposeHttpTrafficRecordEvent } from "../../events/composeHttpTrafficRecordEvent";
 import { eventMediator } from "../../shared/eventMediator";
 
@@ -7,7 +8,7 @@ type InputProps = {
   trafficSourceId: string;
   status: number;
   protocol: "HTTP" | "HTTPS";
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  method: HttpMethod;
   trafficUserId: string | null;
   requestHeaders: Record<string, string>;
   requestBody: Record<string, string>;
