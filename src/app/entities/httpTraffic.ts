@@ -15,6 +15,8 @@ type ConstructorProps = {
   trafficSourceId: string;
   domainId: string;
   pathnameId: string;
+  requestId: string;
+  responseId: string;
   createdAt: Date;
 };
 
@@ -26,6 +28,8 @@ type CreateHttpTrafficProps = {
   trafficSourceId: string;
   domainId: string;
   pathnameId: string;
+  requestId: string;
+  responseId: string;
 };
 
 type RestoreHttpTrafficProps = ConstructorProps;
@@ -40,6 +44,8 @@ class HttpTraffic {
   trafficSourceId: string;
   domainId: string;
   pathnameId: string;
+  requestId: string;
+  responseId: string;
   createdAt: Date;
 
   private constructor(props: ConstructorProps) {
@@ -52,6 +58,8 @@ class HttpTraffic {
     this.trafficSourceId = props.trafficSourceId;
     this.domainId = props.domainId;
     this.pathnameId = props.pathnameId;
+    this.requestId = props.requestId;
+    this.responseId = props.responseId;
     this.createdAt = props.createdAt;
   }
 
@@ -72,6 +80,8 @@ class HttpTraffic {
       trafficSourceId: props.trafficSourceId,
       domainId: props.domainId,
       pathnameId: props.pathnameId,
+      requestId: props.requestId,
+      responseId: props.responseId,
       createdAt: new Date(),
     });
   }
@@ -87,6 +97,8 @@ class HttpTraffic {
       trafficSourceId: props.trafficSourceId,
       domainId: props.domainId,
       pathnameId: props.pathnameId,
+      requestId: props.requestId,
+      responseId: props.responseId,
       createdAt: props.createdAt,
     });
   }
@@ -105,6 +117,8 @@ class HttpTraffic {
       trafficSourceId: this.trafficSourceId,
       domainId: this.domainId,
       pathnameId: this.pathnameId,
+      requestId: this.requestId,
+      responseId: this.responseId,
       createdAt: createdAt,
     };
   }

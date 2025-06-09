@@ -15,6 +15,8 @@ type HttpTrafficRecordMapperDTO = {
   elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
+  requestId: string;
+  responseId: string;
   createdAt: Date;
 
   domain: {
@@ -30,7 +32,6 @@ type HttpTrafficRecordMapperDTO = {
     headers: any;
     body: any;
     queryParams: any;
-    httpTrafficId: string;
     createdAt: Date;
   } | null;
 
@@ -38,7 +39,6 @@ type HttpTrafficRecordMapperDTO = {
     id: string;
     headers: any;
     body: any;
-    httpTrafficId: string;
     createdAt: Date;
   } | null;
 

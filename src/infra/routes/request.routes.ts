@@ -6,8 +6,6 @@ import { createRequest } from "../factory/request/createRequestFactory";
 const requestRoutes = new Hono();
 const { adaptRoute } = new RouteAdapter();
 
-requestRoutes.post("/:httpTrafficId", async (c) =>
-  adaptRoute(c, createRequest.handle)
-);
+requestRoutes.post("/", async (c) => adaptRoute(c, createRequest.handle));
 
 export { requestRoutes };

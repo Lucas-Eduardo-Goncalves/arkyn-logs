@@ -9,6 +9,7 @@ class PrismaHttpTrafficRecordDAL implements HttpTrafficRecordDAL {
       where: { trafficSourceId },
       include: { domain: true, request: true, response: true, pathname: true },
     });
+
     return httpTraffics.map(HttpTrafficRecordMapper.toEntity);
   }
 }

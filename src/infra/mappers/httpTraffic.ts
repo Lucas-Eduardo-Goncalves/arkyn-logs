@@ -10,6 +10,8 @@ type HttpTrafficMapperDTO = {
   elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;
+  requestId: string;
+  responseId: string;
   createdAt: Date;
 };
 
@@ -25,6 +27,8 @@ class HttpTrafficMapper {
       pathnameId: httpTraffic.pathnameId,
       trafficUserId: httpTraffic.trafficUserId ?? null,
       trafficSourceId: httpTraffic.trafficSourceId,
+      requestId: httpTraffic.requestId,
+      responseId: httpTraffic.responseId,
       createdAt: httpTraffic.createdAt,
     });
   }

@@ -5,7 +5,6 @@ type ResponseMapperDTO = {
   id: string;
   headers: any;
   body: any;
-  httpTrafficId: string;
   createdAt: Date;
 };
 
@@ -16,7 +15,6 @@ class ResponseMapper {
       id: response.id,
       headers: jsonAdapter.jsonValueToStringRecord(response.headers),
       body: jsonAdapter.jsonValueToStringRecord(response.body),
-      httpTrafficId: response.httpTrafficId,
       createdAt: response.createdAt,
     });
   }
@@ -28,7 +26,6 @@ class ResponseMapper {
       id: request.id,
       headers: jsonAdapter.jsonValueToStringRecord(request.headers),
       body: jsonAdapter.jsonValueToStringRecord(request.body),
-      httpTrafficId: request.httpTrafficId,
       createdAt: request.createdAt,
     });
   }

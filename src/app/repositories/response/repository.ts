@@ -1,7 +1,7 @@
 import { Response } from "../../entities/response";
 
 type ResponseRepository = {
-  findAll: (httpTrafficId: string) => Promise<Response[]>;
+  findAll: () => Promise<Response[]>;
   findById: (responseId: string) => Promise<Response | null>;
   createResponse: (response: Response) => Promise<Response>;
   deleteResponse: (responseId: string) => Promise<void>;

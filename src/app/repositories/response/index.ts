@@ -7,10 +7,8 @@ import { ResponseRepository } from "./repository";
 class PrismaResponseRepository implements ResponseRepository {
   toJson = new JsonAdapter();
 
-  async findAll(httpTrafficId: string): Promise<Response[]> {
-    const responses = await databaseConnection.response.findMany({
-      where: { httpTrafficId },
-    });
+  async findAll(): Promise<Response[]> {
+    const responses = await databaseConnection.response.findMany();
 
     return responses.map(ResponseMapper.toEntity);
   }

@@ -6,7 +6,6 @@ type ConstructorProps = {
   headers: Record<string, string>;
   body: Record<string, string>;
   queryParams: Record<string, string>;
-  httpTrafficId: string;
   createdAt: Date;
 };
 
@@ -14,7 +13,6 @@ type CreateRequestProps = {
   headers: Record<string, string>;
   body: Record<string, string>;
   queryParams: Record<string, string>;
-  httpTrafficId: string;
 };
 
 type RestoreRequestProps = ConstructorProps;
@@ -24,7 +22,6 @@ class Request {
   headers: Record<string, string>;
   body: Record<string, string>;
   queryParams: Record<string, string>;
-  httpTrafficId: string;
   createdAt: Date;
 
   private constructor(props: ConstructorProps) {
@@ -32,7 +29,6 @@ class Request {
     this.headers = props.headers;
     this.body = props.body;
     this.queryParams = props.queryParams;
-    this.httpTrafficId = props.httpTrafficId;
     this.createdAt = props.createdAt;
   }
 
@@ -42,7 +38,6 @@ class Request {
       headers: props.headers,
       body: props.body,
       queryParams: props.queryParams,
-      httpTrafficId: props.httpTrafficId,
       createdAt: new Date(),
     });
   }
@@ -53,7 +48,6 @@ class Request {
       headers: props.headers,
       body: props.body,
       queryParams: props.queryParams,
-      httpTrafficId: props.httpTrafficId,
       createdAt: props.createdAt,
     });
   }
@@ -67,7 +61,6 @@ class Request {
       headers: this.headers,
       body: this.body,
       queryParams: this.queryParams,
-      httpTrafficId: this.httpTrafficId,
       createdAt: createdAt,
     };
   }

@@ -43,7 +43,19 @@ class OnComposeHttpTrafficRecordEvent {
       value: pathnameUrl,
     });
 
-    const httpTraffic = await this.createHttpTrafficUseCase.execute({
+    const [request, response] = await Promise.all([
+      this.createRequestUseCase.execute({
+        body: requestBody,
+        headers: requestHeaders,
+        queryParams,
+      }),
+      this.createResponseUseCase.execute({
+        body: responseBody,
+        headers: responseHeaders,
+      }),
+    ]);
+
+    await this.createHttpTrafficUseCase.execute({
       trafficSourceId,
       domainId: domain.id,
       pathnameId: pathname.id,
@@ -51,22 +63,9 @@ class OnComposeHttpTrafficRecordEvent {
       method,
       trafficUserId,
       elapsedTime,
+      requestId: request.id,
+      responseId: response.id,
     });
-
-    await Promise.all([
-      await this.createRequestUseCase.execute({
-        body: requestBody,
-        headers: requestHeaders,
-        httpTrafficId: httpTraffic.id,
-        queryParams,
-      }),
-
-      await this.createResponseUseCase.execute({
-        body: responseBody,
-        headers: responseHeaders,
-        httpTrafficId: httpTraffic.id,
-      }),
-    ]);
   }
 }
 

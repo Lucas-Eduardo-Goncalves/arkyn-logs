@@ -6,7 +6,6 @@ type RequestMapperDTO = {
   headers: any;
   body: any;
   queryParams: any;
-  httpTrafficId: string;
   createdAt: Date;
 };
 
@@ -18,7 +17,6 @@ class RequestMapper {
       headers: jsonAdapter.jsonValueToStringRecord(request.headers),
       body: jsonAdapter.jsonValueToStringRecord(request.body),
       queryParams: jsonAdapter.jsonValueToStringRecord(request.queryParams),
-      httpTrafficId: request.httpTrafficId,
       createdAt: request.createdAt,
     });
   }
@@ -31,7 +29,6 @@ class RequestMapper {
       headers: jsonAdapter.jsonValueToStringRecord(request.headers),
       body: jsonAdapter.jsonValueToStringRecord(request.body),
       queryParams: jsonAdapter.jsonValueToStringRecord(request.queryParams),
-      httpTrafficId: request.httpTrafficId,
       createdAt: request.createdAt,
     });
   }

@@ -33,17 +33,15 @@ const createHttpTrafficRepository = new CreateHttpTrafficUseCase(
   prismaHttpTrafficRepository,
   prismaTrafficSourceRepository,
   prismaDomainRepository,
-  prismaPathnameRepository
+  prismaPathnameRepository,
+  prismaRequestRepository,
+  prismaResponseRepository
 );
 
-const createRequestUseCase = new CreateRequestUseCase(
-  prismaRequestRepository,
-  prismaHttpTrafficRepository
-);
+const createRequestUseCase = new CreateRequestUseCase(prismaRequestRepository);
 
 const createResponseUseCase = new CreateResponseUseCase(
-  prismaResponseRepository,
-  prismaHttpTrafficRepository
+  prismaResponseRepository
 );
 
 const onComposeHttpTrafficRecord = new OnComposeHttpTrafficRecordEvent(
