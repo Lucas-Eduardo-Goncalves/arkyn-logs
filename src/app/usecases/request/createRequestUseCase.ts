@@ -1,9 +1,9 @@
-import { Request } from "../../entities/request";
-import { RequestRepository } from "../../repositories/request/repository";
+import { Request } from "../../../domain/entities/request";
+import { RequestRepository } from "../../../domain/repositories/request";
 
 type InputProps = {
   headers: Record<string, string>;
-  body: Record<string, string>;
+  body: Record<string, string> | null;
   queryParams: Record<string, string>;
 };
 

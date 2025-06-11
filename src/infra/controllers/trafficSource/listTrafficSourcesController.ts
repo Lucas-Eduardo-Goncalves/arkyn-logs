@@ -1,7 +1,7 @@
 import { ListTrafficSourcesUseCase } from "../../../app/usecases/trafficSource/listTrafficSourcesUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 
 class ListTrafficSourcesController {
   constructor(private listTrafficSourcesUseCase: ListTrafficSourcesUseCase) {}

@@ -2,7 +2,7 @@ import { CreatePathnameUseCase } from "../../../app/usecases/pathname/createPath
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createPathnameSchema } from "../../schemas/internal/pathname";
 
 class CreatePathnameController {

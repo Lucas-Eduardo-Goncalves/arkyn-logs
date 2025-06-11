@@ -2,7 +2,7 @@ import { ListHttpTrafficRecordsUseCase } from "../../../app/usecases/httpTraffic
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { HttpAdapter } from "../../adapters/httpAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 
 class ListHttpTrafficRecordsController {
   constructor(

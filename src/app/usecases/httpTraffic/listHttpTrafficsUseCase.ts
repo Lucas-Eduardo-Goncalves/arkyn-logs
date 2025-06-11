@@ -1,4 +1,4 @@
-import { HttpTrafficRepository } from "../../repositories/httpTraffic/repository";
+import { HttpTrafficRepository } from "../../../domain/repositories/httpTraffic";
 
 class ListHttpTrafficsUseCase {
   constructor(private httpTrafficRepository: HttpTrafficRepository) {}

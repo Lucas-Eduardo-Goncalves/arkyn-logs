@@ -2,7 +2,7 @@ import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/crea
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createHttpTrafficSchema } from "../../schemas/internal/httpTraffic";
 
 class CreateHttpTrafficController {

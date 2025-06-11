@@ -2,7 +2,7 @@ import { ListCorePathnamesUseCase } from "../../../app/usecases/corePathname/lis
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { HttpAdapter } from "../../adapters/httpAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 
 class ListCorePathnamesController {
   constructor(private listCorePathnamesUseCase: ListCorePathnamesUseCase) {}

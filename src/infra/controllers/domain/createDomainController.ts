@@ -2,7 +2,7 @@ import { CreateDomainUseCase } from "../../../app/usecases/domain/createDomainUs
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createDomainSchema } from "../../schemas/internal/domain";
 
 class CreateDomainController {

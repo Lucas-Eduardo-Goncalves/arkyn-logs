@@ -10,10 +10,10 @@ class ComposeHttpTrafficRecordEvent {
   readonly trafficUserId: string | null;
   readonly elapsedTime: number;
   readonly requestHeaders: Record<string, string>;
-  readonly requestBody: Record<string, string>;
+  readonly requestBody: Record<string, string> | null;
   readonly queryParams: Record<string, string>;
   readonly responseHeaders: Record<string, string>;
-  readonly responseBody: Record<string, string>;
+  readonly responseBody: Record<string, string> | null;
 
   constructor(data: ComposeHttpTrafficRecordEvent) {
     this.domainUrl = data.domainUrl;

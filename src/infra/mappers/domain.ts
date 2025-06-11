@@ -1,4 +1,4 @@
-import { Domain } from "../../app/entities/domain";
+import { Domain } from "../../domain/entities/domain";
 
 type DomainMapperDTO = {
   id: string;

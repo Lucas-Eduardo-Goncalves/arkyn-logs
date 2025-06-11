@@ -2,7 +2,7 @@ import { CreateResponseUseCase } from "../../../app/usecases/response/createResp
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createResponseSchema } from "../../schemas/internal/response";
 
 class CreateResponseController {

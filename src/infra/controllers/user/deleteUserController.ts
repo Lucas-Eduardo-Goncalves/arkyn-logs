@@ -2,7 +2,7 @@ import { DeleteUserUseCase } from "../../../app/usecases/user/deleteUserUseCase"
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { deleteUserSchema } from "../../schemas/internal/user";
 
 class DeleteUserController {

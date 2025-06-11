@@ -99,7 +99,7 @@ model HttpTraffic {
 model Request {
   id          String       @id
   headers     Json
-  body        Json
+  body        Json?
   queryParams Json
   createdAt   DateTime
   httpTraffic HttpTraffic?
@@ -109,7 +109,7 @@ model Request {
 model Response {
   id          String       @id
   headers     Json
-  body        Json
+  body        Json?
   createdAt   DateTime
   httpTraffic HttpTraffic?
   coreLog     CoreLog?

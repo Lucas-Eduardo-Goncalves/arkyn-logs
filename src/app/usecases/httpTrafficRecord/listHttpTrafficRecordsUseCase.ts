@@ -1,4 +1,4 @@
-import { HttpTrafficRecordDAL } from "../../dal/httpTrafficRecord/dal";
+import { HttpTrafficRecordDAL } from "../../../domain/dal/httpTrafficRecord";
 
 class ListHttpTrafficRecordsUseCase {
   constructor(private httpTrafficRecordDAL: HttpTrafficRecordDAL) {}

@@ -1,7 +1,7 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { CorePathname } from "../../entities/corePathname";
-import { CorePathnameRepository } from "../../repositories/corePathname/repository";
-import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+import { CorePathname } from "../../../domain/entities/corePathname";
+import { CorePathnameRepository } from "../../../domain/repositories/corePathname";
+import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 
 type InputProps = {
   trafficSourceId: string;

@@ -1,4 +1,4 @@
-import { Pathname } from "../../app/entities/pathname";
+import { Pathname } from "../../domain/entities/pathname";
 
 type PathnameMapperDTO = {
   id: string;

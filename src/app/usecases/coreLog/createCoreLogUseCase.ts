@@ -1,15 +1,17 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 import { HttpMethod } from "../../../main/types/HttpMethod";
-import { CoreLog } from "../../entities/coreLog";
-import { CoreLogRepository } from "../../repositories/coreLog/repository";
-import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+import { CoreLog } from "../../../domain/entities/coreLog";
+import { CoreLogRepository } from "../../../domain/repositories/coreLog";
+import { CorePathnameRepository } from "../../../domain/repositories/corePathname";
+import { RequestRepository } from "../../../domain/repositories/request";
+import { ResponseRepository } from "../../../domain/repositories/response";
+import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 
 type InputProps = {
   status: number;
   method: HttpMethod;
   elapsedTime: number;
   trafficUserId: string | null;
-  value: string;
   trafficSourceId: string;
   corePathnameId: string;
   requestId: string;
@@ -19,15 +21,34 @@ type InputProps = {
 class CreateCoreLogUseCase {
   constructor(
     private coreLogRepository: CoreLogRepository,
-    private trafficSourceRepository: TrafficSourceRepository
+    private trafficSourceRepository: TrafficSourceRepository,
+    private corePathnameRespository: CorePathnameRepository,
+    private requestRepository: RequestRepository,
+    private responseRepository: ResponseRepository
   ) {}
 
   async execute(input: InputProps) {
-    const { trafficSourceId, value } = input;
+    const {
+      trafficSourceId,
+      corePathnameId,
+      elapsedTime,
+      method,
+      requestId,
+      responseId,
+      status,
+      trafficUserId,
+    } = input;
 
-    const [existsTrafficSource, existsCoreLog] = await Promise.all([
+    const [
+      existsTrafficSource,
+      existsCorePathname,
+      existsRequest,
+      existsResponse,
+    ] = await Promise.all([
       await this.trafficSourceRepository.findById(trafficSourceId),
-      await this.coreLogRepository.findByValue(value),
+      await this.corePathnameRespository.findById(corePathnameId),
+      await this.requestRepository.findById(requestId),
+      await this.responseRepository.findById(responseId),
     ]);
 
     if (!existsTrafficSource) {
@@ -35,11 +56,30 @@ class CreateCoreLogUseCase {
       throw httpAdapter.notFound("Traffic source not found");
     }
 
-    if (existsCoreLog) return existsCoreLog.toJson();
+    if (!existsCorePathname) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.notFound("Core pathname not found");
+    }
+
+    if (!existsRequest) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.notFound("Request not found");
+    }
+
+    if (!existsResponse) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.notFound("Response not found");
+    }
 
     const coreLog = CoreLog.create({
       trafficSourceId,
-      value,
+      corePathnameId,
+      elapsedTime,
+      method,
+      requestId,
+      responseId,
+      status,
+      trafficUserId,
     });
 
     await this.coreLogRepository.createCoreLog(coreLog);

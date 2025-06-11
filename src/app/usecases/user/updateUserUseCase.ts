@@ -1,5 +1,5 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { UserRepository } from "../../repositories/user/repository";
+import { UserRepository } from "../../../domain/repositories/user";
 
 type InputProps = {
   name?: string;

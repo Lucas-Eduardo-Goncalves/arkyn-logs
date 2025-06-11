@@ -1,6 +1,6 @@
 import { jwtVerify, SignJWT } from "jose";
 
-import { User } from "../../app/entities/user";
+import { User } from "../../domain/entities/user";
 import { env } from "../../main/config/env";
 import { HttpAdapter } from "./httpAdapter";
 

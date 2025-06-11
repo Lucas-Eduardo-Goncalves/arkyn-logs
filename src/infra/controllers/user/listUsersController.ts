@@ -1,7 +1,7 @@
 import { ListUsersUseCase } from "../../../app/usecases/user/listUsersUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 
 class ListUsersController {
   constructor(private listUsersUseCase: ListUsersUseCase) {}

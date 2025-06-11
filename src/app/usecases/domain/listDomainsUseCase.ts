@@ -1,4 +1,4 @@
-import { DomainRepository } from "../../repositories/domain/repository";
+import { DomainRepository } from "../../../domain/repositories/domain";
 
 class ListDomainsUseCase {
   constructor(private domainRepository: DomainRepository) {}

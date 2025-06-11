@@ -1,4 +1,4 @@
-import { onComposeHttpTrafficRecordHandler } from "../../infra/factory/handlers/onComposeHttpTraffcRecordEventFactory";
+import { onComposeHttpTrafficRecordHandler } from "../../main/factory/handlers/onComposeHttpTraffcRecordEventFactory";
 import { eventMediator } from "../shared/eventMediator";
 
 function handlersFactory() {

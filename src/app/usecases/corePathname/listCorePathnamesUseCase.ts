@@ -1,4 +1,4 @@
-import { CorePathnameRepository } from "../../repositories/corePathname/repository";
+import { CorePathnameRepository } from "../../../domain/repositories/corePathname";
 
 class ListCorePathnamesUseCase {
   constructor(private corePathnameRepository: CorePathnameRepository) {}

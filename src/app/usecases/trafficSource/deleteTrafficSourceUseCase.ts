@@ -1,5 +1,5 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 
 class DeleteTrafficSourceUseCase {
   constructor(private trafficSourceRepository: TrafficSourceRepository) {}

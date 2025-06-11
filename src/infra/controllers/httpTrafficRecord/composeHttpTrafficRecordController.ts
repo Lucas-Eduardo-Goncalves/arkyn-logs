@@ -3,7 +3,7 @@ import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { HttpAdapter } from "../../adapters/httpAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { composeHttpTrafficRecordSchema } from "../../schemas/internal/httpTrafficRecord";
 
 class ComposeHttpTrafficRecordController {
@@ -33,6 +33,7 @@ class ComposeHttpTrafficRecordController {
       return route.response.json(null, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
+      console.log(error);
       return errorHandlerAdapter.handle(error);
     }
   }

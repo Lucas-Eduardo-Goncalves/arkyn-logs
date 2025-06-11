@@ -1,5 +1,5 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { DomainRepository } from "../../repositories/domain/repository";
+import { DomainRepository } from "../../../domain/repositories/domain";
 
 class DeleteDomainUseCase {
   constructor(private domainRepository: DomainRepository) {}

@@ -1,9 +1,9 @@
-import { Response } from "../../entities/response";
-import { ResponseRepository } from "../../repositories/response/repository";
+import { Response } from "../../../domain/entities/response";
+import { ResponseRepository } from "../../../domain/repositories/response";
 
 type InputProps = {
   headers: Record<string, string>;
-  body: Record<string, string>;
+  body: Record<string, string> | null;
 };
 
 class CreateResponseUseCase {

@@ -1,7 +1,7 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 import { JwtAdapter } from "../../../infra/adapters/jwtAdapter";
 import { PasswordAdapter } from "../../../infra/adapters/passwordAdapter";
-import { UserRepository } from "../../repositories/user/repository";
+import { UserRepository } from "../../../domain/repositories/user";
 
 type InputProps = {
   email: string;

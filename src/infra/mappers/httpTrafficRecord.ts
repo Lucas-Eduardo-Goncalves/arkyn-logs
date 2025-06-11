@@ -1,4 +1,4 @@
-import { HttpTrafficRecord } from "../../app/views/httpTrafficRecord";
+import { HttpTrafficRecord } from "../../domain/views/httpTrafficRecord";
 import { HttpMethod } from "../../main/types/HttpMethod";
 import { DomainMapper } from "./domain";
 import { HttpTrafficMapper } from "./httpTraffic";

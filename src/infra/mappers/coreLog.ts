@@ -1,4 +1,4 @@
-import { CoreLog } from "../../app/entities/coreLog";
+import { CoreLog } from "../../domain/entities/coreLog";
 import { HttpMethod } from "../../main/types/HttpMethod";
 
 type CoreLogMapperDTO = {

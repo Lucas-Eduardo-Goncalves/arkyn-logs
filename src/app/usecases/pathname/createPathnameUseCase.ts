@@ -1,8 +1,8 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { Pathname } from "../../entities/pathname";
-import { DomainRepository } from "../../repositories/domain/repository";
-import { PathnameRepository } from "../../repositories/pathname/repository";
-import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
+import { Pathname } from "../../../domain/entities/pathname";
+import { DomainRepository } from "../../../domain/repositories/domain";
+import { PathnameRepository } from "../../../domain/repositories/pathname";
+import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 
 type InputProps = {
   trafficSourceId: string;

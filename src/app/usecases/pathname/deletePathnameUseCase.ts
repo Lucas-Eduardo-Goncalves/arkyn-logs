@@ -1,5 +1,5 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { PathnameRepository } from "../../repositories/pathname/repository";
+import { PathnameRepository } from "../../../domain/repositories/pathname";
 
 class DeletePathnameUseCase {
   constructor(private pathnameRepository: PathnameRepository) {}

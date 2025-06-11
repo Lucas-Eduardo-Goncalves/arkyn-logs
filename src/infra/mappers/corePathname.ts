@@ -1,4 +1,4 @@
-import { CorePathname } from "../../app/entities/corePathname";
+import { CorePathname } from "../../domain/entities/corePathname";
 
 type CorePathnameMapperDTO = {
   id: string;

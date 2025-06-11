@@ -1,7 +1,7 @@
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { TrafficSource } from "../../entities/trafficSource";
-import { TrafficSourceRepository } from "../../repositories/trafficSource/repository";
-import { UserRepository } from "../../repositories/user/repository";
+import { TrafficSource } from "../../../domain/entities/trafficSource";
+import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
+import { UserRepository } from "../../../domain/repositories/user";
 
 type InputProps = {
   name: string;

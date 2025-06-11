@@ -11,10 +11,10 @@ type InputProps = {
   method: HttpMethod;
   trafficUserId: string | null;
   requestHeaders: Record<string, string>;
-  requestBody: Record<string, string>;
+  requestBody: Record<string, string> | null;
   queryParams: Record<string, string>;
   responseHeaders: Record<string, string>;
-  responseBody: Record<string, string>;
+  responseBody: Record<string, string> | null;
   elapsedTime: number;
 };
 

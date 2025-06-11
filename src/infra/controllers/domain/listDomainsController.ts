@@ -2,7 +2,7 @@ import { ListDomainsUseCase } from "../../../app/usecases/domain/listDomainsUseC
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { HttpAdapter } from "../../adapters/httpAdapter";
-import { AuthMiddleware } from "../../middlewares/authMiddleware";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 
 class ListDomainsController {
   constructor(private listDomainsUseCase: ListDomainsUseCase) {}

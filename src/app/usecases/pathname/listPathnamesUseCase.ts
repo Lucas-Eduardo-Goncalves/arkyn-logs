@@ -1,4 +1,4 @@
-import { PathnameRepository } from "../../repositories/pathname/repository";
+import { PathnameRepository } from "../../../domain/repositories/pathname";
 
 class ListPathnamesUseCase {
   constructor(private pathnameRepository: PathnameRepository) {}
