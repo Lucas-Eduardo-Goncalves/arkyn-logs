@@ -1,5 +1,5 @@
-import { HttpTraffic } from "../../domain/entities/httpTraffic";
-import { HttpMethod } from "../../main/types/HttpMethod";
+import { HttpTraffic } from "../../../domain/entities/httpTraffic";
+import { HttpMethod } from "../../../main/types/HttpMethod";
 
 type HttpTrafficMapperDTO = {
   id: string;

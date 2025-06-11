@@ -1,4 +1,4 @@
-import { PrismaDomainRepository } from "../../../infra/repositories/domain";
+import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
 import { ListDomainsUseCase } from "../../../app/usecases/domain/listDomainsUseCase";
 import { ListDomainsController } from "../../../infra/controllers/domain/listDomainsController";
 

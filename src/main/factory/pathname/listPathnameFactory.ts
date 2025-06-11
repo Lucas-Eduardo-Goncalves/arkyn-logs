@@ -1,4 +1,4 @@
-import { PrismaPathnameRepository } from "../../../infra/repositories/pathname";
+import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathname";
 import { ListPathnamesUseCase } from "../../../app/usecases/pathname/listPathnamesUseCase";
 import { ListPathnamesController } from "../../../infra/controllers/pathname/listPathnamesController";
 

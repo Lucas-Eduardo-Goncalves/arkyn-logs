@@ -1,10 +1,10 @@
 import { OnComposeHttpTrafficRecordEvent } from "../../../app/handlers/onComposeHttpTrafficRecordEvent";
-import { PrismaDomainRepository } from "../../../infra/repositories/domain";
-import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
-import { PrismaPathnameRepository } from "../../../infra/repositories/pathname";
-import { PrismaRequestRepository } from "../../../infra/repositories/request";
-import { PrismaResponseRepository } from "../../../infra/repositories/response";
-import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
+import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
+import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
+import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathname";
+import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
+import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
+import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { CreateDomainUseCase } from "../../../app/usecases/domain/createDomainUseCase";
 import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/createHttpTrafficUseCase";
 import { CreatePathnameUseCase } from "../../../app/usecases/pathname/createPathnameUseCase";

@@ -1,6 +1,6 @@
-import { Domain } from "../../domain/entities/domain";
-import { DomainRepository } from "../../domain/repositories/domain";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { Domain } from "../../../domain/entities/domain";
+import { DomainRepository } from "../../../domain/repositories/domain";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { DomainMapper } from "../mappers/domain";
 
 class PrismaDomainRepository implements DomainRepository {

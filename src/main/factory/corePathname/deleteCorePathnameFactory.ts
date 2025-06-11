@@ -1,6 +1,6 @@
 import { DeleteCorePathnameUseCase } from "../../../app/usecases/corePathname/deleteCorePathnameUseCase";
 import { DeleteCorePathnameController } from "../../../infra/controllers/corePathname/deleteCorePathnameController";
-import { PrismaCorePathnameRepository } from "../../../infra/repositories/corePathname";
+import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
 
 const prismaCorePathnameRepository = new PrismaCorePathnameRepository();
 

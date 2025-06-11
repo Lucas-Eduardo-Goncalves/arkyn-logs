@@ -1,6 +1,6 @@
-import { HttpTrafficRecordDAL } from "../../domain/dal/httpTrafficRecord";
-import { HttpTrafficRecord } from "../../domain/views/httpTrafficRecord";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { HttpTrafficRecordDAL } from "../../../domain/dal/httpTrafficRecord";
+import { HttpTrafficRecord } from "../../../domain/views/httpTrafficRecord";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { HttpTrafficRecordMapper } from "../mappers/httpTrafficRecord";
 
 class PrismaHttpTrafficRecordDAL implements HttpTrafficRecordDAL {

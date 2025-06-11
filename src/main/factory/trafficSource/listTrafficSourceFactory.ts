@@ -1,4 +1,4 @@
-import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
+import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { ListTrafficSourcesUseCase } from "../../../app/usecases/trafficSource/listTrafficSourcesUseCase";
 import { ListTrafficSourcesController } from "../../../infra/controllers/trafficSource/listTrafficSourcesController";
 

@@ -1,4 +1,4 @@
-import { ComposeHttpTrafficRecordEvent } from "../events/composeHttpTrafficRecordEvent";
+import { ComposeHttpTrafficRecordEvent } from "../../domain/events/composeHttpTrafficRecordEvent";
 import { CreateDomainUseCase } from "../usecases/domain/createDomainUseCase";
 import { CreateHttpTrafficUseCase } from "../usecases/httpTraffic/createHttpTrafficUseCase";
 import { CreatePathnameUseCase } from "../usecases/pathname/createPathnameUseCase";

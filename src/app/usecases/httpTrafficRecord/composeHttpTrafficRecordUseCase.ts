@@ -1,5 +1,5 @@
+import { ComposeHttpTrafficRecordEvent } from "../../../domain/events/composeHttpTrafficRecordEvent";
 import { HttpMethod } from "../../../main/types/HttpMethod";
-import { ComposeHttpTrafficRecordEvent } from "../../events/composeHttpTrafficRecordEvent";
 import { eventMediator } from "../../shared/eventMediator";
 
 type InputProps = {

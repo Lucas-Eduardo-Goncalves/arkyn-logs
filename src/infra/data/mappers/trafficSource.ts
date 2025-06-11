@@ -1,4 +1,4 @@
-import { TrafficSource } from "../../domain/entities/trafficSource";
+import { TrafficSource } from "../../../domain/entities/trafficSource";
 
 type TrafficSourceMapperDTO = {
   id: string;

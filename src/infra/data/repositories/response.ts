@@ -1,7 +1,7 @@
-import { Response } from "../../domain/entities/response";
-import { ResponseRepository } from "../../domain/repositories/response";
-import { databaseConnection } from "../adapters/dbAdapter";
-import { JsonAdapter } from "../adapters/jsonAdapter";
+import { Response } from "../../../domain/entities/response";
+import { ResponseRepository } from "../../../domain/repositories/response";
+import { databaseConnection } from "../../adapters/dbAdapter";
+import { JsonAdapter } from "../../adapters/jsonAdapter";
 import { ResponseMapper } from "../mappers/response";
 
 class PrismaResponseRepository implements ResponseRepository {

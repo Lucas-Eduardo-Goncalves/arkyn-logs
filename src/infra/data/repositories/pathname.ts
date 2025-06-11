@@ -1,6 +1,6 @@
-import { Pathname } from "../../domain/entities/pathname";
-import { PathnameRepository } from "../../domain/repositories/pathname";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { Pathname } from "../../../domain/entities/pathname";
+import { PathnameRepository } from "../../../domain/repositories/pathname";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { PathnameMapper } from "../mappers/pathname";
 
 class PrismaPathnameRepository implements PathnameRepository {

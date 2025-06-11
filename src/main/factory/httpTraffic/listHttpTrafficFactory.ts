@@ -1,4 +1,4 @@
-import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
+import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
 import { ListHttpTrafficsUseCase } from "../../../app/usecases/httpTraffic/listHttpTrafficsUseCase";
 import { ListHttpTrafficsController } from "../../../infra/controllers/httpTraffic/listHttpTrafficsController";
 

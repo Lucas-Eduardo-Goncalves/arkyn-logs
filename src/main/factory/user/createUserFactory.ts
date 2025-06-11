@@ -1,4 +1,4 @@
-import { PrismaUserRepository } from "../../../infra/repositories/user";
+import { PrismaUserRepository } from "../../../infra/data/repositories/user";
 import { CreateUserUseCase } from "../../../app/usecases/user/createUserUseCase";
 import { CreateUserController } from "../../../infra/controllers/user/createUserController";
 

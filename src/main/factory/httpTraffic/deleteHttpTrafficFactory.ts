@@ -1,4 +1,4 @@
-import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
+import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
 import { DeleteHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/deleteHttpTrafficUseCase";
 import { DeleteHttpTrafficController } from "../../../infra/controllers/httpTraffic/deleteHttpTrafficController";
 

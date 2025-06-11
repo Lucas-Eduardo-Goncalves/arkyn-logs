@@ -1,7 +1,7 @@
-import { Request } from "../../domain/entities/request";
-import { RequestRepository } from "../../domain/repositories/request";
-import { databaseConnection } from "../adapters/dbAdapter";
-import { JsonAdapter } from "../adapters/jsonAdapter";
+import { Request } from "../../../domain/entities/request";
+import { RequestRepository } from "../../../domain/repositories/request";
+import { databaseConnection } from "../../adapters/dbAdapter";
+import { JsonAdapter } from "../../adapters/jsonAdapter";
 import { RequestMapper } from "../mappers/request";
 
 class PrismaRequestRepository implements RequestRepository {

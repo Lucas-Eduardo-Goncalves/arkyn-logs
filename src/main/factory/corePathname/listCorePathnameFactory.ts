@@ -1,6 +1,6 @@
 import { ListCorePathnamesUseCase } from "../../../app/usecases/corePathname/listCorePathnamesUseCase";
 import { ListCorePathnamesController } from "../../../infra/controllers/corePathname/listCorePathnamesController";
-import { PrismaCorePathnameRepository } from "../../../infra/repositories/corePathname";
+import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
 
 const prismaCorePathnameRepository = new PrismaCorePathnameRepository();
 const listCorePathnamesUseCase = new ListCorePathnamesUseCase(

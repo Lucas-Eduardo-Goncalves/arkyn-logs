@@ -1,6 +1,6 @@
-import { HttpTraffic } from "../../domain/entities/httpTraffic";
-import { HttpTrafficRepository } from "../../domain/repositories/httpTraffic";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { HttpTraffic } from "../../../domain/entities/httpTraffic";
+import { HttpTrafficRepository } from "../../../domain/repositories/httpTraffic";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { HttpTrafficMapper } from "../mappers/httpTraffic";
 
 class PrismaHttpTrafficRepository implements HttpTrafficRepository {

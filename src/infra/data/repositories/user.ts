@@ -1,6 +1,6 @@
-import { User } from "../../domain/entities/user";
-import { UserRepository } from "../../domain/repositories/user";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { User } from "../../../domain/entities/user";
+import { UserRepository } from "../../../domain/repositories/user";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { UserMapper } from "../mappers/user";
 
 class PrismaUserRepository implements UserRepository {

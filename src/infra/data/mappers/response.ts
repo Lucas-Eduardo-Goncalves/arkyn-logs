@@ -1,5 +1,5 @@
-import { Response } from "../../domain/entities/response";
-import { JsonAdapter } from "../adapters/jsonAdapter";
+import { Response } from "../../../domain/entities/response";
+import { JsonAdapter } from "../../adapters/jsonAdapter";
 
 type ResponseMapperDTO = {
   id: string;

@@ -1,9 +1,9 @@
-import { PrismaDomainRepository } from "../../../infra/repositories/domain";
-import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
-import { PrismaPathnameRepository } from "../../../infra/repositories/pathname";
-import { PrismaRequestRepository } from "../../../infra/repositories/request";
-import { PrismaResponseRepository } from "../../../infra/repositories/response";
-import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
+import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
+import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
+import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathname";
+import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
+import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
+import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/createHttpTrafficUseCase";
 import { CreateHttpTrafficController } from "../../../infra/controllers/httpTraffic/createHttpTrafficController";
 

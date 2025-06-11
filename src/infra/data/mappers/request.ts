@@ -1,5 +1,5 @@
-import { Request } from "../../domain/entities/request";
-import { JsonAdapter } from "../adapters/jsonAdapter";
+import { Request } from "../../../domain/entities/request";
+import { JsonAdapter } from "../../adapters/jsonAdapter";
 
 type RequestMapperDTO = {
   id: string;

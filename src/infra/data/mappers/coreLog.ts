@@ -1,5 +1,5 @@
-import { CoreLog } from "../../domain/entities/coreLog";
-import { HttpMethod } from "../../main/types/HttpMethod";
+import { CoreLog } from "../../../domain/entities/coreLog";
+import { HttpMethod } from "../../../main/types/HttpMethod";
 
 type CoreLogMapperDTO = {
   id: string;

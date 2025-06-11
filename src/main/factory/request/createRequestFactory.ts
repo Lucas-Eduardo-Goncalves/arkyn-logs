@@ -1,4 +1,4 @@
-import { PrismaRequestRepository } from "../../../infra/repositories/request";
+import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
 import { CreateRequestUseCase } from "../../../app/usecases/request/createRequestUseCase";
 import { CreateRequestController } from "../../../infra/controllers/request/createRequestController";
 

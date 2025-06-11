@@ -1,6 +1,6 @@
 import { ListHttpTrafficRecordsUseCase } from "../../../app/usecases/httpTrafficRecord/listHttpTrafficRecordsUseCase";
 import { ListHttpTrafficRecordsController } from "../../../infra/controllers/httpTrafficRecord/listHttpTrafficRecordsController";
-import { PrismaHttpTrafficRecordDAL } from "../../../infra/dal/httpTrafficRecord";
+import { PrismaHttpTrafficRecordDAL } from "../../../infra/data/dal/httpTrafficRecord";
 
 const prismaHttpTrafficRecordDAL = new PrismaHttpTrafficRecordDAL();
 

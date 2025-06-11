@@ -1,6 +1,6 @@
-import { TrafficSource } from "../../domain/entities/trafficSource";
-import { TrafficSourceRepository } from "../../domain/repositories/trafficSource";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { TrafficSource } from "../../../domain/entities/trafficSource";
+import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { TrafficSourceMapper } from "../mappers/trafficSource";
 
 class PrismaTrafficSourceRepository implements TrafficSourceRepository {

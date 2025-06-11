@@ -1,6 +1,6 @@
-import { CorePathname } from "../../domain/entities/corePathname";
-import { CorePathnameRepository } from "../../domain/repositories/corePathname";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { CorePathname } from "../../../domain/entities/corePathname";
+import { CorePathnameRepository } from "../../../domain/repositories/corePathname";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { CorePathnameMapper } from "../mappers/corePathname";
 
 class PrismaCorePathnameRepository implements CorePathnameRepository {

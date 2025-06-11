@@ -1,6 +1,6 @@
-import { CoreLog } from "../../domain/entities/coreLog";
-import { CoreLogRepository } from "../../domain/repositories/coreLog";
-import { databaseConnection } from "../adapters/dbAdapter";
+import { CoreLog } from "../../../domain/entities/coreLog";
+import { CoreLogRepository } from "../../../domain/repositories/coreLog";
+import { databaseConnection } from "../../adapters/dbAdapter";
 import { CoreLogMapper } from "../mappers/coreLog";
 
 class PrismaCoreLogRepository implements CoreLogRepository {
