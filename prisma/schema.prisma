@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
 datasource db {
@@ -14,7 +15,7 @@ model User {
   name          String
   utc           Int
   password      String
-  createdAt     DateTime
+  createdAt     DateTime 
   updatedAt     DateTime
   trafficSource TrafficSource[]
 }

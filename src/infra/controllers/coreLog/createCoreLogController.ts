@@ -17,10 +17,10 @@ class CreateCoreLogController {
 
       const schemaValidator = new SchemaValidatorAdapter(createCoreLogSchema);
 
-      // const data = schemaValidator.validate({ ...body, trafficSourceId });
-      // const trafficsource = await this.createCoreLogUseCase.execute(data);
+      const data = schemaValidator.validate({ ...body, trafficSourceId });
+      const trafficsource = await this.createCoreLogUseCase.execute(data);
 
-      return route.response.json(null, 201);
+      return route.response.json(trafficsource, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

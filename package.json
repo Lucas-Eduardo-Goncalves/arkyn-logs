@@ -11,6 +11,7 @@
     "db:migrate": "bunx prisma migrate dev",
     "db:generate": "bunx prisma generate",
     "db:push": "bunx prisma db push",
+    "start": "bun run src/index.ts",
     "test:all": "vitest --config vitest.config.ts",
     "test:entities": "vitest --config vitest.config.ts src/app/entities/**/*.spec.ts",
     "test:repositories": "vitest --config vitest.config.ts src/app/repositories/**/*.spec.ts",
