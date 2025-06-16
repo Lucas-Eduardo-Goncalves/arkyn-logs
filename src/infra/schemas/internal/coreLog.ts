@@ -8,9 +8,8 @@ const createCoreLogSchema = z.object({
   status: z.number().int("Status must be an integer"),
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]),
   trafficUserId: z.string().uuid("Invalid traffic user id format").nullable(),
-  domainId: z.string().uuid("Invalid domain id format"),
   elapsedTime: z.number().min(0, "Elapsed time must be a non-negative number"),
-  pathnameId: z.string().uuid("Invalid pathname id format"),
+  corePathnameId: z.string().uuid("Invalid pathname id format"),
   requestId: z.string().uuid("Invalid request id format"),
   responseId: z.string().uuid("Invalid response id format"),
 });
