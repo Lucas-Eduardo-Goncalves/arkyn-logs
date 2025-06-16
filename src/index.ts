@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { version, author, license, name } from "../package.json";
 
 import { handlersFactory } from "./app/handlers/handlersFactory";
 import { coreLogRoutes } from "./main/routes/core-log";
@@ -18,6 +19,7 @@ const app = new Hono();
 handlersFactory();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
+app.get("/", (c) => c.json({ author, name, license, version }));
 
 app.route("/core-logs", coreLogRoutes);
 app.route("/core-pathnames", corePathnameRoutes);
