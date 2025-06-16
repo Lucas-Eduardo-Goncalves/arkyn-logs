@@ -1,16 +1,42 @@
+import { HttpTrafficRecordSearchParams } from "../../../app/search/httpTrafficRecordSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { HttpTrafficRecordDAL } from "../../../domain/dal/httpTrafficRecord";
 import { HttpTrafficRecord } from "../../../domain/views/httpTrafficRecord";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { HttpTrafficRecordMapper } from "../mappers/httpTrafficRecord";
 
 class PrismaHttpTrafficRecordDAL implements HttpTrafficRecordDAL {
-  async findAll(trafficSourceId: string): Promise<HttpTrafficRecord[]> {
-    const httpTraffics = await databaseConnection.httpTraffic.findMany({
-      where: { trafficSourceId },
-      include: { domain: true, request: true, response: true, pathname: true },
-    });
+  async findAll(
+    searchParams: HttpTrafficRecordSearchParams
+  ): Promise<SearchResult<HttpTrafficRecord>> {
+    console.log(searchParams.toPrismaCount());
 
-    return httpTraffics.map(HttpTrafficRecordMapper.toEntity);
+    const [httpTraffics, httpTrafficCount] = await Promise.all([
+      databaseConnection.httpTraffic.findMany({
+        // ...searchParams.toPrisma(),
+        where: {
+          request: { body: { cep: "36305-194" } },
+        },
+        include: {
+          domain: true,
+          request: true,
+          response: true,
+          pathname: true,
+        },
+      }),
+      databaseConnection.httpTraffic.count({}),
+    ]);
+
+    return new SearchResult<HttpTrafficRecord>({
+      data: httpTraffics.map((httpTraffic) =>
+        HttpTrafficRecordMapper.toView(httpTraffic)
+      ),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: httpTrafficCount,
+      },
+    });
   }
 }
 

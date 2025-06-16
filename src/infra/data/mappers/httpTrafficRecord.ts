@@ -53,7 +53,7 @@ type HttpTrafficRecordMapperDTO = {
 };
 
 class HttpTrafficRecordMapper {
-  static toEntity(data: HttpTrafficRecordMapperDTO): HttpTrafficRecord {
+  static toView(data: HttpTrafficRecordMapperDTO): HttpTrafficRecord {
     const httpTraffic = HttpTrafficMapper.toEntity(data);
     const request = RequestMapper.toSafeEntity(data.request);
     const response = ResponseMapper.toSafeEntity(data.response);

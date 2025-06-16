@@ -1,6 +1,7 @@
 import { FormatDateAdapter } from "../../infra/adapters/formatDateAdapter";
 import { IdAdapter } from "../../infra/adapters/idAdapter";
 import { HttpMethod } from "../../main/types/HttpMethod";
+import { Entity } from "../protocol/entity";
 
 type Level = "INFO" | "FATAL" | "WARNING";
 
@@ -31,7 +32,7 @@ type CreateCoreLogProps = {
 
 type RestoreCoreLogProps = ConstructorProps;
 
-class CoreLog {
+class CoreLog implements Entity {
   id: string;
   status: number;
   method: HttpMethod;
