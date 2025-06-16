@@ -1,4 +1,4 @@
-Collecting workspace information# Arkyn Logs API Documentation
+# Arkyn Logs API Documentation
 
 ## Overview
 
