@@ -14,6 +14,8 @@ import { requestRoutes } from "./main/routes/request.routes";
 import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
 import { userRoutes } from "./main/routes/user.routes";
+import { env } from "bun";
+import { environmentVariables } from "./main/config/environmentVariables";
 
 const app = new Hono();
 
@@ -33,4 +35,7 @@ app.route("/responses", responseRoutes);
 app.route("/traffic-sources", trafficSourceRoutes);
 app.route("/users", userRoutes);
 
-export default app;
+export default {
+  port: environmentVariables.PORT,
+  fetch: app.fetch,
+};

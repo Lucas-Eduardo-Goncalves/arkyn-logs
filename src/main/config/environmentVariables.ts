@@ -7,13 +7,16 @@ class EnvError extends Error {
   }
 }
 
-const envSchema = z.object({
+const environmentVariablesSchema = z.object({
   // JWT KEY
   JWT_KEY: z.string().min(1),
 
   // DATABASE URL
   DATABASE_URL: z.string().url(),
   DIRECT_URL: z.string().url(),
+
+  // PORT
+  PORT: z.string().min(4).regex(/^\d+$/).transform(Number),
 });
 
 function formatErrorMessage(error: z.ZodError) {
@@ -26,12 +29,12 @@ function formatErrorMessage(error: z.ZodError) {
 
 const parsedEnv = () => {
   try {
-    return envSchema.parse(process.env);
+    return environmentVariablesSchema.parse(process.env);
   } catch (error: any) {
     throw new EnvError(formatErrorMessage(error));
   }
 };
 
-const env = parsedEnv();
+const environmentVariables = parsedEnv();
 
-export { env };
+export { environmentVariables };
