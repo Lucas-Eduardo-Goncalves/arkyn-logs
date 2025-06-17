@@ -1,7 +1,9 @@
 import { Hono } from "hono";
-import { version, author, license, name } from "../package.json";
+import { author, license, name, version } from "../package.json";
 
 import { handlersFactory } from "./app/handlers/handlersFactory";
+import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
+
 import { coreLogRoutes } from "./main/routes/core-log";
 import { corePathnameRoutes } from "./main/routes/core-pathname.routes";
 import { domainRoutes } from "./main/routes/domain.routes";
@@ -12,7 +14,6 @@ import { requestRoutes } from "./main/routes/request.routes";
 import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
 import { userRoutes } from "./main/routes/user.routes";
-import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
 
 const app = new Hono();
 
