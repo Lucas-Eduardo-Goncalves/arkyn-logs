@@ -1,6 +1,9 @@
 import { Hono } from "hono";
+import { author, license, name, version } from "../package.json";
 
 import { handlersFactory } from "./app/handlers/handlersFactory";
+import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
+
 import { coreLogRoutes } from "./main/routes/core-log";
 import { corePathnameRoutes } from "./main/routes/core-pathname.routes";
 import { domainRoutes } from "./main/routes/domain.routes";
@@ -11,13 +14,15 @@ import { requestRoutes } from "./main/routes/request.routes";
 import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
 import { userRoutes } from "./main/routes/user.routes";
-import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
+import { env } from "bun";
+import { environmentVariables } from "./main/config/environmentVariables";
 
 const app = new Hono();
 
 handlersFactory();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
+app.get("/", (c) => c.json({ author, name, license, version }));
 
 app.route("/core-logs", coreLogRoutes);
 app.route("/core-pathnames", corePathnameRoutes);
@@ -30,4 +35,7 @@ app.route("/responses", responseRoutes);
 app.route("/traffic-sources", trafficSourceRoutes);
 app.route("/users", userRoutes);
 
-export default app;
+export default {
+  port: environmentVariables.PORT,
+  fetch: app.fetch,
+};

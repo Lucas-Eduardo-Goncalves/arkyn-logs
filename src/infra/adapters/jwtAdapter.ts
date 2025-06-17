@@ -1,7 +1,7 @@
 import { jwtVerify, SignJWT } from "jose";
 
 import { User } from "../../domain/entities/user";
-import { env } from "../../main/config/env";
+import { environmentVariables } from "../../main/config/environmentVariables";
 import { HttpAdapter } from "./httpAdapter";
 
 class JwtAdapter {
@@ -11,7 +11,7 @@ class JwtAdapter {
     const httpAdapter = new HttpAdapter();
 
     try {
-      const secret = new TextEncoder().encode(env.JWT_KEY);
+      const secret = new TextEncoder().encode(environmentVariables.JWT_KEY);
       const token = rawToken.replace("Bearer ", "");
       const { payload } = await jwtVerify(token, secret);
       const userId = payload?.id;
@@ -27,7 +27,7 @@ class JwtAdapter {
 
   async sign(user: User) {
     const alg = "HS256";
-    const secret = new TextEncoder().encode(env.JWT_KEY);
+    const secret = new TextEncoder().encode(environmentVariables.JWT_KEY);
     const token = await new SignJWT({ id: user.id })
       .setProtectedHeader({ alg })
       .setIssuedAt()
