@@ -1,9 +1,10 @@
 import {
+  BadRequest,
+  Conflict,
+  Forbidden,
   NotFound,
   ServerError,
-  Conflict,
   Unauthorized,
-  BadRequest,
 } from "@arkyn/server";
 
 class HttpAdapter {
@@ -25,6 +26,10 @@ class HttpAdapter {
 
   unauthorized(message: string, cause?: any) {
     throw new Unauthorized(message, cause);
+  }
+
+  forbidden(message: string, cause?: any) {
+    throw new Forbidden(message, cause);
   }
 }
 

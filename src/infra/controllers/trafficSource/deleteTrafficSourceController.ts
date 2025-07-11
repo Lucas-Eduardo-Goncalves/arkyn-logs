@@ -1,8 +1,8 @@
 import { DeleteTrafficSourceUseCase } from "../../../app/usecases/trafficSource/deleteTrafficSourceUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { deleteTrafficSourceSchema } from "../../schemas/internal/trafficSource";
 
 class DeleteTrafficSourceController {
@@ -10,7 +10,7 @@ class DeleteTrafficSourceController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
       const trafficSourceId = route.request.params?.trafficSourceId;
 
       const schemaValidator = new SchemaValidatorAdapter(
@@ -18,11 +18,12 @@ class DeleteTrafficSourceController {
       );
       const validatedBody = schemaValidator.validate({ trafficSourceId });
 
-      const trafficsource = await this.deleteTrafficSourceUseCase.execute(
-        validatedBody.trafficSourceId
+      const trafficSource = await this.deleteTrafficSourceUseCase.execute(
+        validatedBody.trafficSourceId,
+        userId
       );
 
-      return route.response.json(trafficsource);
+      return route.response.json(trafficSource);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

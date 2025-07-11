@@ -18,8 +18,8 @@ class CreateTrafficSourceController {
 
       const data = schemaValidator.validate({ ...route.request.body, userId });
 
-      const trafficsource = await this.createTrafficSourceUseCase.execute(data);
-      return route.response.json(trafficsource, 201);
+      const trafficSource = await this.createTrafficSourceUseCase.execute(data);
+      return route.response.json(trafficSource, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);
