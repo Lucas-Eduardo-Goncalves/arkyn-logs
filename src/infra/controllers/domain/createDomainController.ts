@@ -1,8 +1,8 @@
 import { CreateDomainUseCase } from "../../../app/usecases/domain/createDomainUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createDomainSchema } from "../../schemas/internal/domain";
 
 class CreateDomainController {
@@ -10,7 +10,7 @@ class CreateDomainController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
       const trafficSourceId = route.request.params?.trafficSourceId;
       const schemaValidator = new SchemaValidatorAdapter(createDomainSchema);
 
@@ -19,8 +19,8 @@ class CreateDomainController {
         trafficSourceId,
       });
 
-      const trafficsource = await this.createDomainUseCase.execute(data);
-      return route.response.json(trafficsource, 201);
+      const domain = await this.createDomainUseCase.execute(data, userId);
+      return route.response.json(domain, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

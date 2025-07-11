@@ -15,32 +15,39 @@ class CreateDomainUseCase {
     private trafficSourceRepository: TrafficSourceRepository
   ) {}
 
-  async execute(input: InputProps) {
+  normalizeValue(value: string): string {
+    return value.endsWith("/") ? value.slice(0, -1) : value;
+  }
+
+  async execute(input: InputProps, userId: string) {
     const { trafficSourceId, value, protocol } = input;
 
-    const [existsTrafficSource, existsDomain] = await Promise.all([
+    const [trafficSource, domain] = await Promise.all([
       await this.trafficSourceRepository.findById(trafficSourceId),
       await this.domainRepository.findByValue(value),
     ]);
 
-    if (!existsTrafficSource) {
+    if (!trafficSource) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Traffic source not found");
     }
 
-    if (existsDomain) return existsDomain.toJson();
+    if (trafficSource.userId !== userId) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.forbidden("You do not own this traffic source.");
+    }
 
-    const normalizedValue = value.endsWith("/") ? value.slice(0, -1) : value;
+    if (domain) return domain.toJson();
 
-    const domain = Domain.create({
+    const newDomain = Domain.create({
       trafficSourceId,
-      value: normalizedValue,
+      value: this.normalizeValue(value),
       protocol,
     });
 
-    await this.domainRepository.createDomain(domain);
+    await this.domainRepository.createDomain(newDomain);
 
-    return domain.toJson();
+    return newDomain.toJson();
   }
 }
 
