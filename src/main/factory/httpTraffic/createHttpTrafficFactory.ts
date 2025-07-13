@@ -6,6 +6,7 @@ import { PrismaResponseRepository } from "../../../infra/data/repositories/respo
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { CreateHttpTrafficUseCase } from "../../../app/useCases/httpTraffic/createHttpTrafficUseCase";
 import { CreateHttpTrafficController } from "../../../infra/controllers/httpTraffic/createHttpTrafficController";
+import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
 
 const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
@@ -13,6 +14,7 @@ const prismaDomainRepository = new PrismaDomainRepository();
 const prismaPathnameSourceRepository = new PrismaPathnameRepository();
 const prismaRequestRepository = new PrismaRequestRepository();
 const prismaResponseRepository = new PrismaResponseRepository();
+const prismaWebhookRepository = new PrismaWebhookRepository();
 
 const createHttpTrafficUseCase = new CreateHttpTrafficUseCase(
   prismaHttpTrafficRepository,
@@ -20,7 +22,8 @@ const createHttpTrafficUseCase = new CreateHttpTrafficUseCase(
   prismaDomainRepository,
   prismaPathnameSourceRepository,
   prismaRequestRepository,
-  prismaResponseRepository
+  prismaResponseRepository,
+  prismaWebhookRepository
 );
 
 const createHttpTrafficController = new CreateHttpTrafficController(

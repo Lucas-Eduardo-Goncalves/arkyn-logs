@@ -1,5 +1,5 @@
 import z from "zod";
-import { paginationSchema } from "../tamplate/pagination";
+import { paginationSchema } from "../template/pagination";
 
 const createCorePathnameSchema = z.object({
   value: z

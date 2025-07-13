@@ -1,5 +1,5 @@
 import z from "zod";
-import { paginationSchema } from "../tamplate/pagination";
+import { paginationSchema } from "../template/pagination";
 
 const createTrafficSourceSchema = z.object({
   name: z.string().min(1, "Name is required"),

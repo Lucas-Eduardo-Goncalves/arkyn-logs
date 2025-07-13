@@ -1,5 +1,5 @@
 import z from "zod";
-import { paginationSchema } from "../tamplate/pagination";
+import { paginationSchema } from "../template/pagination";
 
 const createDomainSchema = z.object({
   value: z.string().min(1, "Value is required").url("Invalid URL format"),

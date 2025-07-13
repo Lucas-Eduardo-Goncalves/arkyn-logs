@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
 }
 
@@ -15,7 +15,7 @@ model User {
   name          String
   utc           Int
   password      String
-  createdAt     DateTime 
+  createdAt     DateTime
   updatedAt     DateTime
   trafficSource TrafficSource[]
 }
@@ -34,6 +34,16 @@ model TrafficSource {
   corePathname  CorePathname[]
   exception     Exception[]
   coreLog       CoreLog[]
+  webhook       Webhook?
+}
+
+model Webhook {
+  id                String        @id
+  discordChannelId String?
+  createdAt         DateTime
+  updatedAt         DateTime
+  trafficSourceId   String        @unique
+  trafficSource     TrafficSource @relation(fields: [trafficSourceId], references: [id])
 }
 
 enum Protocol {

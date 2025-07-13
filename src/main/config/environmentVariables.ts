@@ -17,6 +17,9 @@ const environmentVariablesSchema = z.object({
 
   // PORT
   PORT: z.string().min(4).regex(/^\d+$/).transform(Number),
+
+  // DISCORD BOT TOKEN
+  DISCORD_BOT_TOKEN: z.string().min(1),
 });
 
 function formatErrorMessage(error: z.ZodError) {

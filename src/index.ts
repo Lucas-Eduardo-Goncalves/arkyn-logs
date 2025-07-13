@@ -4,6 +4,7 @@ import { author, license, name, version } from "../package.json";
 import { handlersFactory } from "./app/handlers/handlersFactory";
 import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
 
+import { environmentVariables } from "./main/config/environmentVariables";
 import { coreLogRoutes } from "./main/routes/core-log";
 import { corePathnameRoutes } from "./main/routes/core-pathname.routes";
 import { domainRoutes } from "./main/routes/domain.routes";
@@ -14,8 +15,7 @@ import { requestRoutes } from "./main/routes/request.routes";
 import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
 import { userRoutes } from "./main/routes/user.routes";
-import { env } from "bun";
-import { environmentVariables } from "./main/config/environmentVariables";
+import { webhookRoutes } from "./main/routes/webhook.route";
 
 const app = new Hono();
 
@@ -34,6 +34,7 @@ app.route("/requests", requestRoutes);
 app.route("/responses", responseRoutes);
 app.route("/traffic-sources", trafficSourceRoutes);
 app.route("/users", userRoutes);
+app.route("/webhooks", webhookRoutes);
 
 export default {
   port: environmentVariables.PORT,
