@@ -1,8 +1,8 @@
 import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/createHttpTrafficUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createHttpTrafficSchema } from "../../schemas/internal/httpTraffic";
 
 class CreateHttpTrafficController {
@@ -10,7 +10,7 @@ class CreateHttpTrafficController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
       const trafficSourceId = route.request.params?.trafficSourceId;
       const schemaValidator = new SchemaValidatorAdapter(
         createHttpTrafficSchema
@@ -21,8 +21,11 @@ class CreateHttpTrafficController {
         trafficSourceId,
       });
 
-      const trafficsource = await this.createHttpTrafficUseCase.execute(data);
-      return route.response.json(trafficsource, 201);
+      const httpTraffic = await this.createHttpTrafficUseCase.execute(
+        data,
+        userId
+      );
+      return route.response.json(httpTraffic, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

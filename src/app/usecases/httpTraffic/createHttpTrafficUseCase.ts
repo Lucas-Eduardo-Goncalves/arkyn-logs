@@ -30,7 +30,7 @@ class CreateHttpTrafficUseCase {
     private responseRepository: ResponseRepository
   ) {}
 
-  async execute(input: InputProps) {
+  async execute(input: InputProps, userId: string) {
     const {
       trafficSourceId,
       status,
@@ -43,41 +43,41 @@ class CreateHttpTrafficUseCase {
       responseId,
     } = input;
 
-    const [
-      existsTrafficSource,
-      existsDomain,
-      existsPathname,
-      existsRequest,
-      existsResponse,
-    ] = await Promise.all([
-      this.trafficSourceRepository.findById(trafficSourceId),
-      this.domainRepository.findById(domainId),
-      this.pathnameRepository.findById(pathnameId),
-      this.requestRepository.findById(requestId),
-      this.responseRepository.findById(responseId),
-    ]);
+    const [trafficSource, domain, pathname, request, response] =
+      await Promise.all([
+        this.trafficSourceRepository.findById(trafficSourceId),
+        this.domainRepository.findById(domainId),
+        this.pathnameRepository.findById(pathnameId),
+        this.requestRepository.findById(requestId),
+        this.responseRepository.findById(responseId),
+      ]);
 
-    if (!existsTrafficSource) {
+    if (!trafficSource) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Traffic source not found");
     }
 
-    if (!existsDomain) {
+    if (trafficSource.userId !== userId) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.forbidden("You do not own this traffic source.");
+    }
+
+    if (!domain) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Domain not found");
     }
 
-    if (!existsPathname) {
+    if (!pathname) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Pathname not found");
     }
 
-    if (!existsRequest) {
+    if (!request) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Request not found");
     }
 
-    if (!existsResponse) {
+    if (!response) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Response not found");
     }

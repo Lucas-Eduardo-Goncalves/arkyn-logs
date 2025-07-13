@@ -62,17 +62,20 @@ class OnComposeHttpTrafficRecordEvent {
       }),
     ]);
 
-    await this.createHttpTrafficUseCase.execute({
-      trafficSourceId,
-      domainId: domain.id,
-      pathnameId: pathname.id,
-      status,
-      method,
-      trafficUserId,
-      elapsedTime,
-      requestId: request.id,
-      responseId: response.id,
-    });
+    await this.createHttpTrafficUseCase.execute(
+      {
+        trafficSourceId,
+        domainId: domain.id,
+        pathnameId: pathname.id,
+        status,
+        method,
+        trafficUserId,
+        elapsedTime,
+        requestId: request.id,
+        responseId: response.id,
+      },
+      userId
+    );
   }
 }
 
