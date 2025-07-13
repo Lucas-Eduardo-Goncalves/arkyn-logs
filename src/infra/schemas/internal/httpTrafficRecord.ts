@@ -42,31 +42,6 @@ const listHttpTrafficRecordsSchema = paginationSchema.extend({
     .string()
     .min(1, "Traffic source id is required")
     .uuid("Invalid traffic source id format"),
-  requestHeaders: z
-    .string()
-    .optional()
-    .transform((val) => (val ? JSON.parse(val) : undefined))
-    .pipe(z.record(z.string()).optional()),
-  requestBody: z
-    .string()
-    .optional()
-    .transform((val) => (val ? JSON.parse(val) : undefined))
-    .pipe(z.record(z.string()).optional()),
-  responseHeaders: z
-    .string()
-    .optional()
-    .transform((val) => (val ? JSON.parse(val) : undefined))
-    .pipe(z.record(z.string()).optional()),
-  responseBody: z
-    .string()
-    .optional()
-    .transform((val) => (val ? JSON.parse(val) : undefined))
-    .pipe(z.record(z.string()).optional()),
-  queryParams: z
-    .string()
-    .optional()
-    .transform((val) => (val ? JSON.parse(val) : undefined))
-    .pipe(z.record(z.string()).optional()),
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]).optional(),
   level: z.enum(["INFO", "WARNING", "DEBUG"]).optional(),
   status: z

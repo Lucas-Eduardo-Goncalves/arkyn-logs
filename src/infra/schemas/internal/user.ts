@@ -1,4 +1,5 @@
 import z from "zod";
+import { paginationSchema } from "../tamplate/pagination";
 
 const authUserSchema = z.object({
   email: z.string().email("Invalid email format"),
@@ -22,4 +23,12 @@ const deleteUserSchema = z.object({
   userId: z.string().uuid("Invalid id format"),
 });
 
-export { authUserSchema, createUserSchema, deleteUserSchema, updateUserSchema };
+const listUsersSchema = paginationSchema;
+
+export {
+  authUserSchema,
+  createUserSchema,
+  deleteUserSchema,
+  updateUserSchema,
+  listUsersSchema,
+};

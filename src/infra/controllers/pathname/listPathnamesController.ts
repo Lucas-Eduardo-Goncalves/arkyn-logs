@@ -1,8 +1,10 @@
+import { SearchParamsMapper } from "../../../app/shared/searchParamsMapper";
 import { ListPathnamesUseCase } from "../../../app/useCases/pathname/listPathnamesUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
-import { HttpAdapter } from "../../adapters/httpAdapter";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { listPathnamesSchema } from "../../schemas/internal/pathname";
 
 class ListPathnamesController {
   constructor(private listPathnamesUseCase: ListPathnamesUseCase) {}
@@ -11,24 +13,18 @@ class ListPathnamesController {
     try {
       const { userId } = await AuthMiddleware.authenticate(route);
 
-      const trafficSourceId = route.request.params?.trafficSourceId;
-      const domainId = route.request.params?.domainId;
+      const searchParams = SearchParamsMapper.toObject({
+        query: route.request.query,
+        params: route.request.params,
+      });
 
-      if (!trafficSourceId) {
-        const httpAdapter = new HttpAdapter();
-        const message = "Traffic source ID is required to list pathnames.";
-        throw httpAdapter.notFound(message);
-      }
+      const schemaValidator = new SchemaValidatorAdapter(listPathnamesSchema);
 
-      if (!domainId) {
-        const httpAdapter = new HttpAdapter();
-        const message = "Domain ID is required to list pathnames.";
-        throw httpAdapter.notFound(message);
-      }
+      const validatedParams = schemaValidator.validate(searchParams);
+      const mappedFilter = SearchParamsMapper.toFilter(validatedParams);
 
       const pathnames = await this.listPathnamesUseCase.execute(
-        trafficSourceId,
-        domainId,
+        mappedFilter,
         userId
       );
 

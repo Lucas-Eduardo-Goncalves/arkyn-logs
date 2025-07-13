@@ -1,4 +1,5 @@
 import z from "zod";
+import { paginationSchema } from "../tamplate/pagination";
 
 const createTrafficSourceSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -23,8 +24,13 @@ const deleteTrafficSourceSchema = z.object({
   trafficSourceId: z.string().uuid("Invalid id format"),
 });
 
+const listTrafficSourcesSchema = paginationSchema.extend({
+  userId: z.string().uuid("Invalid user id format"),
+});
+
 export {
   createTrafficSourceSchema,
   deleteTrafficSourceSchema,
   updateTrafficSourceSchema,
+  listTrafficSourcesSchema,
 };

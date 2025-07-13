@@ -1,4 +1,5 @@
 import z from "zod";
+import { paginationSchema } from "../tamplate/pagination";
 
 const createCoreLogSchema = z.object({
   trafficSourceId: z
@@ -18,4 +19,11 @@ const deleteCoreLogSchema = z.object({
   coreLogId: z.string().uuid("Invalid HTTP traffic ID format"),
 });
 
-export { createCoreLogSchema, deleteCoreLogSchema };
+const listCoreLogsSchema = paginationSchema.extend({
+  trafficSourceId: z
+    .string()
+    .min(1, "Traffic source id is required")
+    .uuid("Invalid traffic source id format"),
+});
+
+export { createCoreLogSchema, deleteCoreLogSchema, listCoreLogsSchema };

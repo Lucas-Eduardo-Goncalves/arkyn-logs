@@ -1,15 +1,29 @@
+import { DomainSearchParams } from "../../../app/search/domainSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { Domain } from "../../../domain/entities/domain";
 import { DomainRepository } from "../../../domain/repositories/domain";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { DomainMapper } from "../mappers/domain";
 
 class PrismaDomainRepository implements DomainRepository {
-  async findAll(trafficSourceId: string): Promise<Domain[]> {
-    const domains = await databaseConnection.domain.findMany({
-      where: { trafficSourceId },
-    });
+  async findAll(
+    searchParams: DomainSearchParams
+  ): Promise<SearchResult<Domain>> {
+    const [domains, count] = await Promise.all([
+      databaseConnection.domain.findMany(searchParams.toPrisma()),
+      databaseConnection.domain.count({
+        where: searchParams.toPrisma().where,
+      }),
+    ]);
 
-    return domains.map(DomainMapper.toEntity);
+    return new SearchResult({
+      data: domains.map(DomainMapper.toEntity),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: count,
+      },
+    });
   }
 
   async findById(domainId: string): Promise<Domain | null> {

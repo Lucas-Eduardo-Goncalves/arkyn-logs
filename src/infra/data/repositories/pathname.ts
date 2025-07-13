@@ -1,3 +1,5 @@
+import { PathnameSearchParams } from "../../../app/search/pathnameSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { Pathname } from "../../../domain/entities/pathname";
 import { PathnameRepository } from "../../../domain/repositories/pathname";
 import { databaseConnection } from "../../adapters/dbAdapter";
@@ -5,14 +7,23 @@ import { PathnameMapper } from "../mappers/pathname";
 
 class PrismaPathnameRepository implements PathnameRepository {
   async findAll(
-    trafficSourceId: string,
-    domainId: string
-  ): Promise<Pathname[]> {
-    const pathnames = await databaseConnection.pathname.findMany({
-      where: { domainId, trafficSourceId },
-    });
+    searchParams: PathnameSearchParams
+  ): Promise<SearchResult<Pathname>> {
+    const [pathnames, count] = await Promise.all([
+      databaseConnection.pathname.findMany(searchParams.toPrisma()),
+      databaseConnection.pathname.count({
+        where: searchParams.toPrisma().where,
+      }),
+    ]);
 
-    return pathnames.map(PathnameMapper.toEntity);
+    return new SearchResult({
+      data: pathnames.map(PathnameMapper.toEntity),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: count,
+      },
+    });
   }
 
   async findById(pathnameId: string): Promise<Pathname | null> {

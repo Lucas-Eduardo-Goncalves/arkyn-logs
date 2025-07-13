@@ -2,6 +2,19 @@ import { DomainRepository } from "../../../domain/repositories/domain";
 import { PathnameRepository } from "../../../domain/repositories/pathname";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { PathnameSearchParams } from "../../search/pathnameSearchParams";
+
+type InputProps = {
+  page?: number;
+  pageLimit?: number;
+  sort?: string | null;
+  sortDirection?: "asc" | "desc";
+
+  filter: {
+    trafficSourceId: string;
+    domainId: string;
+  };
+};
 
 class ListPathnamesUseCase {
   constructor(
@@ -10,10 +23,12 @@ class ListPathnamesUseCase {
     private domainRepository: DomainRepository
   ) {}
 
-  async execute(trafficSourceId: string, domainId: string, userId: string) {
+  async execute(input: InputProps, userId: string) {
+    const searchParams = new PathnameSearchParams(input);
+
     const [trafficSource, domain] = await Promise.all([
-      this.trafficSourceRepository.findById(trafficSourceId),
-      this.domainRepository.findById(domainId),
+      this.trafficSourceRepository.findById(input.filter.trafficSourceId),
+      this.domainRepository.findById(input.filter.domainId),
     ]);
 
     if (!trafficSource) {
@@ -31,12 +46,8 @@ class ListPathnamesUseCase {
       throw httpAdapter.notFound("Domain not found");
     }
 
-    const pathnames = await this.pathnameRepository.findAll(
-      trafficSourceId,
-      domainId
-    );
-
-    return pathnames.map((user) => user.toJson());
+    const pathnames = await this.pathnameRepository.findAll(searchParams);
+    return pathnames.toJson();
   }
 }
 

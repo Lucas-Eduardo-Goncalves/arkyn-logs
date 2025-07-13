@@ -1,7 +1,9 @@
+import { DomainSearchParams } from "../../app/search/domainSearchParams";
+import { SearchResult } from "../../app/shared/searchResult";
 import { Domain } from "../entities/domain";
 
 type DomainRepository = {
-  findAll: (trafficSourceId: string) => Promise<Domain[]>;
+  findAll: (searchParams: DomainSearchParams) => Promise<SearchResult<Domain>>;
   findById: (domainId: string) => Promise<Domain | null>;
   findByValue: (value: string) => Promise<Domain | null>;
   createDomain: (domain: Domain) => Promise<Domain>;

@@ -115,4 +115,4 @@ class SearchParams<Filter> {
   }
 }
 
-export { SearchParams };
+export { SearchParams, PAGE_DEFAULT, PAGE_LIMIT_DEFAULT };

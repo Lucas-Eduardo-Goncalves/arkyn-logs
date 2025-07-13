@@ -1,16 +1,32 @@
+import { TrafficSourceSearchParams } from "../../../app/search/trafficSourceSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { TrafficSource } from "../../../domain/entities/trafficSource";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { TrafficSourceMapper } from "../mappers/trafficSource";
 
 class PrismaTrafficSourceRepository implements TrafficSourceRepository {
-  async findAll(userId: string): Promise<TrafficSource[]> {
-    const trafficSources = await databaseConnection.trafficSource.findMany({
-      where: { userId },
-      orderBy: { createdAt: "desc" },
-    });
+  async findAll(
+    searchParams: TrafficSourceSearchParams
+  ): Promise<SearchResult<TrafficSource>> {
+    const [trafficSources, count] = await Promise.all([
+      databaseConnection.trafficSource.findMany({
+        ...searchParams.toPrisma(),
+        orderBy: { createdAt: "desc" },
+      }),
+      databaseConnection.trafficSource.count({
+        where: searchParams.toPrisma().where,
+      }),
+    ]);
 
-    return trafficSources.map(TrafficSourceMapper.toEntity);
+    return new SearchResult({
+      data: trafficSources.map(TrafficSourceMapper.toEntity),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: count,
+      },
+    });
   }
 
   async findById(trafficSourceId: string): Promise<TrafficSource | null> {

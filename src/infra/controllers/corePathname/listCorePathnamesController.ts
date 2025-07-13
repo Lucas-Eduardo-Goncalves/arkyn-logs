@@ -1,8 +1,10 @@
+import { SearchParamsMapper } from "../../../app/shared/searchParamsMapper";
 import { ListCorePathnamesUseCase } from "../../../app/useCases/corePathname/listCorePathnamesUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
-import { HttpAdapter } from "../../adapters/httpAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { listCorePathnamesSchema } from "../../schemas/internal/corePathname";
 
 class ListCorePathnamesController {
   constructor(private listCorePathnamesUseCase: ListCorePathnamesUseCase) {}
@@ -11,19 +13,23 @@ class ListCorePathnamesController {
     try {
       await AuthMiddleware.authenticate(route);
 
-      const trafficSourceId = route.request.params?.trafficSourceId;
+      const searchParams = SearchParamsMapper.toObject({
+        query: route.request.query,
+        params: route.request.params,
+      });
 
-      if (!trafficSourceId) {
-        const httpAdapter = new HttpAdapter();
-        const message = "Traffic source ID is required to list corePathnames.";
-        throw httpAdapter.notFound(message);
-      }
-
-      const trafficsources = await this.listCorePathnamesUseCase.execute(
-        trafficSourceId
+      const schemaValidator = new SchemaValidatorAdapter(
+        listCorePathnamesSchema
       );
 
-      return route.response.json(trafficsources);
+      const validatedParams = schemaValidator.validate(searchParams);
+      const mappedFilter = SearchParamsMapper.toFilter(validatedParams);
+
+      const corePathnames = await this.listCorePathnamesUseCase.execute(
+        mappedFilter
+      );
+
+      return route.response.json(corePathnames);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

@@ -1,6 +1,18 @@
 import { HttpTrafficRepository } from "../../../domain/repositories/httpTraffic";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
+import { HttpTrafficSearchParams } from "../../search/httpTrafficSearchParams";
+
+type InputProps = {
+  page?: number;
+  pageLimit?: number;
+  sort?: string | null;
+  sortDirection?: "asc" | "desc";
+
+  filter: {
+    trafficSourceId: string;
+  };
+};
 
 class ListHttpTrafficsUseCase {
   constructor(
@@ -8,9 +20,11 @@ class ListHttpTrafficsUseCase {
     private trafficSourceRepository: TrafficSourceRepository
   ) {}
 
-  async execute(trafficSourceId: string, userId: string) {
+  async execute(input: InputProps, userId: string) {
+    const searchParams = new HttpTrafficSearchParams(input);
+
     const trafficSource = await this.trafficSourceRepository.findById(
-      trafficSourceId
+      input.filter.trafficSourceId
     );
 
     if (!trafficSource) {
@@ -23,11 +37,8 @@ class ListHttpTrafficsUseCase {
       throw httpAdapter.forbidden("You do not own this traffic source.");
     }
 
-    const httpTraffics = await this.httpTrafficRepository.findAll(
-      trafficSourceId
-    );
-
-    return httpTraffics.map((user) => user.toJson());
+    const httpTraffics = await this.httpTrafficRepository.findAll(searchParams);
+    return httpTraffics.toJson();
   }
 }
 

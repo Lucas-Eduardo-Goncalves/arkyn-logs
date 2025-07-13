@@ -1,7 +1,9 @@
+import { UserSearchParams } from "../../app/search/userSearchParams";
+import { SearchResult } from "../../app/shared/searchResult";
 import { User } from "../entities/user";
 
 type UserRepository = {
-  findAll: () => Promise<User[]>;
+  findAll: (searchParams: UserSearchParams) => Promise<SearchResult<User>>;
   findById: (userId: string) => Promise<User | null>;
   findByEmail: (email: string) => Promise<User | null>;
   createUser: (User: User) => Promise<User>;

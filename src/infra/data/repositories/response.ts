@@ -1,3 +1,5 @@
+import { ResponseSearchParams } from "../../../app/search/responseSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { Response } from "../../../domain/entities/response";
 import { ResponseRepository } from "../../../domain/repositories/response";
 import { databaseConnection } from "../../adapters/dbAdapter";
@@ -7,10 +9,24 @@ import { ResponseMapper } from "../mappers/response";
 class PrismaResponseRepository implements ResponseRepository {
   toJson = new JsonAdapter();
 
-  async findAll(): Promise<Response[]> {
-    const responses = await databaseConnection.response.findMany();
+  async findAll(
+    searchParams: ResponseSearchParams
+  ): Promise<SearchResult<Response>> {
+    const [responses, count] = await Promise.all([
+      databaseConnection.response.findMany(searchParams.toPrisma()),
+      databaseConnection.response.count({
+        where: searchParams.toPrisma().where,
+      }),
+    ]);
 
-    return responses.map(ResponseMapper.toEntity);
+    return new SearchResult({
+      data: responses.map(ResponseMapper.toEntity),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: count,
+      },
+    });
   }
 
   async findById(responseId: string): Promise<Response | null> {

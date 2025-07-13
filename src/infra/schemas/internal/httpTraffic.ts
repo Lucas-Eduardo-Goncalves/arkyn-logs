@@ -1,4 +1,5 @@
 import z from "zod";
+import { paginationSchema } from "../tamplate/pagination";
 
 const createHttpTrafficSchema = z.object({
   trafficSourceId: z
@@ -19,4 +20,15 @@ const deleteHttpTrafficSchema = z.object({
   httpTrafficId: z.string().uuid("Invalid HTTP traffic ID format"),
 });
 
-export { createHttpTrafficSchema, deleteHttpTrafficSchema };
+const listHttpTrafficsSchema = paginationSchema.extend({
+  trafficSourceId: z
+    .string()
+    .min(1, "Traffic source id is required")
+    .uuid("Invalid traffic source id format"),
+});
+
+export {
+  createHttpTrafficSchema,
+  deleteHttpTrafficSchema,
+  listHttpTrafficsSchema,
+};

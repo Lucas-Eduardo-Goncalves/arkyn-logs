@@ -1,4 +1,5 @@
 import z from "zod";
+import { paginationSchema } from "../tamplate/pagination";
 
 const createPathnameSchema = z.object({
   value: z
@@ -30,4 +31,15 @@ const deletePathnameSchema = z.object({
   pathnameId: z.string().uuid("Invalid id format"),
 });
 
-export { createPathnameSchema, deletePathnameSchema };
+const listPathnamesSchema = paginationSchema.extend({
+  trafficSourceId: z
+    .string()
+    .min(1, "Traffic source id is required")
+    .uuid("Invalid traffic source id format"),
+  domainId: z
+    .string()
+    .min(1, "Domain id is required")
+    .uuid("Invalid domain id format"),
+});
+
+export { createPathnameSchema, deletePathnameSchema, listPathnamesSchema };

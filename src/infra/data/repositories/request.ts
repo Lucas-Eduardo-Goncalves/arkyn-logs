@@ -1,3 +1,5 @@
+import { RequestSearchParams } from "../../../app/search/requestSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { Request } from "../../../domain/entities/request";
 import { RequestRepository } from "../../../domain/repositories/request";
 import { databaseConnection } from "../../adapters/dbAdapter";
@@ -7,9 +9,24 @@ import { RequestMapper } from "../mappers/request";
 class PrismaRequestRepository implements RequestRepository {
   toJson = new JsonAdapter();
 
-  async findAll(): Promise<Request[]> {
-    const requests = await databaseConnection.request.findMany();
-    return requests.map(RequestMapper.toEntity);
+  async findAll(
+    searchParams: RequestSearchParams
+  ): Promise<SearchResult<Request>> {
+    const [requests, count] = await Promise.all([
+      databaseConnection.request.findMany(searchParams.toPrisma()),
+      databaseConnection.request.count({
+        where: searchParams.toPrisma().where,
+      }),
+    ]);
+
+    return new SearchResult({
+      data: requests.map(RequestMapper.toEntity),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: count,
+      },
+    });
   }
 
   async findById(requestId: string): Promise<Request | null> {

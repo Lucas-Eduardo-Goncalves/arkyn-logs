@@ -1,29 +1,34 @@
+import { SearchParamsMapper } from "../../../app/shared/searchParamsMapper";
 import { ListCoreLogsUseCase } from "../../../app/useCases/coreLog/listCoreLogsUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
-import { HttpAdapter } from "../../adapters/httpAdapter";
+import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
+import { listCoreLogsSchema } from "../../schemas/internal/coreLog";
 
 class ListCoreLogsController {
   constructor(private listCoreLogsUseCase: ListCoreLogsUseCase) {}
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
 
-      const trafficSourceId = route.request.params?.trafficSourceId;
+      const searchParams = SearchParamsMapper.toObject({
+        query: route.request.query,
+        params: route.request.params,
+      });
 
-      if (!trafficSourceId) {
-        const httpAdapter = new HttpAdapter();
-        const message = "Traffic source ID is required to list coreLogs.";
-        throw httpAdapter.notFound(message);
-      }
+      const schemaValidator = new SchemaValidatorAdapter(listCoreLogsSchema);
 
-      const trafficsources = await this.listCoreLogsUseCase.execute(
-        trafficSourceId
+      const validatedParams = schemaValidator.validate(searchParams);
+      const mappedFilter = SearchParamsMapper.toFilter(validatedParams);
+
+      const coreLog = await this.listCoreLogsUseCase.execute(
+        mappedFilter,
+        userId
       );
 
-      return route.response.json(trafficsources);
+      return route.response.json(coreLog);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

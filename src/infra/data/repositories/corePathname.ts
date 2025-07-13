@@ -1,15 +1,29 @@
+import { CorePathnameSearchParams } from "../../../app/search/corePathnameSearchParams";
+import { SearchResult } from "../../../app/shared/searchResult";
 import { CorePathname } from "../../../domain/entities/corePathname";
 import { CorePathnameRepository } from "../../../domain/repositories/corePathname";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { CorePathnameMapper } from "../mappers/corePathname";
 
 class PrismaCorePathnameRepository implements CorePathnameRepository {
-  async findAll(trafficSourceId: string): Promise<CorePathname[]> {
-    const corePathnames = await databaseConnection.corePathname.findMany({
-      where: { trafficSourceId },
-    });
+  async findAll(
+    searchParams: CorePathnameSearchParams
+  ): Promise<SearchResult<CorePathname>> {
+    const [corePathnames, count] = await Promise.all([
+      databaseConnection.corePathname.findMany(searchParams.toPrisma()),
+      databaseConnection.corePathname.count({
+        where: searchParams.toPrisma().where,
+      }),
+    ]);
 
-    return corePathnames.map(CorePathnameMapper.toEntity);
+    return new SearchResult({
+      data: corePathnames.map(CorePathnameMapper.toEntity),
+      meta: {
+        page: searchParams.page,
+        pageLimit: searchParams.pageLimit,
+        totalItems: count,
+      },
+    });
   }
 
   async findById(corePathnameId: string): Promise<CorePathname | null> {
