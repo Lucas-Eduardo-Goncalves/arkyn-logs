@@ -20,7 +20,13 @@ class UpdateUserUseCase {
       throw httpAdapter.notFound("User not found");
     }
 
+    if (user.id !== userId) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.unauthorized("You do not own this user");
+    }
+
     user.update({ name, utc });
+
     await this.userRepository.updateUser(user);
 
     return user.toJson();
