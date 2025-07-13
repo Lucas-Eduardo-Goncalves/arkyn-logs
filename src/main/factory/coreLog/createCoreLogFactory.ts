@@ -1,4 +1,4 @@
-import { CreateCoreLogUseCase } from "../../../app/usecases/coreLog/createCoreLogUseCase";
+import { CreateCoreLogUseCase } from "../../../app/useCases/coreLog/createCoreLogUseCase";
 import { CreateCoreLogController } from "../../../infra/controllers/coreLog/createCoreLogController";
 import { PrismaCoreLogRepository } from "../../../infra/data/repositories/coreLog";
 import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";

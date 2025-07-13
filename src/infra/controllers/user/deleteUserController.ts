@@ -1,4 +1,4 @@
-import { DeleteUserUseCase } from "../../../app/usecases/user/deleteUserUseCase";
+import { DeleteUserUseCase } from "../../../app/useCases/user/deleteUserUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";

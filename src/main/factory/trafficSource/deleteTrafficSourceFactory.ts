@@ -1,5 +1,5 @@
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
-import { DeleteTrafficSourceUseCase } from "../../../app/usecases/trafficSource/deleteTrafficSourceUseCase";
+import { DeleteTrafficSourceUseCase } from "../../../app/useCases/trafficSource/deleteTrafficSourceUseCase";
 import { DeleteTrafficSourceController } from "../../../infra/controllers/trafficSource/deleteTrafficSourceController";
 
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

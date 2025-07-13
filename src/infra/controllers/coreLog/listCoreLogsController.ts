@@ -1,4 +1,4 @@
-import { ListCoreLogsUseCase } from "../../../app/usecases/coreLog/listCoreLogsUseCase";
+import { ListCoreLogsUseCase } from "../../../app/useCases/coreLog/listCoreLogsUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";

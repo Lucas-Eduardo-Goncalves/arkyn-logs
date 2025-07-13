@@ -1,4 +1,4 @@
-import { ComposeHttpTrafficRecordUseCase } from "../../../app/usecases/httpTrafficRecord/composeHttpTrafficRecordUseCase";
+import { ComposeHttpTrafficRecordUseCase } from "../../../app/useCases/httpTrafficRecord/composeHttpTrafficRecordUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { HttpAdapter } from "../../adapters/httpAdapter";

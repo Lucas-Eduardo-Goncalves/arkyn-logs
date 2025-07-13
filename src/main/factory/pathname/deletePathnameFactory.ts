@@ -1,5 +1,5 @@
 import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathname";
-import { DeletePathnameUseCase } from "../../../app/usecases/pathname/deletePathnameUseCase";
+import { DeletePathnameUseCase } from "../../../app/useCases/pathname/deletePathnameUseCase";
 import { DeletePathnameController } from "../../../infra/controllers/pathname/deletePathnameController";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 

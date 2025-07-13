@@ -1,4 +1,4 @@
-import { UpdateTrafficSourceUseCase } from "../../../app/usecases/trafficSource/updateTrafficSourceUseCase";
+import { UpdateTrafficSourceUseCase } from "../../../app/useCases/trafficSource/updateTrafficSourceUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";

@@ -1,4 +1,4 @@
-import { ListCorePathnamesUseCase } from "../../../app/usecases/corePathname/listCorePathnamesUseCase";
+import { ListCorePathnamesUseCase } from "../../../app/useCases/corePathname/listCorePathnamesUseCase";
 import { ListCorePathnamesController } from "../../../infra/controllers/corePathname/listCorePathnamesController";
 import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
 

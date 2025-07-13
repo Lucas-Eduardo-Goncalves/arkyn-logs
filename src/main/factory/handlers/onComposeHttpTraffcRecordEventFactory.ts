@@ -5,11 +5,11 @@ import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathn
 import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
 import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
-import { CreateDomainUseCase } from "../../../app/usecases/domain/createDomainUseCase";
-import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/createHttpTrafficUseCase";
-import { CreatePathnameUseCase } from "../../../app/usecases/pathname/createPathnameUseCase";
-import { CreateRequestUseCase } from "../../../app/usecases/request/createRequestUseCase";
-import { CreateResponseUseCase } from "../../../app/usecases/response/createResponseUseCase";
+import { CreateDomainUseCase } from "../../../app/useCases/domain/createDomainUseCase";
+import { CreateHttpTrafficUseCase } from "../../../app/useCases/httpTraffic/createHttpTrafficUseCase";
+import { CreatePathnameUseCase } from "../../../app/useCases/pathname/createPathnameUseCase";
+import { CreateRequestUseCase } from "../../../app/useCases/request/createRequestUseCase";
+import { CreateResponseUseCase } from "../../../app/useCases/response/createResponseUseCase";
 
 const prismaDomainRepository = new PrismaDomainRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

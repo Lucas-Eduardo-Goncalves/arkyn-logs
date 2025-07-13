@@ -1,5 +1,5 @@
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
-import { UpdateTrafficSourceUseCase } from "../../../app/usecases/trafficSource/updateTrafficSourceUseCase";
+import { UpdateTrafficSourceUseCase } from "../../../app/useCases/trafficSource/updateTrafficSourceUseCase";
 import { UpdateTrafficSourceController } from "../../../infra/controllers/trafficSource/updateTrafficSourceController";
 
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

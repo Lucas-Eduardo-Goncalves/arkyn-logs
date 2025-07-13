@@ -1,4 +1,4 @@
-import { CreateResponseUseCase } from "../../../app/usecases/response/createResponseUseCase";
+import { CreateResponseUseCase } from "../../../app/useCases/response/createResponseUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";

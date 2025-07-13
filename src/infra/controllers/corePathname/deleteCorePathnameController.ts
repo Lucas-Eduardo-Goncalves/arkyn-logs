@@ -1,4 +1,4 @@
-import { DeleteCorePathnameUseCase } from "../../../app/usecases/corePathname/deleteCorePathnameUseCase";
+import { DeleteCorePathnameUseCase } from "../../../app/useCases/corePathname/deleteCorePathnameUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";

@@ -1,5 +1,5 @@
 import { PrismaUserRepository } from "../../../infra/data/repositories/user";
-import { DeleteUserUseCase } from "../../../app/usecases/user/deleteUserUseCase";
+import { DeleteUserUseCase } from "../../../app/useCases/user/deleteUserUseCase";
 import { DeleteUserController } from "../../../infra/controllers/user/deleteUserController";
 
 const prismaUserRepository = new PrismaUserRepository();

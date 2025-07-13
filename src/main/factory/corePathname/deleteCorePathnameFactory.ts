@@ -1,4 +1,4 @@
-import { DeleteCorePathnameUseCase } from "../../../app/usecases/corePathname/deleteCorePathnameUseCase";
+import { DeleteCorePathnameUseCase } from "../../../app/useCases/corePathname/deleteCorePathnameUseCase";
 import { DeleteCorePathnameController } from "../../../infra/controllers/corePathname/deleteCorePathnameController";
 import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
 

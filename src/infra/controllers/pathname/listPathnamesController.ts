@@ -1,4 +1,4 @@
-import { ListPathnamesUseCase } from "../../../app/usecases/pathname/listPathnamesUseCase";
+import { ListPathnamesUseCase } from "../../../app/useCases/pathname/listPathnamesUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";

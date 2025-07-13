@@ -1,5 +1,5 @@
 import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
-import { CreateResponseUseCase } from "../../../app/usecases/response/createResponseUseCase";
+import { CreateResponseUseCase } from "../../../app/useCases/response/createResponseUseCase";
 import { CreateResponseController } from "../../../infra/controllers/response/createResponseController";
 
 const prismaResponseRepository = new PrismaResponseRepository();

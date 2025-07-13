@@ -1,4 +1,4 @@
-import { AuthUserUseCase } from "../../../app/usecases/user/authUserUseCase";
+import { AuthUserUseCase } from "../../../app/useCases/user/authUserUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";

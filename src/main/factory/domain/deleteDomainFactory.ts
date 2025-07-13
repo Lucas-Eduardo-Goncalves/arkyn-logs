@@ -1,4 +1,4 @@
-import { DeleteDomainUseCase } from "../../../app/usecases/domain/deleteDomainUseCase";
+import { DeleteDomainUseCase } from "../../../app/useCases/domain/deleteDomainUseCase";
 import { DeleteDomainController } from "../../../infra/controllers/domain/deleteDomainController";
 import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";

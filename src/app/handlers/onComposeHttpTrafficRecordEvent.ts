@@ -1,9 +1,9 @@
 import { ComposeHttpTrafficRecordEvent } from "../../domain/events/composeHttpTrafficRecordEvent";
-import { CreateDomainUseCase } from "../usecases/domain/createDomainUseCase";
-import { CreateHttpTrafficUseCase } from "../usecases/httpTraffic/createHttpTrafficUseCase";
-import { CreatePathnameUseCase } from "../usecases/pathname/createPathnameUseCase";
-import { CreateRequestUseCase } from "../usecases/request/createRequestUseCase";
-import { CreateResponseUseCase } from "../usecases/response/createResponseUseCase";
+import { CreateDomainUseCase } from "../useCases/domain/createDomainUseCase";
+import { CreateHttpTrafficUseCase } from "../useCases/httpTraffic/createHttpTrafficUseCase";
+import { CreatePathnameUseCase } from "../useCases/pathname/createPathnameUseCase";
+import { CreateRequestUseCase } from "../useCases/request/createRequestUseCase";
+import { CreateResponseUseCase } from "../useCases/response/createResponseUseCase";
 
 class OnComposeHttpTrafficRecordEvent {
   constructor(

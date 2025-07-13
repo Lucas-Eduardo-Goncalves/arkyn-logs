@@ -1,5 +1,5 @@
 import { PrismaUserRepository } from "../../../infra/data/repositories/user";
-import { CreateUserUseCase } from "../../../app/usecases/user/createUserUseCase";
+import { CreateUserUseCase } from "../../../app/useCases/user/createUserUseCase";
 import { CreateUserController } from "../../../infra/controllers/user/createUserController";
 
 const prismaUserRepository = new PrismaUserRepository();

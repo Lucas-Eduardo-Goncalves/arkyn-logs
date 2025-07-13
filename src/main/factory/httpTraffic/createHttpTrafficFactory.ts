@@ -4,7 +4,7 @@ import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathn
 import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
 import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
-import { CreateHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/createHttpTrafficUseCase";
+import { CreateHttpTrafficUseCase } from "../../../app/useCases/httpTraffic/createHttpTrafficUseCase";
 import { CreateHttpTrafficController } from "../../../infra/controllers/httpTraffic/createHttpTrafficController";
 
 const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();

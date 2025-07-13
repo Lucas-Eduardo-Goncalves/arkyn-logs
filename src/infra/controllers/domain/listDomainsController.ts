@@ -1,4 +1,4 @@
-import { ListDomainsUseCase } from "../../../app/usecases/domain/listDomainsUseCase";
+import { ListDomainsUseCase } from "../../../app/useCases/domain/listDomainsUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";

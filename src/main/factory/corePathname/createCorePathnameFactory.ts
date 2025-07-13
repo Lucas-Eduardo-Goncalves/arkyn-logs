@@ -1,4 +1,4 @@
-import { CreateCorePathnameUseCase } from "../../../app/usecases/corePathname/createCorePathnameUseCase";
+import { CreateCorePathnameUseCase } from "../../../app/useCases/corePathname/createCorePathnameUseCase";
 import { CreateCorePathnameController } from "../../../infra/controllers/corePathname/createCorePathnameController";
 import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";

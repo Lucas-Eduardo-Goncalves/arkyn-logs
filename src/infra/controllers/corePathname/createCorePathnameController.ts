@@ -1,4 +1,4 @@
-import { CreateCorePathnameUseCase } from "../../../app/usecases/corePathname/createCorePathnameUseCase";
+import { CreateCorePathnameUseCase } from "../../../app/useCases/corePathname/createCorePathnameUseCase";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
