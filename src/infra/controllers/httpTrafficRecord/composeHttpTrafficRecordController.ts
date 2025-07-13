@@ -33,7 +33,6 @@ class ComposeHttpTrafficRecordController {
       return route.response.json(null, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
-      console.log(error);
       return errorHandlerAdapter.handle(error);
     }
   }

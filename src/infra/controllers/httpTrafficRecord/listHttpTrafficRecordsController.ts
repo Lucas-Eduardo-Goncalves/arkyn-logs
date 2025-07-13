@@ -13,7 +13,7 @@ class ListHttpTrafficRecordsController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
 
       const searchParams = SearchParamsMapper.toObject({
         query: route.request.query,
@@ -27,11 +27,10 @@ class ListHttpTrafficRecordsController {
       const validatedParams = schemaValidator.validate(searchParams);
       const mappedFilter = SearchParamsMapper.toFilter(validatedParams);
 
-      const trafficsources = await this.listHttpTrafficRecordsUseCase.execute(
-        mappedFilter
-      );
+      const httpTrafficRecords =
+        await this.listHttpTrafficRecordsUseCase.execute(mappedFilter, userId);
 
-      return route.response.json(trafficsources);
+      return route.response.json(httpTrafficRecords);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);
