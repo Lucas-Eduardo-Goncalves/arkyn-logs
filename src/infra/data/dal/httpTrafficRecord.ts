@@ -9,15 +9,13 @@ class PrismaHttpTrafficRecordDAL implements HttpTrafficRecordDAL {
   async findAll(
     searchParams: HttpTrafficRecordSearchParams
   ): Promise<SearchResult<HttpTrafficRecord>> {
-    console.log(searchParams.toPrismaCount());
-
     const [httpTraffics, httpTrafficCount] = await Promise.all([
       databaseConnection.httpTraffic.findMany({
-        ...searchParams.toPrisma(),
+        where: { trafficSourceId: searchParams.filter?.trafficSourceId },
         include: {
-          domain: true,
           request: true,
           response: true,
+          domain: true,
           pathname: true,
         },
       }),
