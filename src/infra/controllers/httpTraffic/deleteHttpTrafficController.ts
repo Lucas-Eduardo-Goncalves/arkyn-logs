@@ -1,8 +1,8 @@
 import { DeleteHttpTrafficUseCase } from "../../../app/usecases/httpTraffic/deleteHttpTrafficUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { deleteHttpTrafficSchema } from "../../schemas/internal/httpTraffic";
 
 class DeleteHttpTrafficController {
@@ -10,7 +10,7 @@ class DeleteHttpTrafficController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
       const httpTrafficId = route.request.params?.httpTrafficId;
 
       const schemaValidator = new SchemaValidatorAdapter(
@@ -18,11 +18,12 @@ class DeleteHttpTrafficController {
       );
       const validatedBody = schemaValidator.validate({ httpTrafficId });
 
-      const trafficsource = await this.deleteHttpTrafficUseCase.execute(
-        validatedBody.httpTrafficId
+      const httpTraffic = await this.deleteHttpTrafficUseCase.execute(
+        validatedBody.httpTrafficId,
+        userId
       );
 
-      return route.response.json(trafficsource);
+      return route.response.json(httpTraffic);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

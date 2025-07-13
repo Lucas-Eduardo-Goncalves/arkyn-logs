@@ -9,7 +9,7 @@ class ListHttpTrafficsController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
       const trafficSourceId = route.request.params?.trafficSourceId;
 
       if (!trafficSourceId) {
@@ -18,10 +18,12 @@ class ListHttpTrafficsController {
         throw httpAdapter.notFound(message);
       }
 
-      const trafficsources = await this.listHttpTrafficsUseCase.execute(
-        trafficSourceId
+      const httpTraffics = await this.listHttpTrafficsUseCase.execute(
+        trafficSourceId,
+        userId
       );
-      return route.response.json(trafficsources);
+
+      return route.response.json(httpTraffics);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);
