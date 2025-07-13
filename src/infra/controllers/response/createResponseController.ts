@@ -18,8 +18,8 @@ class CreateResponseController {
       const schemaValidator = new SchemaValidatorAdapter(createResponseSchema);
       const data = schemaValidator.validate({ ...body, httpTrafficId });
 
-      const trafficsource = await this.createResponseUseCase.execute(data);
-      return route.response.json(trafficsource, 201);
+      const response = await this.createResponseUseCase.execute(data);
+      return route.response.json(response, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);
