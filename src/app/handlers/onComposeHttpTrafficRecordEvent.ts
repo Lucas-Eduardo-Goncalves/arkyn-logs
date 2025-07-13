@@ -29,19 +29,26 @@ class OnComposeHttpTrafficRecordEvent {
       responseHeaders,
       responseBody,
       elapsedTime,
+      userId,
     } = input;
 
-    const domain = await this.createDomainUseCase.execute({
-      trafficSourceId,
-      value: domainUrl,
-      protocol,
-    });
+    const domain = await this.createDomainUseCase.execute(
+      {
+        trafficSourceId,
+        value: domainUrl,
+        protocol,
+      },
+      userId
+    );
 
-    const pathname = await this.createPathnameUseCase.execute({
-      trafficSourceId,
-      domainId: domain.id,
-      value: pathnameUrl,
-    });
+    const pathname = await this.createPathnameUseCase.execute(
+      {
+        trafficSourceId,
+        domainId: domain.id,
+        value: pathnameUrl,
+      },
+      userId
+    );
 
     const [request, response] = await Promise.all([
       this.createRequestUseCase.execute({

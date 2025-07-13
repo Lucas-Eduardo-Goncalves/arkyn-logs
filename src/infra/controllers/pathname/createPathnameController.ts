@@ -1,8 +1,8 @@
 import { CreatePathnameUseCase } from "../../../app/usecases/pathname/createPathnameUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createPathnameSchema } from "../../schemas/internal/pathname";
 
 class CreatePathnameController {
@@ -10,7 +10,7 @@ class CreatePathnameController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
 
       const trafficSourceId = route.request.params?.trafficSourceId;
       const domainId = route.request.params?.domainId;
@@ -24,9 +24,9 @@ class CreatePathnameController {
         domainId,
       });
 
-      const trafficsource = await this.createPathnameUseCase.execute(data);
+      const pathname = await this.createPathnameUseCase.execute(data, userId);
 
-      return route.response.json(trafficsource, 201);
+      return route.response.json(pathname, 201);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

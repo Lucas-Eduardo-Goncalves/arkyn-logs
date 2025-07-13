@@ -13,7 +13,7 @@ class ComposeHttpTrafficRecordController {
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
       const body = route.request.body;
       const trafficSourceId = route.request.params?.trafficSourceId;
 
@@ -28,7 +28,7 @@ class ComposeHttpTrafficRecordController {
       );
 
       const data = schemaValidator.validate({ ...body, trafficSourceId });
-      await this.composeHttpTrafficRecordUseCase.execute(data);
+      await this.composeHttpTrafficRecordUseCase.execute(data, userId);
 
       return route.response.json(null, 201);
     } catch (error) {

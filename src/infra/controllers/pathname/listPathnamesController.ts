@@ -1,15 +1,15 @@
 import { ListPathnamesUseCase } from "../../../app/usecases/pathname/listPathnamesUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { HttpAdapter } from "../../adapters/httpAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 
 class ListPathnamesController {
   constructor(private listPathnamesUseCase: ListPathnamesUseCase) {}
 
   async handle(route: RouteDTO) {
     try {
-      await AuthMiddleware.authenticate(route);
+      const { userId } = await AuthMiddleware.authenticate(route);
 
       const trafficSourceId = route.request.params?.trafficSourceId;
       const domainId = route.request.params?.domainId;
@@ -26,12 +26,13 @@ class ListPathnamesController {
         throw httpAdapter.notFound(message);
       }
 
-      const trafficsources = await this.listPathnamesUseCase.execute(
+      const pathnames = await this.listPathnamesUseCase.execute(
         trafficSourceId,
-        domainId
+        domainId,
+        userId
       );
 
-      return route.response.json(trafficsources);
+      return route.response.json(pathnames);
     } catch (error) {
       const errorHandlerAdapter = new ErrorHandlerAdapter();
       return errorHandlerAdapter.handle(error);

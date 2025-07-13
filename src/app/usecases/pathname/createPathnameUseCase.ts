@@ -1,8 +1,8 @@
-import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 import { Pathname } from "../../../domain/entities/pathname";
 import { DomainRepository } from "../../../domain/repositories/domain";
 import { PathnameRepository } from "../../../domain/repositories/pathname";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
+import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 
 type InputProps = {
   trafficSourceId: string;
@@ -17,32 +17,36 @@ class CreatePathnameUseCase {
     private trafficSourceRepository: TrafficSourceRepository
   ) {}
 
-  async execute(input: InputProps) {
+  async execute(input: InputProps, userId: string) {
     const { trafficSourceId, domainId, value } = input;
 
-    const [existsTrafficSource, existsDomain, existsPathname] =
-      await Promise.all([
-        await this.trafficSourceRepository.findById(trafficSourceId),
-        await this.domainRepository.findById(domainId),
-        await this.pathnameRepository.findByValue(value),
-      ]);
+    const [trafficSource, domain, pathname] = await Promise.all([
+      await this.trafficSourceRepository.findById(trafficSourceId),
+      await this.domainRepository.findById(domainId),
+      await this.pathnameRepository.findByValue(value),
+    ]);
 
-    if (!existsTrafficSource) {
+    if (!trafficSource) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Traffic source not found");
     }
 
-    if (!existsDomain) {
+    if (trafficSource.userId !== userId) {
+      const httpAdapter = new HttpAdapter();
+      throw httpAdapter.forbidden("You do not own this traffic source.");
+    }
+
+    if (!domain) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Domain not found");
     }
 
-    if (existsPathname) return existsPathname.toJson();
+    if (pathname) return pathname.toJson();
 
-    const pathname = Pathname.create({ trafficSourceId, domainId, value });
-    await this.pathnameRepository.createPathname(pathname);
+    const newPathname = Pathname.create({ trafficSourceId, domainId, value });
+    await this.pathnameRepository.createPathname(newPathname);
 
-    return pathname.toJson();
+    return newPathname.toJson();
   }
 }
 
