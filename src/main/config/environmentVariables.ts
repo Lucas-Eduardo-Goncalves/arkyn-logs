@@ -18,7 +18,7 @@ const environmentVariablesSchema = z.object({
   // PORT
   PORT: z.string().min(4).regex(/^\d+$/).transform(Number),
 
-  // DISCORD BOT TOKEN
+  // discord BOT TOKEN
   DISCORD_BOT_TOKEN: z.string().min(1),
 });
 

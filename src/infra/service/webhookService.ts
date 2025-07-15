@@ -5,13 +5,12 @@ import { environmentVariables } from "../../main/config/environmentVariables";
 type SendInput = {
   title: string;
   description: string;
-  type: "INFO" | "WARNING" | "FATAL";
 };
 
-const colorMap: Record<SendInput["type"], number> = {
-  INFO: 0x0ea5e9,
-  WARNING: 0xfb923c,
-  FATAL: 0xe11d48,
+const colorMap: Record<Webhook["level"], number> = {
+  info: 0x0ea5e9,
+  warning: 0xfb923c,
+  fatal: 0xe11d48,
 };
 
 class WebhookService {
@@ -33,17 +32,23 @@ class WebhookService {
     const embed = {
       title: input.title,
       description: input.description,
-      color: colorMap[input.type],
+      color: colorMap[this.webhook.level],
       timestamp: new Date().toISOString(),
     };
 
-    await api.POST(`/api/channels/${this.webhook.discordChannelId}/messages`, {
+    await api.POST(`/api/channels/${this.webhook.value}/messages`, {
       body: { embeds: [embed] },
     });
   }
 
   async send(input: SendInput) {
-    if (this.webhook.discordChannelId) await this.sendDiscordWebhook(input);
+    switch (this.webhook.type) {
+      case "discord":
+        await this.sendDiscordWebhook(input);
+        break;
+      default:
+        throw new Error(`Unsupported webhook type: ${this.webhook.type}`);
+    }
   }
 }
 

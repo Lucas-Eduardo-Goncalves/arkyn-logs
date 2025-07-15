@@ -6,7 +6,7 @@ type Route = (rawRoute: RouteDTO) => Promise<any>;
 class RouteAdapter {
   async adaptRoute(context: Context, rawRoute: Route) {
     async function safeParseJson(): Promise<any> {
-      if (context.req.method === "GET") return {};
+      if (context.req.method === "get") return {};
       try {
         return await context.req.json();
       } catch (error) {

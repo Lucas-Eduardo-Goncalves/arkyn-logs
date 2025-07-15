@@ -2,7 +2,7 @@ import { FormatDateAdapter } from "../../infra/adapters/formatDateAdapter";
 import { IdAdapter } from "../../infra/adapters/idAdapter";
 import { HttpMethod } from "../../main/types/HttpMethod";
 
-type Level = "INFO" | "FATAL" | "WARNING";
+type Level = "info" | "fatal" | "warning";
 
 type ConstructorProps = {
   id: string;
@@ -63,9 +63,9 @@ class HttpTraffic {
   }
 
   private static getLevelByStatus(status: number): Level {
-    if (status >= 400 && status < 500) return "WARNING";
-    else if (status >= 500) return "FATAL";
-    else return "INFO";
+    if (status >= 400 && status < 500) return "warning";
+    else if (status >= 500) return "fatal";
+    else return "info";
   }
 
   static create(props: CreateHttpTrafficProps) {

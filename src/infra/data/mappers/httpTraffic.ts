@@ -4,7 +4,7 @@ import { HttpMethod } from "../../../main/types/HttpMethod";
 type HttpTrafficMapperDTO = {
   id: string;
   domainId: string;
-  level: "INFO" | "FATAL" | "WARNING";
+  level: "info" | "fatal" | "warning";
   method: HttpMethod;
   pathnameId: string;
   status: number;

@@ -4,17 +4,16 @@ import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 
 type InputProps = {
   webhookId: string;
-  value: string;
 };
 
-class UpdateWebhookUseCase {
+class DeleteWebhookUseCase {
   constructor(
     private webhookRepository: WebhookRepository,
     private trafficSourceRepository: TrafficSourceRepository
   ) {}
 
   async execute(input: InputProps, userId: string) {
-    const { webhookId, value } = input;
+    const { webhookId } = input;
 
     const webhook = await this.webhookRepository.findById(webhookId);
 
@@ -37,11 +36,9 @@ class UpdateWebhookUseCase {
       throw httpAdapter.forbidden("You do not own this traffic source.");
     }
 
-    webhook.updateWebhook({ value });
-
-    await this.webhookRepository.updateWebhook(webhook);
+    await this.webhookRepository.deleteWebhook(webhook);
     return webhook.toJson();
   }
 }
 
-export { UpdateWebhookUseCase };
+export { DeleteWebhookUseCase };

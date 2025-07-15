@@ -5,7 +5,7 @@ class ComposeHttpTrafficRecordEvent {
   readonly pathnameUrl: string;
   readonly trafficSourceId: string;
   readonly status: number;
-  readonly protocol: "HTTP" | "HTTPS";
+  readonly protocol: "http" | "https";
   readonly method: HttpMethod;
   readonly trafficUserId: string | null;
   readonly elapsedTime: number;

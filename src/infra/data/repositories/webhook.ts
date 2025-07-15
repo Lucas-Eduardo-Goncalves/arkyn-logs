@@ -4,13 +4,21 @@ import { databaseConnection } from "../../adapters/dbAdapter";
 import { WebhookMapper } from "../mappers/webhook";
 
 class PrismaWebhookRepository implements WebhookRepository {
-  async findByTrafficSourceId(
-    trafficSourceId: string
-  ): Promise<Webhook | null> {
-    const webhook = await databaseConnection.webhook.findUnique({
+  async findAll(trafficSourceId: string): Promise<Webhook[]> {
+    const data = await databaseConnection.webhook.findMany({
       where: { trafficSourceId },
     });
+
+    return data.map(WebhookMapper.toEntity);
+  }
+
+  async findById(webhookId: string): Promise<Webhook | null> {
+    const webhook = await databaseConnection.webhook.findUnique({
+      where: { id: webhookId },
+    });
+
     if (!webhook) return null;
+
     return WebhookMapper.toEntity(webhook);
   }
 
@@ -28,9 +36,9 @@ class PrismaWebhookRepository implements WebhookRepository {
     return webhook;
   }
 
-  async deleteWebhook(webhookId: string): Promise<void> {
+  async deleteWebhook(webhook: Webhook): Promise<void> {
     await databaseConnection.webhook.delete({
-      where: { id: webhookId },
+      where: { id: webhook.id },
     });
   }
 }

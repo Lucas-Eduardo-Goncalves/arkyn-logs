@@ -26,8 +26,8 @@ const composeHttpTrafficRecordSchema = z.object({
     .min(1, "Traffic source id is required")
     .uuid("Invalid traffic source id format"),
   status: z.number().int("Status must be an integer"),
-  protocol: z.enum(["HTTP", "HTTPS"]),
-  method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]),
+  protocol: z.enum(["http", "https"]),
+  method: z.enum(["get", "post", "put", "delete", "patch"]),
   trafficUserId: z.string().uuid("Invalid traffic user id format").nullable(),
   elapsedTime: z.number().min(0, "Elapsed time must be a non-negative number"),
   requestHeaders: z.record(z.string()),
@@ -42,14 +42,14 @@ const listHttpTrafficRecordsSchema = paginationSchema.extend({
     .string()
     .min(1, "Traffic source id is required")
     .uuid("Invalid traffic source id format"),
-  method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]).optional(),
-  level: z.enum(["INFO", "WARNING", "DEBUG"]).optional(),
+  method: z.enum(["get", "post", "put", "delete", "patch"]).optional(),
+  level: z.enum(["info", "warning", "DEBUG"]).optional(),
   status: z
     .string()
     .optional()
     .transform((val) => (val ? parseInt(val, 10) : undefined))
     .pipe(z.number().int("Status must be an integer").optional()),
-  protocol: z.enum(["HTTP", "HTTPS"]).optional(),
+  protocol: z.enum(["http", "https"]).optional(),
 });
 
 export { composeHttpTrafficRecordSchema, listHttpTrafficRecordsSchema };

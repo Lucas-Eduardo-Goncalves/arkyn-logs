@@ -9,46 +9,90 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum Method {
+  post
+  put
+  patch
+  delete
+  get
+}
+
+enum Level {
+  info
+  fatal
+  warning
+}
+
 model User {
-  id            String          @id
-  email         String          @unique
-  name          String
-  utc           Int
-  password      String
-  createdAt     DateTime
-  updatedAt     DateTime
-  trafficSource TrafficSource[]
+  id                        String               @id
+  email                     String               @unique
+  name                      String
+  utc                       Int
+  password                  String
+  createdAt                 DateTime
+  updatedAt                 DateTime
+  trafficSource             TrafficSource[]
+  ownedTrafficSourceShares  TrafficSourceShare[] @relation("ShareOwner")
+  sharedTrafficSourceShares TrafficSourceShare[] @relation("ShareReceiver")
 }
 
 model TrafficSource {
-  id            String         @id
+  id            String               @id
   name          String
   trafficDomain String
   userId        String
   createdAt     DateTime
   updatedAt     DateTime
-  user          User           @relation(fields: [userId], references: [id])
+  user          User                 @relation(fields: [userId], references: [id])
   domain        Domain[]
   pathname      Pathname[]
   httpTraffic   HttpTraffic[]
   corePathname  CorePathname[]
   exception     Exception[]
   coreLog       CoreLog[]
-  webhook       Webhook?
+  webhook       Webhook[]
+  shares        TrafficSourceShare[]
+}
+
+enum WebhookType {
+  discord
 }
 
 model Webhook {
-  id                String        @id
-  discordChannelId String?
-  createdAt         DateTime
-  updatedAt         DateTime
-  trafficSourceId   String        @unique
-  trafficSource     TrafficSource @relation(fields: [trafficSourceId], references: [id])
+  id              String        @id
+  type            WebhookType
+  level           Level
+  value           String
+  createdAt       DateTime
+  updatedAt       DateTime
+  trafficSourceId String        @unique
+  trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
+}
+
+enum SharePermission {
+  READ_ONLY
+}
+
+model TrafficSourceShare {
+  id              String          @id
+  ownerId         String
+  sharedWithId    String
+  trafficSourceId String
+  permission      SharePermission
+  createdAt       DateTime
+  updatedAt       DateTime
+  owner           User            @relation("ShareOwner", fields: [ownerId], references: [id])
+  sharedWith      User            @relation("ShareReceiver", fields: [sharedWithId], references: [id])
+  trafficSource   TrafficSource   @relation(fields: [trafficSourceId], references: [id])
+
+  @@unique([ownerId, sharedWithId, trafficSourceId])
+  @@index([sharedWithId])
+  @@index([trafficSourceId])
 }
 
 enum Protocol {
-  HTTP
-  HTTPS
+  http
+  https
 }
 
 model Domain {
@@ -71,20 +115,6 @@ model Pathname {
   trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
   domain          Domain        @relation(fields: [domainId], references: [id])
   httpTraffic     HttpTraffic[]
-}
-
-enum Method {
-  POST
-  PUT
-  PATCH
-  DELETE
-  GET
-}
-
-enum Level {
-  INFO
-  FATAL
-  WARNING
 }
 
 model HttpTraffic {
@@ -167,10 +197,10 @@ model Exception {
   updatedAt           DateTime
   trafficSource       TrafficSource         @relation(fields: [trafficSourceId], references: [id])
   corePathname        CorePathname          @relation(fields: [corePathnameId], references: [id])
-  excepetionOcurrence ExcepetionOcurrence[]
+  exceptionOccurrence ExceptionOccurrence[]
 }
 
-model ExcepetionOcurrence {
+model ExceptionOccurrence {
   id          String    @id
   exceptionId String
   createdAt   DateTime

@@ -1,20 +1,39 @@
 import { Context, Next } from "hono";
 
 class RouteLogMiddleware {
-  private static getMethodColored(method: string): string {
+  private static getMethodColored(
+    method: string,
+    timestamp: string,
+    url: string
+  ) {
+    let returnLog = "";
+
     switch (method.toLowerCase()) {
       case "get":
-        return "\x1b[32m GET\x1b[0m"; // Green
+        returnLog = `\x1b[32mGET:${timestamp}\x1b[0m`; // Green
+        break;
       case "post":
-        return "\x1b[34mPOST\x1b[0m"; // Blue
+        returnLog = `\x1b[34mPOST:${timestamp}\x1b[0m`; // Blue
+        break;
       case "put":
-        return "\x1b[33m PUT\x1b[0m"; // Yellow
+        returnLog = `\x1b[33mPUT:${timestamp}\x1b[0m`; // Yellow
+        break;
       case "delete":
-        return "\x1b[31mDELETE\x1b[0m"; // Red
+        returnLog = `\x1b[31mDELETE:${timestamp}\x1b[0m`; // Red
+        break;
       case "patch":
-        return "\x1b[35mPATCH\x1b[0m"; // Magenta
-      default:
-        return method; // Default color for other methods
+        returnLog = `\x1b[35mPATCH:${timestamp}\x1b[0m`; // Magenta
+        break;
+    }
+
+    console.log(`${returnLog} => ${url}`);
+  }
+
+  private static formatDuration(ms: number): string {
+    if (ms < 1000) {
+      return `${ms.toFixed(2)}ms`;
+    } else {
+      return `${(ms / 1000).toFixed(2)}s`;
     }
   }
 
@@ -22,8 +41,15 @@ class RouteLogMiddleware {
     const url = new URL(c.req.url).pathname;
     const method = c.req.method;
 
-    console.log(`${this.getMethodColored(method)} => ${url}`);
+    const startTime = performance.now();
+
     await next();
+
+    const endTime = performance.now();
+    const duration = Math.abs(endTime - startTime); // Garantir valor positivo
+    const formattedDuration = this.formatDuration(duration);
+
+    this.getMethodColored(method, formattedDuration, url);
   }
 }
 

@@ -9,7 +9,7 @@ import { ResponseMapper } from "./response";
 type HttpTrafficRecordMapperDTO = {
   id: string;
   domainId: string;
-  level: "INFO" | "FATAL" | "WARNING";
+  level: "info" | "fatal" | "warning";
   method: HttpMethod;
   pathnameId: string;
   status: number;
@@ -23,7 +23,7 @@ type HttpTrafficRecordMapperDTO = {
   domain: {
     id: string;
     value: string;
-    protocol: "HTTP" | "HTTPS";
+    protocol: "http" | "https";
     trafficSourceId: string;
     createdAt: Date;
   };

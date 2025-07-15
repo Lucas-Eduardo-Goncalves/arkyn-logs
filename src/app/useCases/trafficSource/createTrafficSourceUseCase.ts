@@ -1,8 +1,6 @@
 import { TrafficSource } from "../../../domain/entities/trafficSource";
-import { Webhook } from "../../../domain/entities/webhook";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 import { UserRepository } from "../../../domain/repositories/user";
-import { WebhookRepository } from "../../../domain/repositories/webhook";
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 
 type InputProps = {
@@ -14,8 +12,7 @@ type InputProps = {
 class CreateTrafficSourceUseCase {
   constructor(
     private trafficSourceRepository: TrafficSourceRepository,
-    private userRepository: UserRepository,
-    private webhookRepository: WebhookRepository
+    private userRepository: UserRepository
   ) {}
 
   async execute(input: InputProps) {
@@ -37,12 +34,7 @@ class CreateTrafficSourceUseCase {
     }
 
     const trafficSource = TrafficSource.create({ name, userId, trafficDomain });
-    const webhook = Webhook.create({ trafficSourceId: trafficSource.id });
-
-    await Promise.all([
-      this.trafficSourceRepository.createTrafficSource(trafficSource),
-      this.webhookRepository.createWebhook(webhook),
-    ]);
+    await this.trafficSourceRepository.createTrafficSource(trafficSource);
 
     return trafficSource.toJson();
   }

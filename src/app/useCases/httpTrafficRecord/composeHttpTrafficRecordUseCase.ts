@@ -7,7 +7,7 @@ type InputProps = {
   pathnameUrl: string;
   trafficSourceId: string;
   status: number;
-  protocol: "HTTP" | "HTTPS";
+  protocol: "http" | "https";
   method: HttpMethod;
   trafficUserId: string | null;
   requestHeaders: Record<string, string>;

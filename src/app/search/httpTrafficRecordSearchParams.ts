@@ -3,10 +3,10 @@ import { SearchParams } from "../shared/searchParams";
 
 type Filter = {
   method?: HttpMethod;
-  level?: "INFO" | "WARNING" | "DEBUG";
+  level?: "info" | "warning" | "DEBUG";
   trafficSourceId: string;
   status?: number;
-  protocol?: "HTTP" | "HTTPS";
+  protocol?: "http" | "https";
 };
 
 class HttpTrafficRecordSearchParams extends SearchParams<Filter> {}

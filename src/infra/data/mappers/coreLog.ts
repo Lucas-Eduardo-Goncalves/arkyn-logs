@@ -5,7 +5,7 @@ type CoreLogMapperDTO = {
   id: string;
   status: number;
   method: HttpMethod;
-  level: "INFO" | "WARNING" | "FATAL";
+  level: "info" | "warning" | "fatal";
   elapsedTime: number;
   trafficUserId: string | null;
   trafficSourceId: string;

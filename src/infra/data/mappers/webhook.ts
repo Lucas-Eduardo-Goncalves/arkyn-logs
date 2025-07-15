@@ -2,7 +2,9 @@ import { Webhook } from "../../../domain/entities/webhook";
 
 type WebhookMapperDTO = {
   id: string;
-  discordChannelId: string | null;
+  value: string;
+  level: "fatal" | "warning" | "info";
+  type: "discord";
   trafficSourceId: string;
   createdAt: Date;
   updatedAt: Date;
@@ -12,7 +14,9 @@ class WebhookMapper {
   static toEntity(webhook: WebhookMapperDTO): Webhook {
     return Webhook.restore({
       id: webhook.id,
-      discordChannelId: webhook.discordChannelId,
+      value: webhook.value,
+      level: webhook.level,
+      type: webhook.type,
       trafficSourceId: webhook.trafficSourceId,
       createdAt: webhook.createdAt,
       updatedAt: webhook.updatedAt,

@@ -2,16 +2,13 @@ import { CreateTrafficSourceUseCase } from "../../../app/useCases/trafficSource/
 import { CreateTrafficSourceController } from "../../../infra/controllers/trafficSource/createTrafficSourceController";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { PrismaUserRepository } from "../../../infra/data/repositories/user";
-import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
 
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
 const prismaUserRepository = new PrismaUserRepository();
-const prismaWebhookRepository = new PrismaWebhookRepository();
 
 const createTrafficSourceUseCase = new CreateTrafficSourceUseCase(
   prismaTrafficSourceRepository,
-  prismaUserRepository,
-  prismaWebhookRepository
+  prismaUserRepository
 );
 
 const createTrafficSourceController = new CreateTrafficSourceController(

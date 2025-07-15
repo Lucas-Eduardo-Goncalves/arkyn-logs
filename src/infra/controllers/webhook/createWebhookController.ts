@@ -1,23 +1,23 @@
-import { ListWebhookUseCase } from "../../../app/useCases/webhook/listWebhookUseCase";
+import { CreateWebhookUseCase } from "../../../app/useCases/webhook/createWebhookUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { listWebhookSchema } from "../../schemas/internal/webhook";
+import { createWebhookSchema } from "../../schemas/internal/webhook";
 
-class ListWebhookController {
-  constructor(private listWebhookUseCase: ListWebhookUseCase) {}
+class CreateWebhookController {
+  constructor(private createWebhookUseCase: CreateWebhookUseCase) {}
 
   async handle(route: RouteDTO) {
     try {
-      console.log("ListWebhookController.handle called");
-
       const { userId } = await AuthMiddleware.authenticate(route);
 
-      const schemaValidator = new SchemaValidatorAdapter(listWebhookSchema);
-      const data = schemaValidator.validate({ ...route.request.params });
+      const body = route.request.body;
 
-      const webhook = await this.listWebhookUseCase.execute(data, userId);
+      const schemaValidator = new SchemaValidatorAdapter(createWebhookSchema);
+      const data = schemaValidator.validate(body);
+
+      const webhook = await this.createWebhookUseCase.execute(data, userId);
 
       return route.response.json(webhook, 201);
     } catch (error) {
@@ -27,4 +27,4 @@ class ListWebhookController {
   }
 }
 
-export { ListWebhookController };
+export { CreateWebhookController };

@@ -6,7 +6,7 @@ type InputProps = {
   trafficSourceId: string;
 };
 
-class ListWebhookUseCase {
+class ListWebhooksUseCase {
   constructor(
     private webhookRepository: WebhookRepository,
     private trafficSourceRepository: TrafficSourceRepository
@@ -29,17 +29,15 @@ class ListWebhookUseCase {
       throw httpAdapter.forbidden("You do not own this traffic source.");
     }
 
-    const webhook = await this.webhookRepository.findByTrafficSourceId(
-      trafficSourceId
-    );
+    const webhook = await this.webhookRepository.findAll(trafficSourceId);
 
     if (!webhook) {
       const httpAdapter = new HttpAdapter();
       throw httpAdapter.notFound("Webhook not found for this traffic source");
     }
 
-    return webhook.toJson();
+    return webhook.map((w) => w.toJson());
   }
 }
 
-export { ListWebhookUseCase };
+export { ListWebhooksUseCase };

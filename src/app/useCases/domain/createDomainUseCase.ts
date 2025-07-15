@@ -6,7 +6,7 @@ import { TrafficSourceRepository } from "../../../domain/repositories/trafficSou
 type InputProps = {
   trafficSourceId: string;
   value: string;
-  protocol: "HTTP" | "HTTPS";
+  protocol: "http" | "https";
 };
 
 class CreateDomainUseCase {

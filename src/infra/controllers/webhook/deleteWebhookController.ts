@@ -1,12 +1,12 @@
-import { UpdateWebhookUseCase } from "../../../app/useCases/webhook/updateWebhookUseCase";
+import { DeleteWebhookUseCase } from "../../../app/useCases/webhook/deleteWebhookUseCase";
 import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { updateWebhookSchema } from "../../schemas/internal/webhook";
+import { deleteWebhookSchema } from "../../schemas/internal/webhook";
 
-class UpdateWebhookController {
-  constructor(private updateWebhookUseCase: UpdateWebhookUseCase) {}
+class DeleteWebhookController {
+  constructor(private deleteWebhookUseCase: DeleteWebhookUseCase) {}
 
   async handle(route: RouteDTO) {
     try {
@@ -15,10 +15,10 @@ class UpdateWebhookController {
       const body = route.request.body;
       const params = route.request.params;
 
-      const schemaValidator = new SchemaValidatorAdapter(updateWebhookSchema);
+      const schemaValidator = new SchemaValidatorAdapter(deleteWebhookSchema);
       const data = schemaValidator.validate({ ...body, ...params });
 
-      const webhook = await this.updateWebhookUseCase.execute(data, userId);
+      const webhook = await this.deleteWebhookUseCase.execute(data, userId);
 
       return route.response.json(webhook, 201);
     } catch (error) {
@@ -28,4 +28,4 @@ class UpdateWebhookController {
   }
 }
 
-export { UpdateWebhookController };
+export { DeleteWebhookController };

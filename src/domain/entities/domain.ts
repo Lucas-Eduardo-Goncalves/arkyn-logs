@@ -4,14 +4,14 @@ import { IdAdapter } from "../../infra/adapters/idAdapter";
 type ConstructorProps = {
   id: string;
   value: string;
-  protocol: "HTTP" | "HTTPS";
+  protocol: "http" | "https";
   trafficSourceId: string;
   createdAt: Date;
 };
 
 type CreateDomainProps = {
   value: string;
-  protocol: "HTTP" | "HTTPS";
+  protocol: "http" | "https";
   trafficSourceId: string;
 };
 
@@ -20,7 +20,7 @@ type RestoreDomainProps = ConstructorProps;
 class Domain {
   id: string;
   value: string;
-  protocol: "HTTP" | "HTTPS";
+  protocol: "http" | "https";
   trafficSourceId: string;
   createdAt: Date;
 

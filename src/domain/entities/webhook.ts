@@ -3,32 +3,41 @@ import { IdAdapter } from "../../infra/adapters/idAdapter";
 
 type ConstructorProps = {
   id: string;
-  discordChannelId: string | null;
+  level: "fatal" | "warning" | "info";
+  type: "discord";
+  value: string;
   trafficSourceId: string;
   createdAt: Date;
   updatedAt: Date;
 };
 
 type CreateWebhookProps = {
+  value: string;
+  level: "fatal" | "warning" | "info";
+  type: "discord";
   trafficSourceId: string;
 };
 
 type UpdateWebhookProps = {
-  discordChannelId?: string;
+  value: string;
 };
 
 type RestoreWebhookProps = ConstructorProps;
 
 class Webhook {
   id: string;
-  discordChannelId: string | null;
+  level: "fatal" | "warning" | "info";
+  type: "discord";
+  value: string;
   trafficSourceId: string;
   createdAt: Date;
   updatedAt: Date;
 
   private constructor(props: ConstructorProps) {
     this.id = props.id;
-    this.discordChannelId = props.discordChannelId;
+    this.level = props.level;
+    this.value = props.value;
+    this.type = props.type;
     this.trafficSourceId = props.trafficSourceId;
     this.createdAt = props.createdAt;
     this.updatedAt = props.updatedAt;
@@ -37,7 +46,9 @@ class Webhook {
   static create(props: CreateWebhookProps) {
     return new Webhook({
       id: new IdAdapter().generate(),
-      discordChannelId: process.env.DISCORD_WEBHOOK_URL || null,
+      level: props.level,
+      value: props.value,
+      type: props.type,
       trafficSourceId: props.trafficSourceId,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -47,7 +58,9 @@ class Webhook {
   static restore(props: RestoreWebhookProps) {
     return new Webhook({
       id: props.id,
-      discordChannelId: props.discordChannelId,
+      level: props.level,
+      value: props.value,
+      type: props.type,
       trafficSourceId: props.trafficSourceId,
       createdAt: props.createdAt,
       updatedAt: props.updatedAt,
@@ -55,8 +68,8 @@ class Webhook {
   }
 
   updateWebhook(input: UpdateWebhookProps) {
-    const { discordChannelId } = input;
-    if (discordChannelId) this.discordChannelId = discordChannelId;
+    const { value } = input;
+    if (value) this.value = value;
     this.updatedAt = new Date();
   }
 
@@ -68,7 +81,8 @@ class Webhook {
 
     return {
       id: this.id,
-      discordChannelId: this.discordChannelId,
+      value: this.value,
+      type: this.level,
       trafficSourceId: this.trafficSourceId,
       createdAt,
       updatedAt,

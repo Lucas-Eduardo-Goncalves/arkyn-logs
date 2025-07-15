@@ -1,20 +1,20 @@
-import { ListWebhookUseCase } from "../../../app/useCases/webhook/listWebhookUseCase";
-import { ListWebhookController } from "../../../infra/controllers/webhook/listWebhookController";
+import { ListWebhooksUseCase } from "../../../app/useCases/webhook/listWebhooksUseCase";
+import { ListWebhooksController } from "../../../infra/controllers/webhook/listWebhooksController";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
 
 const prismaWebhookRepository = new PrismaWebhookRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
 
-const listWebhookUseCase = new ListWebhookUseCase(
+const listWebhooksUseCase = new ListWebhooksUseCase(
   prismaWebhookRepository,
   prismaTrafficSourceRepository
 );
 
-const listWebhookController = new ListWebhookController(listWebhookUseCase);
+const listWebhooksController = new ListWebhooksController(listWebhooksUseCase);
 
-const listWebhook = {
-  handle: listWebhookController.handle.bind(listWebhookController),
+const listWebhooks = {
+  handle: listWebhooksController.handle.bind(listWebhooksController),
 };
 
-export { listWebhook };
+export { listWebhooks };

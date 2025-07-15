@@ -5,9 +5,7 @@ import { PathnameRepository } from "../../../domain/repositories/pathname";
 import { RequestRepository } from "../../../domain/repositories/request";
 import { ResponseRepository } from "../../../domain/repositories/response";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
-import { WebhookRepository } from "../../../domain/repositories/webhook";
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
-import { WebhookService } from "../../../infra/service/webhookService";
 import { HttpMethod } from "../../../main/types/HttpMethod";
 
 type InputProps = {
@@ -29,8 +27,7 @@ class CreateHttpTrafficUseCase {
     private domainRepository: DomainRepository,
     private pathnameRepository: PathnameRepository,
     private requestRepository: RequestRepository,
-    private responseRepository: ResponseRepository,
-    private webhookRepository: WebhookRepository
+    private responseRepository: ResponseRepository
   ) {}
 
   async execute(input: InputProps, userId: string) {
@@ -46,14 +43,13 @@ class CreateHttpTrafficUseCase {
       responseId,
     } = input;
 
-    const [trafficSource, domain, pathname, request, response, webhook] =
+    const [trafficSource, domain, pathname, request, response] =
       await Promise.all([
         this.trafficSourceRepository.findById(trafficSourceId),
         this.domainRepository.findById(domainId),
         this.pathnameRepository.findById(pathnameId),
         this.requestRepository.findById(requestId),
         this.responseRepository.findById(responseId),
-        this.webhookRepository.findByTrafficSourceId(trafficSourceId),
       ]);
 
     if (!trafficSource) {
@@ -97,15 +93,6 @@ class CreateHttpTrafficUseCase {
       requestId,
       responseId,
     });
-
-    if (webhook?.discordChannelId && httpTraffic.level === "FATAL") {
-      const webhookService = new WebhookService(webhook);
-      await webhookService.send({
-        title: `A fatal error occurred in the HTTP traffic\nID: ${httpTraffic.id}`,
-        description: `Traffic Source: ${trafficSource.name}\nDomain: ${domain.value}\nPathname: ${pathname.value}\nStatus: ${httpTraffic.status}\nMethod: ${httpTraffic.method}\nElapsed Time: ${httpTraffic.elapsedTime}ms`,
-        type: "FATAL",
-      });
-    }
 
     await this.httpTrafficRepository.createHttpTraffic(httpTraffic);
     return httpTraffic.toJson();

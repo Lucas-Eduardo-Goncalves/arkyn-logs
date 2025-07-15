@@ -3,7 +3,7 @@ import { Domain } from "../../../domain/entities/domain";
 type DomainMapperDTO = {
   id: string;
   value: string;
-  protocol: "HTTP" | "HTTPS";
+  protocol: "http" | "https";
   trafficSourceId: string;
   createdAt: Date;
 };
