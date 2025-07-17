@@ -82,7 +82,8 @@ class Webhook {
     return {
       id: this.id,
       value: this.value,
-      type: this.level,
+      level: this.level,
+      type: this.type,
       trafficSourceId: this.trafficSourceId,
       createdAt,
       updatedAt,

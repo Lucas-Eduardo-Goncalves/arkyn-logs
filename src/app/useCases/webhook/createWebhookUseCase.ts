@@ -44,7 +44,7 @@ class CreateWebhookUseCase {
     }
 
     const webhook = Webhook.create({ level, type, trafficSourceId, value });
-    await this.webhookRepository.updateWebhook(webhook);
+    await this.webhookRepository.createWebhook(webhook);
     return webhook.toJson();
   }
 }

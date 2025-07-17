@@ -20,6 +20,9 @@ const environmentVariablesSchema = z.object({
 
   // discord BOT TOKEN
   DISCORD_BOT_TOKEN: z.string().min(1),
+
+  // Arkyn Panel URL
+  ARKYN_PANEL_URL: z.string().url(),
 });
 
 function formatErrorMessage(error: z.ZodError) {

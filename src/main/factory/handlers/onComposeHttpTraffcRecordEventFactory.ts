@@ -1,4 +1,5 @@
 import { OnComposeHttpTrafficRecordEvent } from "../../../app/handlers/onComposeHttpTrafficRecordEvent";
+import { HttpTrafficNotifier } from "../../../app/services/httpTrafficNotifier";
 import { CreateDomainUseCase } from "../../../app/useCases/domain/createDomainUseCase";
 import { CreateHttpTrafficUseCase } from "../../../app/useCases/httpTraffic/createHttpTrafficUseCase";
 import { CreatePathnameUseCase } from "../../../app/useCases/pathname/createPathnameUseCase";
@@ -10,6 +11,7 @@ import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathn
 import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
 import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
 
 const prismaDomainRepository = new PrismaDomainRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
@@ -17,6 +19,7 @@ const prismaPathnameRepository = new PrismaPathnameRepository();
 const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
 const prismaRequestRepository = new PrismaRequestRepository();
 const prismaResponseRepository = new PrismaResponseRepository();
+const prismaWebhookRepository = new PrismaWebhookRepository();
 
 const createDomainUseCase = new CreateDomainUseCase(
   prismaDomainRepository,
@@ -29,13 +32,16 @@ const createPathnameUseCase = new CreatePathnameUseCase(
   prismaTrafficSourceRepository
 );
 
+const httpTrafficNotifier = new HttpTrafficNotifier(prismaWebhookRepository);
+
 const createHttpTrafficRepository = new CreateHttpTrafficUseCase(
   prismaHttpTrafficRepository,
   prismaTrafficSourceRepository,
   prismaDomainRepository,
   prismaPathnameRepository,
   prismaRequestRepository,
-  prismaResponseRepository
+  prismaResponseRepository,
+  httpTrafficNotifier
 );
 
 const createRequestUseCase = new CreateRequestUseCase(prismaRequestRepository);

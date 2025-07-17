@@ -65,7 +65,7 @@ model Webhook {
   value           String
   createdAt       DateTime
   updatedAt       DateTime
-  trafficSourceId String        @unique
+  trafficSourceId String        
   trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
 }
 

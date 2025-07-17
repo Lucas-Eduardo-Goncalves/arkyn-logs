@@ -22,6 +22,19 @@ class PrismaWebhookRepository implements WebhookRepository {
     return WebhookMapper.toEntity(webhook);
   }
 
+  async findUnique(
+    trafficSourceId: string,
+    level: "fatal" | "warning" | "info"
+  ): Promise<Webhook | null> {
+    const webhook = await databaseConnection.webhook.findFirst({
+      where: { trafficSourceId, level },
+    });
+
+    if (!webhook) return null;
+
+    return WebhookMapper.toEntity(webhook);
+  }
+
   async createWebhook(webhook: Webhook): Promise<Webhook> {
     await databaseConnection.webhook.create({ data: webhook });
     return webhook;

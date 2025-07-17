@@ -21,7 +21,7 @@ import { DiscordAdapter } from "./infra/adapters/discordAdapter";
 const app = new Hono();
 
 handlersFactory();
-new DiscordAdapter();
+DiscordAdapter.getInstance();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
 app.get("/", (c) => c.json({ author, name, license, version }));

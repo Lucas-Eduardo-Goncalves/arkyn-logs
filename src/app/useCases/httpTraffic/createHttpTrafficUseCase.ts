@@ -7,6 +7,7 @@ import { ResponseRepository } from "../../../domain/repositories/response";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 import { HttpMethod } from "../../../main/types/HttpMethod";
+import { HttpTrafficNotifier } from "../../services/httpTrafficNotifier";
 
 type InputProps = {
   trafficSourceId: string;
@@ -27,7 +28,8 @@ class CreateHttpTrafficUseCase {
     private domainRepository: DomainRepository,
     private pathnameRepository: PathnameRepository,
     private requestRepository: RequestRepository,
-    private responseRepository: ResponseRepository
+    private responseRepository: ResponseRepository,
+    private httpTrafficNotifier: HttpTrafficNotifier
   ) {}
 
   async execute(input: InputProps, userId: string) {
@@ -95,6 +97,8 @@ class CreateHttpTrafficUseCase {
     });
 
     await this.httpTrafficRepository.createHttpTraffic(httpTraffic);
+    await this.httpTrafficNotifier.send(httpTraffic, domain, pathname);
+
     return httpTraffic.toJson();
   }
 }

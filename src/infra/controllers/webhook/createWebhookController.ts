@@ -13,9 +13,10 @@ class CreateWebhookController {
       const { userId } = await AuthMiddleware.authenticate(route);
 
       const body = route.request.body;
+      const params = route.request.params;
 
       const schemaValidator = new SchemaValidatorAdapter(createWebhookSchema);
-      const data = schemaValidator.validate(body);
+      const data = schemaValidator.validate({ ...body, ...params });
 
       const webhook = await this.createWebhookUseCase.execute(data, userId);
 
