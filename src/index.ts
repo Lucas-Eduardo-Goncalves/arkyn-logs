@@ -16,10 +16,12 @@ import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
 import { userRoutes } from "./main/routes/user.routes";
 import { webhookRoutes } from "./main/routes/webhook.route";
+import { DiscordAdapter } from "./infra/adapters/discordAdapter";
 
 const app = new Hono();
 
 handlersFactory();
+new DiscordAdapter();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
 app.get("/", (c) => c.json({ author, name, license, version }));
