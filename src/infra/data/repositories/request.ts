@@ -2,6 +2,7 @@ import { RequestSearchParams } from "../../../app/search/requestSearchParams";
 import { SearchResult } from "../../../app/shared/searchResult";
 import { Request } from "../../../domain/entities/request";
 import { RequestRepository } from "../../../domain/repositories/request";
+import { cacheDb } from "../../adapters/cacheDbAdapter";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { JsonAdapter } from "../../adapters/jsonAdapter";
 import { RequestMapper } from "../mappers/request";
@@ -30,11 +31,16 @@ class PrismaRequestRepository implements RequestRepository {
   }
 
   async findById(requestId: string): Promise<Request | null> {
+    const cached = await cacheDb.getJson<any>(requestId);
+    if (cached) return RequestMapper.toEntity(cached);
+
     const request = await databaseConnection.request.findUnique({
       where: { id: requestId },
     });
 
     if (!request) return null;
+
+    await cacheDb.setJson(requestId, request);
     return RequestMapper.toEntity(request);
   }
 

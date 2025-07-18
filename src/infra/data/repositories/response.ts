@@ -2,6 +2,7 @@ import { ResponseSearchParams } from "../../../app/search/responseSearchParams";
 import { SearchResult } from "../../../app/shared/searchResult";
 import { Response } from "../../../domain/entities/response";
 import { ResponseRepository } from "../../../domain/repositories/response";
+import { cacheDb } from "../../adapters/cacheDbAdapter";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { JsonAdapter } from "../../adapters/jsonAdapter";
 import { ResponseMapper } from "../mappers/response";
@@ -30,11 +31,16 @@ class PrismaResponseRepository implements ResponseRepository {
   }
 
   async findById(responseId: string): Promise<Response | null> {
+    const cached = await cacheDb.getJson<any>(responseId);
+    if (cached) return ResponseMapper.toEntity(cached);
+
     const response = await databaseConnection.response.findUnique({
       where: { id: responseId },
     });
 
     if (!response) return null;
+
+    await cacheDb.setJson(responseId, response);
     return ResponseMapper.toEntity(response);
   }
 

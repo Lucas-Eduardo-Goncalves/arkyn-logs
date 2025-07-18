@@ -4,6 +4,8 @@ import { author, license, name, version } from "../package.json";
 import { handlersFactory } from "./app/handlers/handlersFactory";
 import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
 
+import { cacheDb } from "./infra/adapters/cacheDbAdapter";
+import { DiscordAdapter } from "./infra/adapters/discordAdapter";
 import { environmentVariables } from "./main/config/environmentVariables";
 import { coreLogRoutes } from "./main/routes/core-log";
 import { corePathnameRoutes } from "./main/routes/core-pathname.routes";
@@ -16,12 +18,12 @@ import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
 import { userRoutes } from "./main/routes/user.routes";
 import { webhookRoutes } from "./main/routes/webhook.route";
-import { DiscordAdapter } from "./infra/adapters/discordAdapter";
 
 const app = new Hono();
 
 handlersFactory();
 DiscordAdapter.getInstance();
+cacheDb.connect();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
 app.get("/", (c) => c.json({ author, name, license, version }));

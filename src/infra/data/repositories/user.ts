@@ -2,6 +2,7 @@ import { UserSearchParams } from "../../../app/search/userSearchParams";
 import { SearchResult } from "../../../app/shared/searchResult";
 import { User } from "../../../domain/entities/user";
 import { UserRepository } from "../../../domain/repositories/user";
+import { cacheDb } from "../../adapters/cacheDbAdapter";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { UserMapper } from "../mappers/user";
 
@@ -25,11 +26,16 @@ class PrismaUserRepository implements UserRepository {
   }
 
   async findById(userId: string): Promise<User | null> {
+    const cached = await cacheDb.getJson<any>(userId);
+    if (cached) return UserMapper.toEntity(cached);
+
     const user = await databaseConnection.user.findUnique({
       where: { id: userId },
     });
 
     if (!user) return null;
+
+    await cacheDb.setJson(userId, user);
     return UserMapper.toEntity(user);
   }
 

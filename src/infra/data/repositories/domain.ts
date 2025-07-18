@@ -2,6 +2,7 @@ import { DomainSearchParams } from "../../../app/search/domainSearchParams";
 import { SearchResult } from "../../../app/shared/searchResult";
 import { Domain } from "../../../domain/entities/domain";
 import { DomainRepository } from "../../../domain/repositories/domain";
+import { cacheDb } from "../../adapters/cacheDbAdapter";
 import { databaseConnection } from "../../adapters/dbAdapter";
 import { DomainMapper } from "../mappers/domain";
 
@@ -27,10 +28,16 @@ class PrismaDomainRepository implements DomainRepository {
   }
 
   async findById(domainId: string): Promise<Domain | null> {
+    const cached = await cacheDb.getJson<any>(domainId);
+    if (cached) return DomainMapper.toEntity(cached);
+
     const domain = await databaseConnection.domain.findUnique({
       where: { id: domainId },
     });
+
     if (!domain) return null;
+
+    await cacheDb.setJson(domainId, domain);
     return DomainMapper.toEntity(domain);
   }
 

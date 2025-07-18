@@ -15,6 +15,11 @@ const environmentVariablesSchema = z.object({
   DATABASE_URL: z.string().url(),
   DIRECT_URL: z.string().url(),
 
+  // REDIS URL
+  REDIS_HOST: z.string().min(1),
+  REDIS_PASSWORD: z.string().min(1),
+  REDIS_PORT: z.string().min(1).transform(Number),
+
   // PORT
   PORT: z.string().min(4).regex(/^\d+$/).transform(Number),
 

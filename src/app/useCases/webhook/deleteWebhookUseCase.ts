@@ -37,7 +37,7 @@ class DeleteWebhookUseCase {
     }
 
     await this.webhookRepository.deleteWebhook(webhook);
-    return webhook.toJson();
+    return;
   }
 }
 
