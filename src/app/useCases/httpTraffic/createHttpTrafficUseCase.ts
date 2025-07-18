@@ -97,7 +97,7 @@ class CreateHttpTrafficUseCase {
     });
 
     await this.httpTrafficRepository.createHttpTraffic(httpTraffic);
-    await this.httpTrafficNotifier.send(httpTraffic, domain, pathname);
+    this.httpTrafficNotifier.send(httpTraffic, domain, pathname);
 
     return httpTraffic.toJson();
   }
