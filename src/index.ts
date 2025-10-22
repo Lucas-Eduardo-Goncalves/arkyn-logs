@@ -1,5 +1,6 @@
 import { Hono } from "hono";
-import { author, license, name, version } from "../package.json";
+import { hostname } from "os";
+import { version } from "../package.json";
 
 import { handlersFactory } from "./app/handlers/handlersFactory";
 import { RouteLogMiddleware } from "./main/middlewares/routeLogMiddleware";
@@ -26,7 +27,10 @@ DiscordAdapter.getInstance();
 cacheDb.connect();
 
 app.use("*", (c, next) => RouteLogMiddleware.logRoute(c, next));
-app.get("/", (c) => c.json({ author, name, license, version }));
+
+app.get("/health-check", (c) =>
+  c.text(`Container: ${hostname()} - Service is healthy on version ${version}`)
+);
 
 app.route("/core-logs", coreLogRoutes);
 app.route("/core-pathnames", corePathnameRoutes);
