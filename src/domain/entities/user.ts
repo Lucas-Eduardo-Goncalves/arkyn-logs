@@ -69,8 +69,9 @@ class User {
   }
 
   update(props: UpdateUserProps) {
-    this.name = props.name ?? this.name;
-    this.utc = props.utc ?? this.utc;
+    const { name, utc } = props;
+    if (name) this.name = name;
+    if (utc) this.utc = utc;
     this.updatedAt = new Date();
   }
 

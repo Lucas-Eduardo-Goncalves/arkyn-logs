@@ -20,6 +20,7 @@ type CreateWebhookProps = {
 
 type UpdateWebhookProps = {
   value: string;
+  level: "fatal" | "warning" | "info";
 };
 
 type RestoreWebhookProps = ConstructorProps;
@@ -68,8 +69,9 @@ class Webhook {
   }
 
   updateWebhook(input: UpdateWebhookProps) {
-    const { value } = input;
+    const { value, level } = input;
     if (value) this.value = value;
+    if (level) this.level = level;
     this.updatedAt = new Date();
   }
 

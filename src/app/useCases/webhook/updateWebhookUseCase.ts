@@ -5,6 +5,7 @@ import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 type InputProps = {
   webhookId: string;
   value: string;
+  level: "fatal" | "warning" | "info";
 };
 
 class UpdateWebhookUseCase {
@@ -14,7 +15,7 @@ class UpdateWebhookUseCase {
   ) {}
 
   async execute(input: InputProps, userId: string) {
-    const { webhookId, value } = input;
+    const { webhookId, value, level } = input;
 
     const webhook = await this.webhookRepository.findById(webhookId);
 
@@ -37,7 +38,7 @@ class UpdateWebhookUseCase {
       throw httpAdapter.forbidden("You do not own this traffic source.");
     }
 
-    webhook.updateWebhook({ value });
+    webhook.updateWebhook({ value, level });
 
     await this.webhookRepository.updateWebhook(webhook);
     return webhook.toJson();

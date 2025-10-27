@@ -8,10 +8,10 @@ const createWebhookSchema = z.object({
   trafficSourceId: z.string().uuid("Invalid traffic source ID format"),
   value: z.string().min(1, "Webhook value must not be empty"),
   type: z.enum(["discord"], {
-    message: "Invalid webhook type",
+    message: "Type must be 'discord'",
   }),
   level: z.enum(["fatal", "warning", "info"], {
-    message: "Invalid webhook level",
+    message: "Level must be 'fatal', 'warning', or 'info'",
   }),
 });
 

@@ -63,7 +63,9 @@ class TrafficSource {
   }
 
   update(props: UpdateTrafficSourceProps) {
-    this.name = props.name ?? this.name;
+    const { name, trafficDomain } = props;
+    if (name) this.name = name;
+    if (trafficDomain) this.trafficDomain = trafficDomain;
     this.updatedAt = new Date();
   }
 
