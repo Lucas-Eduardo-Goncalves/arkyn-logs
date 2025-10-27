@@ -30,8 +30,7 @@ class ListDomainsController {
 
       return route.response.json(domains);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

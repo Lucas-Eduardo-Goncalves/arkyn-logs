@@ -1,8 +1,8 @@
 import { SearchParamsMapper } from "../../../app/shared/searchParamsMapper";
 import { ListUsersUseCase } from "../../../app/useCases/user/listUsersUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
 import { listUsersSchema } from "../../schemas/internal/user";
 
@@ -26,8 +26,7 @@ class ListUsersController {
       const users = await this.listUsersUseCase.execute(mappedFilter);
       return route.response.json(users);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

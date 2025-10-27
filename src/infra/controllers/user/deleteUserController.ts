@@ -19,8 +19,7 @@ class DeleteUserController {
       const user = await this.deleteUserUseCase.execute(validatedBody.userId);
       return route.response.json(user);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

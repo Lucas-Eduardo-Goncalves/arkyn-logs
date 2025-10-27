@@ -30,8 +30,7 @@ class ListCoreLogsController {
 
       return route.response.json(coreLog);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

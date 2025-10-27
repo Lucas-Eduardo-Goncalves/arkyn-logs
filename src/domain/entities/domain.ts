@@ -34,7 +34,7 @@ class Domain {
 
   static create(props: CreateDomainProps) {
     return new Domain({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       value: props.value,
       protocol: props.protocol,
       trafficSourceId: props.trafficSourceId,
@@ -53,15 +53,12 @@ class Domain {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-
     return {
       id: this.id,
       value: this.value,
       protocol: this.protocol,
       trafficSourceId: this.trafficSourceId,
-      createdAt: createdAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
     };
   }
 }

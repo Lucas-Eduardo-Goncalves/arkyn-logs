@@ -15,7 +15,7 @@ class PathnameMapper {
       value: pathname.value,
       trafficSourceId: pathname.trafficSourceId,
       domainId: pathname.domainId,
-      createdAt: pathname.createdAt,
+      createdAt: new Date(pathname.createdAt),
     });
   }
 }

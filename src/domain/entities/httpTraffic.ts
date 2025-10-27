@@ -70,7 +70,7 @@ class HttpTraffic {
 
   static create(props: CreateHttpTrafficProps) {
     return new HttpTraffic({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       status: props.status,
       method: props.method,
       elapsedTime: props.elapsedTime,
@@ -103,9 +103,6 @@ class HttpTraffic {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-
     return {
       id: this.id,
       status: this.status,
@@ -118,7 +115,7 @@ class HttpTraffic {
       pathnameId: this.pathnameId,
       requestId: this.requestId,
       responseId: this.responseId,
-      createdAt: createdAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
     };
   }
 }

@@ -30,7 +30,7 @@ class HttpTrafficMapper {
       trafficSourceId: httpTraffic.trafficSourceId,
       requestId: httpTraffic.requestId,
       responseId: httpTraffic.responseId,
-      createdAt: httpTraffic.createdAt,
+      createdAt: new Date(httpTraffic.createdAt),
     });
   }
 }

@@ -28,7 +28,7 @@ class CoreLogMapper {
       corePathnameId: coreLog.corePathnameId,
       requestId: coreLog.requestId,
       responseId: coreLog.responseId,
-      createdAt: coreLog.createdAt,
+      createdAt: new Date(coreLog.createdAt),
     });
   }
 }

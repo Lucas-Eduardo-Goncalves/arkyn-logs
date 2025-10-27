@@ -24,8 +24,7 @@ class CreateCorePathnameController {
 
       return route.response.json(trafficsource, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

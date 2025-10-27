@@ -28,8 +28,7 @@ class CreatePathnameController {
 
       return route.response.json(pathname, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

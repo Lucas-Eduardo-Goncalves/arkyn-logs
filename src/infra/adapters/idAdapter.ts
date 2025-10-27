@@ -1,7 +1,7 @@
 import { generateId } from "@arkyn/shared";
 
 class IdAdapter {
-  generate(): string {
+  static generate(): string {
     return generateId("text", "v7");
   }
 }

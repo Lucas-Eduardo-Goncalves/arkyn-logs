@@ -1,36 +1,47 @@
 import { Request } from "../../../domain/entities/request";
-import { JsonAdapter } from "../../adapters/jsonAdapter";
 
 type RequestMapperDTO = {
   id: string;
   headers: any;
-  body: any;
+  bodyPreview: any;
+  bodyUrl: string | null;
   queryParams: any;
   createdAt: Date;
 };
 
 class RequestMapper {
   static toEntity(request: RequestMapperDTO): Request {
-    const jsonAdapter = new JsonAdapter();
     return Request.restore({
       id: request.id,
-      headers: jsonAdapter.jsonValueToStringRecord(request.headers),
-      body: jsonAdapter.jsonValueToStringRecord(request.body),
-      queryParams: jsonAdapter.jsonValueToStringRecord(request.queryParams),
-      createdAt: request.createdAt,
+      headers: request.headers,
+      bodyPreview: request.bodyPreview || null,
+      bodyUrl: request.bodyUrl || null,
+      queryParams: request.queryParams || null,
+      createdAt: new Date(request.createdAt),
     });
   }
 
   static toSafeEntity(request: RequestMapperDTO | null): Request | null {
-    const jsonAdapter = new JsonAdapter();
     if (!request) return null;
     return Request.restore({
       id: request.id,
-      headers: jsonAdapter.jsonValueToStringRecord(request.headers),
-      body: jsonAdapter.jsonValueToStringRecord(request.body),
-      queryParams: jsonAdapter.jsonValueToStringRecord(request.queryParams),
-      createdAt: request.createdAt,
+      headers: request.headers,
+      bodyPreview: request.bodyPreview || null,
+      bodyUrl: request.bodyUrl || null,
+      queryParams: request.queryParams || null,
+      createdAt: new Date(request.createdAt),
     });
+  }
+
+  static toDatabase(request: Request) {
+    return {
+      id: request.id,
+      headers: request.headers,
+      bodyPreview: request.bodyPreview || undefined,
+      bodyUrl: request.bodyUrl || undefined,
+      queryParams: request.queryParams,
+      createdAt: new Date(request.createdAt),
+    };
   }
 }
 export { RequestMapper };

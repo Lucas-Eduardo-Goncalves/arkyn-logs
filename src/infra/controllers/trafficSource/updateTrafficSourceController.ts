@@ -29,8 +29,7 @@ class UpdateTrafficSourceController {
 
       return route.response.json(trafficSource, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

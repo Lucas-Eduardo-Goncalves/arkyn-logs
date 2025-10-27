@@ -30,8 +30,7 @@ class ListPathnamesController {
 
       return route.response.json(pathnames);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

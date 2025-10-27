@@ -1,33 +1,43 @@
 import { Response } from "../../../domain/entities/response";
-import { JsonAdapter } from "../../adapters/jsonAdapter";
 
 type ResponseMapperDTO = {
   id: string;
   headers: any;
-  body: any;
+  bodyPreview: any;
+  bodyUrl: string | null;
   createdAt: Date;
 };
 
 class ResponseMapper {
   static toEntity(response: ResponseMapperDTO): Response {
-    const jsonAdapter = new JsonAdapter();
     return Response.restore({
       id: response.id,
-      headers: jsonAdapter.jsonValueToStringRecord(response.headers),
-      body: jsonAdapter.jsonValueToStringRecord(response.body),
-      createdAt: response.createdAt,
+      headers: response.headers,
+      bodyPreview: response.bodyPreview || null,
+      bodyUrl: response.bodyUrl || null,
+      createdAt: new Date(response.createdAt),
     });
   }
 
-  static toSafeEntity(request: ResponseMapperDTO | null): Response | null {
-    const jsonAdapter = new JsonAdapter();
-    if (!request) return null;
+  static toSafeEntity(response: ResponseMapperDTO | null): Response | null {
+    if (!response) return null;
     return Response.restore({
-      id: request.id,
-      headers: jsonAdapter.jsonValueToStringRecord(request.headers),
-      body: jsonAdapter.jsonValueToStringRecord(request.body),
-      createdAt: request.createdAt,
+      id: response.id,
+      headers: response.headers,
+      bodyPreview: response.bodyPreview || null,
+      bodyUrl: response.bodyUrl || null,
+      createdAt: new Date(response.createdAt),
     });
+  }
+
+  static toDatabase(response: Response) {
+    return {
+      id: response.id,
+      headers: response.headers,
+      bodyPreview: response.bodyPreview || undefined,
+      bodyUrl: response.bodyUrl || undefined,
+      createdAt: new Date(response.createdAt),
+    };
   }
 }
 export { ResponseMapper };

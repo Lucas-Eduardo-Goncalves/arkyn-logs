@@ -10,11 +10,11 @@ type InputProps = {
   protocol: "http" | "https";
   method: HttpMethod;
   trafficUserId: string | null;
-  requestHeaders: Record<string, string>;
-  requestBody: Record<string, string> | null;
-  queryParams: Record<string, string>;
-  responseHeaders: Record<string, string>;
-  responseBody: Record<string, string> | null;
+  requestHeaders: string;
+  requestBody: string | null;
+  queryParams: string;
+  responseHeaders: string;
+  responseBody: string | null;
   elapsedTime: number;
 };
 

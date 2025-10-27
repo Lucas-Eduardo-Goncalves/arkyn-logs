@@ -1,4 +1,4 @@
-import { ApiInstance } from "@arkyn/server";
+import { ApiService } from "@arkyn/server";
 import { Webhook } from "../../domain/entities/webhook";
 import { environmentVariables } from "../../main/config/environmentVariables";
 
@@ -21,7 +21,7 @@ class WebhookService {
   }
 
   private async sendDiscordWebhook(input: SendInput) {
-    const api = new ApiInstance({
+    const api = new ApiService({
       baseUrl: "https://discordapp.com",
       baseHeaders: {
         Authorization: `Bot ${environmentVariables.DISCORD_BOT_TOKEN}`,
@@ -36,7 +36,7 @@ class WebhookService {
       timestamp: new Date().toISOString(),
     };
 
-    await api.POST(`/api/channels/${this.webhook.value}/messages`, {
+    await api.post(`/api/channels/${this.webhook.value}/messages`, {
       body: { embeds: [embed] },
     });
   }

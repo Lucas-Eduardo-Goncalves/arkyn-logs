@@ -20,8 +20,7 @@ class DeleteDomainController {
       const domain = await this.deleteDomainUseCase.execute(domainId, userId);
       return route.response.json(domain);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

@@ -16,8 +16,8 @@ class TrafficSourceMapper {
       name: trafficSource.name,
       trafficDomain: trafficSource.trafficDomain,
       userId: trafficSource.userId,
-      createdAt: trafficSource.createdAt,
-      updatedAt: trafficSource.updatedAt,
+      createdAt: new Date(trafficSource.createdAt),
+      updatedAt: new Date(trafficSource.updatedAt),
     });
   }
 }

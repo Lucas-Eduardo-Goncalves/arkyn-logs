@@ -18,8 +18,8 @@ class WebhookMapper {
       level: webhook.level,
       type: webhook.type,
       trafficSourceId: webhook.trafficSourceId,
-      createdAt: webhook.createdAt,
-      updatedAt: webhook.updatedAt,
+      createdAt: new Date(webhook.createdAt),
+      updatedAt: new Date(webhook.updatedAt),
     });
   }
 }

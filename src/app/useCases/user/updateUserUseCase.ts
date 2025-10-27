@@ -26,7 +26,6 @@ class UpdateUserUseCase {
     }
 
     user.update({ name, utc });
-
     await this.userRepository.updateUser(user);
 
     return user.toJson();

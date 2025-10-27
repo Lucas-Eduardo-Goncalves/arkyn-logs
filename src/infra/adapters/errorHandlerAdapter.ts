@@ -1,7 +1,8 @@
 import { errorHandler } from "@arkyn/server";
 
 class ErrorHandlerAdapter {
-  handle(error: any) {
+  static handle(error: any) {
+    if (process.env.NODE_ENV === "development") console.error(error);
     return errorHandler(error);
   }
 }

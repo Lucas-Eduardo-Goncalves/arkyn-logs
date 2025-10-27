@@ -25,8 +25,7 @@ class DeleteCorePathnameController {
 
       return route.response.json(trafficsource);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

@@ -1,9 +1,9 @@
 import z from "zod";
 
 const createRequestSchema = z.object({
-  headers: z.record(z.string(), z.string()),
-  body: z.record(z.string(), z.string()).nullable(),
-  queryParams: z.record(z.string(), z.string()),
+  headers: z.string().min(1, "Headers cannot be empty"),
+  body: z.string().nullable(),
+  queryParams: z.string().min(1, "Query params cannot be empty"),
 });
 
 const deleteRequestSchema = z.object({

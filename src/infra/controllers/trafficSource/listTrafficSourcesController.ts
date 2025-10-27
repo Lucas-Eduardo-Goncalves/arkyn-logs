@@ -28,13 +28,13 @@ class ListTrafficSourcesController {
       });
       const mappedFilter = SearchParamsMapper.toFilter(validatedParams);
 
-      const trafficsources = await this.listTrafficSourcesUseCase.execute(
+      const trafficSources = await this.listTrafficSourcesUseCase.execute(
         mappedFilter
       );
-      return route.response.json(trafficsources);
+
+      return route.response.json(trafficSources);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

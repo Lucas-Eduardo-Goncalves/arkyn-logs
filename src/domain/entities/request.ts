@@ -3,40 +3,45 @@ import { IdAdapter } from "../../infra/adapters/idAdapter";
 
 type ConstructorProps = {
   id: string;
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
-  queryParams: Record<string, string>;
+  headers: string;
+  bodyPreview: string | null;
+  bodyUrl: string | null;
+  queryParams: string;
   createdAt: Date;
 };
 
 type CreateRequestProps = {
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
-  queryParams: Record<string, string>;
+  headers: string;
+  bodyPreview: string | null;
+  bodyUrl: string | null;
+  queryParams: string;
 };
 
 type RestoreRequestProps = ConstructorProps;
 
 class Request {
   id: string;
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
-  queryParams: Record<string, string>;
+  headers: string;
+  bodyPreview: string | null;
+  bodyUrl: string | null = null;
+  queryParams: string;
   createdAt: Date;
 
   private constructor(props: ConstructorProps) {
     this.id = props.id;
     this.headers = props.headers;
-    this.body = props.body;
+    this.bodyPreview = props.bodyPreview;
+    this.bodyUrl = props.bodyUrl;
     this.queryParams = props.queryParams;
     this.createdAt = props.createdAt;
   }
 
   static create(props: CreateRequestProps) {
     return new Request({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       headers: props.headers,
-      body: props.body,
+      bodyPreview: props.bodyPreview,
+      bodyUrl: props.bodyUrl,
       queryParams: props.queryParams,
       createdAt: new Date(),
     });
@@ -46,22 +51,21 @@ class Request {
     return new Request({
       id: props.id,
       headers: props.headers,
-      body: props.body,
+      bodyPreview: props.bodyPreview,
+      bodyUrl: props.bodyUrl,
       queryParams: props.queryParams,
       createdAt: props.createdAt,
     });
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-
     return {
       id: this.id,
       headers: this.headers,
-      body: this.body,
+      bodyPreview: this.bodyPreview,
+      bodyUrl: this.bodyUrl,
       queryParams: this.queryParams,
-      createdAt: createdAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
     };
   }
 }

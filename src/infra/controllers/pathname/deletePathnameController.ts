@@ -23,8 +23,7 @@ class DeletePathnameController {
 
       return route.response.json(pathname);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

@@ -18,8 +18,8 @@ class UserMapper {
       email: user.email,
       password: user.password,
       utc: user.utc,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt),
     });
   }
 }

@@ -34,7 +34,7 @@ class Pathname {
 
   static create(props: CreatePathnameProps) {
     return new Pathname({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       value: props.value,
       domainId: props.domainId,
       trafficSourceId: props.trafficSourceId,
@@ -53,15 +53,12 @@ class Pathname {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-
     return {
       id: this.id,
       value: this.value,
       domainId: this.domainId,
       trafficSourceId: this.trafficSourceId,
-      createdAt: createdAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
     };
   }
 }

@@ -31,7 +31,7 @@ class DiscordAdapter {
   }
 
   private setupEventListeners(): void {
-    this._client.once("ready", () => console.log(`=> Discord connected`));
+    this._client.once("clientReady", () => console.log(`=> Discord connected`));
 
     this._client.on("messageCreate", async (message) => {
       if (message.author.bot) return;

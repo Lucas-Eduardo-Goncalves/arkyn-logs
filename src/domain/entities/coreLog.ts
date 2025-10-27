@@ -67,7 +67,7 @@ class CoreLog implements Entity {
 
   static create(props: CreateCoreLogProps) {
     return new CoreLog({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       status: props.status,
       method: props.method,
       level: this.getLevelByStatus(props.status),
@@ -98,9 +98,6 @@ class CoreLog implements Entity {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-
     return {
       id: this.id,
       status: this.status,
@@ -111,7 +108,7 @@ class CoreLog implements Entity {
       corePathnameId: this.corePathnameId,
       requestId: this.requestId,
       responseId: this.responseId,
-      createdAt: createdAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
     };
   }
 }

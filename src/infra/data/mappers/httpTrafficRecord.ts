@@ -30,16 +30,18 @@ type HttpTrafficRecordMapperDTO = {
 
   request: {
     id: string;
-    headers: any;
-    body: any;
-    queryParams: any;
+    headers: string;
+    bodyPreview: string | null;
+    bodyUrl: string | null;
+    queryParams: string | null;
     createdAt: Date;
   } | null;
 
   response: {
     id: string;
-    headers: any;
-    body: any;
+    headers: string;
+    bodyPreview: string | null;
+    bodyUrl: string | null;
     createdAt: Date;
   } | null;
 

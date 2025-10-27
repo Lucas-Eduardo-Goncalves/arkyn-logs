@@ -1,8 +1,8 @@
 import { CreateRequestUseCase } from "../../../app/useCases/request/createRequestUseCase";
+import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { RouteDTO } from "../../../main/types/RouteDTO";
 import { ErrorHandlerAdapter } from "../../adapters/errorHandlerAdapter";
 import { SchemaValidatorAdapter } from "../../adapters/schemaValidatorAdapter";
-import { AuthMiddleware } from "../../../main/middlewares/authMiddleware";
 import { createRequestSchema } from "../../schemas/internal/request";
 
 class CreateRequestController {
@@ -21,8 +21,7 @@ class CreateRequestController {
       const request = await this.createRequestUseCase.execute(data);
       return route.response.json(request, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

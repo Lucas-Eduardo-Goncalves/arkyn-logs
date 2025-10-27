@@ -25,8 +25,7 @@ class DeleteTrafficSourceController {
 
       return route.response.json(trafficSource);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

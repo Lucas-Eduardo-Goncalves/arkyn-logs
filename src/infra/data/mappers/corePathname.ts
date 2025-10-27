@@ -13,7 +13,7 @@ class CorePathnameMapper {
       id: corePathname.id,
       value: corePathname.value,
       trafficSourceId: corePathname.trafficSourceId,
-      createdAt: corePathname.createdAt,
+      createdAt: new Date(corePathname.createdAt),
     });
   }
 }

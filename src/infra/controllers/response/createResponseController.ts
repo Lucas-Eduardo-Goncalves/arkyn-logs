@@ -21,8 +21,7 @@ class CreateResponseController {
       const response = await this.createResponseUseCase.execute(data);
       return route.response.json(response, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

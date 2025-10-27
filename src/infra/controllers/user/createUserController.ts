@@ -19,8 +19,7 @@ class CreateUserController {
       const user = await this.createUserUseCase.execute(data);
       return route.response.json(user, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

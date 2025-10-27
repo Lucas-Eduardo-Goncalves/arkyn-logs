@@ -4,12 +4,9 @@ import { Request } from "../../../domain/entities/request";
 import { RequestRepository } from "../../../domain/repositories/request";
 import { cacheDb } from "../../adapters/cacheDbAdapter";
 import { databaseConnection } from "../../adapters/dbAdapter";
-import { JsonAdapter } from "../../adapters/jsonAdapter";
 import { RequestMapper } from "../mappers/request";
 
 class PrismaRequestRepository implements RequestRepository {
-  toJson = new JsonAdapter();
-
   async findAll(
     searchParams: RequestSearchParams
   ): Promise<SearchResult<Request>> {
@@ -46,7 +43,7 @@ class PrismaRequestRepository implements RequestRepository {
 
   async createRequest(request: Request): Promise<Request> {
     await databaseConnection.request.create({
-      data: { ...request, body: request?.body || undefined },
+      data: RequestMapper.toDatabase(request),
     });
 
     return request;

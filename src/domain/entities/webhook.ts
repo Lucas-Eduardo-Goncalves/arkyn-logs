@@ -45,7 +45,7 @@ class Webhook {
 
   static create(props: CreateWebhookProps) {
     return new Webhook({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       level: props.level,
       value: props.value,
       type: props.type,
@@ -74,19 +74,14 @@ class Webhook {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-
-    const createdAt = formatDateAdapter.format(this.createdAt);
-    const updatedAt = formatDateAdapter.format(this.updatedAt);
-
     return {
       id: this.id,
       value: this.value,
       level: this.level,
       type: this.type,
       trafficSourceId: this.trafficSourceId,
-      createdAt,
-      updatedAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
+      updatedAt: FormatDateAdapter.format(this.updatedAt),
     };
   }
 }

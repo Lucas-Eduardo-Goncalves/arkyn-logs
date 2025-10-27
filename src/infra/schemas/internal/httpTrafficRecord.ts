@@ -30,11 +30,11 @@ const composeHttpTrafficRecordSchema = z.object({
   method: z.enum(["get", "post", "put", "delete", "patch"]),
   trafficUserId: z.string().uuid("Invalid traffic user id format").nullable(),
   elapsedTime: z.number().min(0, "Elapsed time must be a non-negative number"),
-  requestHeaders: z.record(z.string()),
-  requestBody: z.record(z.string()).nullable(),
-  queryParams: z.record(z.string()),
-  responseHeaders: z.record(z.string()),
-  responseBody: z.record(z.string()).nullable(),
+  requestHeaders: z.string().min(1, "Request headers cannot be empty"),
+  requestBody: z.string().nullable(),
+  queryParams: z.string().min(1, "Query params cannot be empty"),
+  responseHeaders: z.string().min(1, "Response headers cannot be empty"),
+  responseBody: z.string().nullable(),
 });
 
 const listHttpTrafficRecordsSchema = paginationSchema.extend({

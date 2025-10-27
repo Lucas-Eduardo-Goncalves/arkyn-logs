@@ -15,7 +15,7 @@ class DomainMapper {
       value: domain.value,
       protocol: domain.protocol,
       trafficSourceId: domain.trafficSourceId,
-      createdAt: domain.createdAt,
+      createdAt: new Date(domain.createdAt),
     });
   }
 }

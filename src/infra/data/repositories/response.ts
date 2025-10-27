@@ -4,12 +4,9 @@ import { Response } from "../../../domain/entities/response";
 import { ResponseRepository } from "../../../domain/repositories/response";
 import { cacheDb } from "../../adapters/cacheDbAdapter";
 import { databaseConnection } from "../../adapters/dbAdapter";
-import { JsonAdapter } from "../../adapters/jsonAdapter";
 import { ResponseMapper } from "../mappers/response";
 
 class PrismaResponseRepository implements ResponseRepository {
-  toJson = new JsonAdapter();
-
   async findAll(
     searchParams: ResponseSearchParams
   ): Promise<SearchResult<Response>> {
@@ -46,7 +43,7 @@ class PrismaResponseRepository implements ResponseRepository {
 
   async createResponse(response: Response): Promise<Response> {
     await databaseConnection.response.create({
-      data: { ...response, body: response?.body || undefined },
+      data: ResponseMapper.toDatabase(response),
     });
 
     return response;

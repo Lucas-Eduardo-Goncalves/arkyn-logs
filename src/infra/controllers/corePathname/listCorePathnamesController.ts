@@ -31,8 +31,7 @@ class ListCorePathnamesController {
 
       return route.response.json(corePathnames);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

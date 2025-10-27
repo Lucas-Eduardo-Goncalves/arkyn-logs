@@ -1,18 +1,37 @@
 import { Request } from "../../../domain/entities/request";
 import { RequestRepository } from "../../../domain/repositories/request";
+import { FileStorageService } from "../../../infra/service/fileStorageService";
 
 type InputProps = {
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
-  queryParams: Record<string, string>;
+  headers: string;
+  body: string | null;
+  queryParams: string;
 };
 
 class CreateRequestUseCase {
-  constructor(private requestRepository: RequestRepository) {}
+  constructor(
+    private requestRepository: RequestRepository,
+    private fileStorageService: FileStorageService
+  ) {}
+
+  getBodyPreview(body: string | null) {
+    if (!body) return null;
+    return body.slice(0, 200);
+  }
 
   async execute(input: InputProps) {
     const { body, headers, queryParams } = input;
-    const request = Request.create({ headers, body, queryParams });
+
+    const bodyUrl = await this.fileStorageService.insert(body);
+    const bodyPreview = this.getBodyPreview(body);
+
+    const request = Request.create({
+      headers,
+      bodyPreview,
+      bodyUrl,
+      queryParams,
+    });
+
     await this.requestRepository.createRequest(request);
     return request.toJson();
   }

@@ -12,6 +12,7 @@ import { PrismaRequestRepository } from "../../../infra/data/repositories/reques
 import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
 import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
 import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
+import { FileStorageService } from "../../../infra/service/fileStorageService";
 
 const prismaDomainRepository = new PrismaDomainRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
@@ -20,6 +21,8 @@ const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
 const prismaRequestRepository = new PrismaRequestRepository();
 const prismaResponseRepository = new PrismaResponseRepository();
 const prismaWebhookRepository = new PrismaWebhookRepository();
+const fileStorage = new FileStorageService();
+const httpTrafficNotifier = new HttpTrafficNotifier(prismaWebhookRepository);
 
 const createDomainUseCase = new CreateDomainUseCase(
   prismaDomainRepository,
@@ -32,8 +35,6 @@ const createPathnameUseCase = new CreatePathnameUseCase(
   prismaTrafficSourceRepository
 );
 
-const httpTrafficNotifier = new HttpTrafficNotifier(prismaWebhookRepository);
-
 const createHttpTrafficRepository = new CreateHttpTrafficUseCase(
   prismaHttpTrafficRepository,
   prismaTrafficSourceRepository,
@@ -44,10 +45,14 @@ const createHttpTrafficRepository = new CreateHttpTrafficUseCase(
   httpTrafficNotifier
 );
 
-const createRequestUseCase = new CreateRequestUseCase(prismaRequestRepository);
+const createRequestUseCase = new CreateRequestUseCase(
+  prismaRequestRepository,
+  fileStorage
+);
 
 const createResponseUseCase = new CreateResponseUseCase(
-  prismaResponseRepository
+  prismaResponseRepository,
+  fileStorage
 );
 
 const onComposeHttpTrafficRecord = new OnComposeHttpTrafficRecordEvent(

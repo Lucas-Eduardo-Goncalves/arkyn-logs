@@ -48,31 +48,26 @@ class HttpTrafficRecord {
 
   makeRequest() {
     if (!this._request) return null;
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this._request.createdAt);
     return {
       headers: this._request.headers,
-      body: this._request.body,
+      bodyPreview: this._request.bodyPreview,
+      bodyUrl: this._request.bodyUrl,
       queryParams: this._request.queryParams,
-      createdAt,
+      createdAt: FormatDateAdapter.format(this._request.createdAt),
     };
   }
 
   makeResponse() {
     if (!this._response) return null;
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this._response.createdAt);
     return {
       headers: this._response.headers,
-      body: this._response.body,
-      createdAt,
+      bodyPreview: this._response.bodyPreview,
+      bodyUrl: this._response.bodyUrl,
+      createdAt: FormatDateAdapter.format(this._response.createdAt),
     };
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this._httpTraffic.createdAt);
-
     return {
       id: this._httpTraffic.id,
       status: this._httpTraffic.status,
@@ -86,7 +81,7 @@ class HttpTrafficRecord {
       pathname: this._pathname.value,
       request: this.makeRequest(),
       response: this.makeResponse(),
-      createdAt: createdAt,
+      createdAt: FormatDateAdapter.format(this._httpTraffic.createdAt),
     };
   }
 }

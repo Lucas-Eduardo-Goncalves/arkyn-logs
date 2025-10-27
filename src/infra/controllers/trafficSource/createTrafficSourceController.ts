@@ -21,8 +21,7 @@ class CreateTrafficSourceController {
       const trafficSource = await this.createTrafficSourceUseCase.execute(data);
       return route.response.json(trafficSource, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

@@ -27,8 +27,7 @@ class CreateHttpTrafficController {
       );
       return route.response.json(httpTraffic, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

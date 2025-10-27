@@ -22,8 +22,7 @@ class DeleteWebhookController {
 
       return route.response.json(webhook, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

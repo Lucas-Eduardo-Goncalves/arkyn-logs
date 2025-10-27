@@ -9,11 +9,11 @@ class ComposeHttpTrafficRecordEvent {
   readonly method: HttpMethod;
   readonly trafficUserId: string | null;
   readonly elapsedTime: number;
-  readonly requestHeaders: Record<string, string>;
-  readonly requestBody: Record<string, string> | null;
-  readonly queryParams: Record<string, string>;
-  readonly responseHeaders: Record<string, string>;
-  readonly responseBody: Record<string, string> | null;
+  readonly requestHeaders: string;
+  readonly requestBody: string | null;
+  readonly queryParams: string;
+  readonly responseHeaders: string;
+  readonly responseBody: string | null;
   readonly userId: string;
 
   constructor(data: ComposeHttpTrafficRecordEvent) {

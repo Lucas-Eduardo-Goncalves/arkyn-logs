@@ -42,7 +42,7 @@ class TrafficSource {
 
   static create(props: CreateTrafficSourceProps) {
     return new TrafficSource({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       name: props.name,
       trafficDomain: props.trafficDomain,
       userId: props.userId,
@@ -68,17 +68,13 @@ class TrafficSource {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-    const updatedAt = formatDateAdapter.format(this.updatedAt);
-
     return {
       id: this.id,
       name: this.name,
       trafficDomain: this.trafficDomain,
       userId: this.userId,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
+      updatedAt: FormatDateAdapter.format(this.updatedAt),
     };
   }
 }

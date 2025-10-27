@@ -45,9 +45,8 @@ class User {
   }
 
   static create(props: CreateUserProps) {
-    const idAdapter = new IdAdapter();
     return new User({
-      id: idAdapter.generate(),
+      id: IdAdapter.generate(),
       name: props.name,
       email: props.email,
       password: props.password,
@@ -76,17 +75,13 @@ class User {
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-    const updatedAt = formatDateAdapter.format(this.updatedAt);
-
     return {
       id: this.id,
       name: this.name,
       email: this.email,
       utc: this.utc,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      createdAt: FormatDateAdapter.format(this.createdAt),
+      updatedAt: FormatDateAdapter.format(this.updatedAt),
     };
   }
 }

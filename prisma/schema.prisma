@@ -65,7 +65,7 @@ model Webhook {
   value           String
   createdAt       DateTime
   updatedAt       DateTime
-  trafficSourceId String        
+  trafficSourceId String
   trafficSource   TrafficSource @relation(fields: [trafficSourceId], references: [id])
 }
 
@@ -139,9 +139,10 @@ model HttpTraffic {
 
 model Request {
   id          String       @id
-  headers     Json
-  body        Json?
-  queryParams Json
+  headers     String
+  bodyPreview String?
+  bodyUrl     String?
+  queryParams String?
   createdAt   DateTime
   httpTraffic HttpTraffic?
   coreLog     CoreLog?
@@ -149,8 +150,9 @@ model Request {
 
 model Response {
   id          String       @id
-  headers     Json
-  body        Json?
+  headers     String
+  bodyPreview String?
+  bodyUrl     String?
   createdAt   DateTime
   httpTraffic HttpTraffic?
   coreLog     CoreLog?

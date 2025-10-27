@@ -3,36 +3,41 @@ import { IdAdapter } from "../../infra/adapters/idAdapter";
 
 type ConstructorProps = {
   id: string;
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
+  headers: string;
+  bodyPreview: string | null;
+  bodyUrl: string | null;
   createdAt: Date;
 };
 
 type CreateResponseProps = {
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
+  headers: string;
+  bodyPreview: string | null;
+  bodyUrl: string | null;
 };
 
 type RestoreResponseProps = ConstructorProps;
 
 class Response {
   id: string;
-  headers: Record<string, string>;
-  body: Record<string, string> | null;
+  headers: string;
+  bodyPreview: string | null;
+  bodyUrl: string | null;
   createdAt: Date;
 
   private constructor(props: ConstructorProps) {
     this.id = props.id;
     this.headers = props.headers;
-    this.body = props.body;
+    this.bodyPreview = props.bodyPreview;
+    this.bodyUrl = props.bodyUrl;
     this.createdAt = props.createdAt;
   }
 
   static create(props: CreateResponseProps) {
     return new Response({
-      id: new IdAdapter().generate(),
+      id: IdAdapter.generate(),
       headers: props.headers,
-      body: props.body,
+      bodyPreview: props.bodyPreview || null,
+      bodyUrl: props.bodyUrl || null,
       createdAt: new Date(),
     });
   }
@@ -41,20 +46,19 @@ class Response {
     return new Response({
       id: props.id,
       headers: props.headers,
-      body: props.body,
+      bodyPreview: props.bodyPreview,
+      bodyUrl: props.bodyUrl,
       createdAt: props.createdAt,
     });
   }
 
   toJson() {
-    const formatDateAdapter = new FormatDateAdapter();
-    const createdAt = formatDateAdapter.format(this.createdAt);
-
     return {
       id: this.id,
       headers: this.headers,
-      body: this.body,
-      createdAt: createdAt,
+      bodyPreview: this.bodyPreview,
+      bodyUrl: this.bodyUrl,
+      createdAt: FormatDateAdapter.format(this.createdAt),
     };
   }
 }

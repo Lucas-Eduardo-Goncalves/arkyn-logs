@@ -22,8 +22,7 @@ class CreateDomainController {
       const domain = await this.createDomainUseCase.execute(data, userId);
       return route.response.json(domain, 201);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

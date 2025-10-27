@@ -32,8 +32,7 @@ class ListHttpTrafficsController {
 
       return route.response.json(httpTraffics);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }

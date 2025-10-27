@@ -25,8 +25,7 @@ class DeleteHttpTrafficController {
 
       return route.response.json(httpTraffic);
     } catch (error) {
-      const errorHandlerAdapter = new ErrorHandlerAdapter();
-      return errorHandlerAdapter.handle(error);
+      return ErrorHandlerAdapter.handle(error);
     }
   }
 }
