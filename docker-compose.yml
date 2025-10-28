@@ -1,23 +1,29 @@
 services:
   app1:
     build: .
-    command: bun run start
+    command: bun run dev # Use o comando de desenvolvimento
     container_name: app1
     hostname: container-1
     networks:
       - balancer-net
     env_file:
       - .env
+    volumes: # Monta o volume para desenvolvimento
+      - .:/app
+      - /app/node_modules
 
   app2:
     build: .
-    command: bun run start
+    command: bun run dev # Use o comando de desenvolvimento
     container_name: app2
     hostname: container-2
     networks:
       - balancer-net
     env_file:
       - .env
+    volumes: # Monta o volume para desenvolvimento
+      - .:/app
+      - /app/node_modules
 
   nginx:
     image: nginx:stable
@@ -28,7 +34,9 @@ services:
     volumes:
       - ./nginx/balancer.conf:/etc/nginx/conf.d/default.conf:ro
     expose:
-      - "80"
+      - "8080"
+    ports:
+      - "8080:80"
     networks:
       - balancer-net
 

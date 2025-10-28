@@ -135,6 +135,8 @@ model HttpTraffic {
   pathname        Pathname      @relation(fields: [pathnameId], references: [id])
   request         Request       @relation(fields: [requestId], references: [id])
   response        Response      @relation(fields: [responseId], references: [id])
+
+  @@index([createdAt, level, trafficSourceId, domainId, pathnameId, method, status])
 }
 
 model Request {
