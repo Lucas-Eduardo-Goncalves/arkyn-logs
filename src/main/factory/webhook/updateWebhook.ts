@@ -1,7 +1,7 @@
 import { UpdateWebhookUseCase } from "../../../app/useCases/webhook/updateWebhookUseCase";
 import { UpdateWebhookController } from "../../../infra/controllers/webhook/updateWebhookController";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
-import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
+import { PrismaWebhookRepository } from "../../../infra/repositories/webhook";
 
 const prismaWebhookRepository = new PrismaWebhookRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

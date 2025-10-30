@@ -10,8 +10,7 @@ class DeleteCorePathnameUseCase {
     );
 
     if (!corePathname) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Core pathname not found");
+      throw HttpAdapter.notFound("Core pathname not found");
     }
 
     await this.corePathnameRepository.deleteCorePathname(corePathname.id);

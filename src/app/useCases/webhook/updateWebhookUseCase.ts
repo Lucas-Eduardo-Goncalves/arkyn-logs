@@ -20,8 +20,7 @@ class UpdateWebhookUseCase {
     const webhook = await this.webhookRepository.findById(webhookId);
 
     if (!webhook) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Webhook not found");
+      throw HttpAdapter.notFound("Webhook not found");
     }
 
     const trafficSource = await this.trafficSourceRepository.findById(
@@ -29,13 +28,11 @@ class UpdateWebhookUseCase {
     );
 
     if (!trafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (trafficSource.userId !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.forbidden("You do not own this traffic source.");
+      throw HttpAdapter.forbidden("You do not own this traffic source.");
     }
 
     webhook.updateWebhook({ value, level });

@@ -1,7 +1,7 @@
 import { DeleteHttpTrafficUseCase } from "../../../app/useCases/httpTraffic/deleteHttpTrafficUseCase";
 import { DeleteHttpTrafficController } from "../../../infra/controllers/httpTraffic/deleteHttpTrafficController";
-import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

@@ -1,4 +1,4 @@
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 import { DeleteTrafficSourceUseCase } from "../../../app/useCases/trafficSource/deleteTrafficSourceUseCase";
 import { DeleteTrafficSourceController } from "../../../infra/controllers/trafficSource/deleteTrafficSourceController";
 

@@ -1,7 +1,7 @@
 import { CreateCorePathnameUseCase } from "../../../app/useCases/corePathname/createCorePathnameUseCase";
 import { CreateCorePathnameController } from "../../../infra/controllers/corePathname/createCorePathnameController";
-import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaCorePathnameRepository } from "../../../infra/repositories/corePathname";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaCorePathnameRepository = new PrismaCorePathnameRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

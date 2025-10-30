@@ -8,27 +8,27 @@ import {
 } from "@arkyn/server";
 
 class HttpAdapter {
-  badRequest(message: string, cause?: any) {
+  static badRequest(message: string, cause?: any) {
     throw new BadRequest(message, cause);
   }
 
-  serverError(message: string, cause?: any) {
+  static serverError(message: string, cause?: any) {
     throw new ServerError(message, cause);
   }
 
-  notFound(message: string, cause?: any) {
+  static notFound(message: string, cause?: any) {
     throw new NotFound(message, cause);
   }
 
-  conflict(message: string, cause?: any) {
+  static conflict(message: string, cause?: any) {
     throw new Conflict(message, cause);
   }
 
-  unauthorized(message: string, cause?: any) {
+  static unauthorized(message: string, cause?: any) {
     throw new Unauthorized(message, cause);
   }
 
-  forbidden(message: string, cause?: any) {
+  static forbidden(message: string, cause?: any) {
     throw new Forbidden(message, cause);
   }
 }

@@ -18,13 +18,11 @@ class UpdateTrafficSourceUseCase {
     );
 
     if (!trafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (trafficSource.userId !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.forbidden("You do not own this traffic source.");
+      throw HttpAdapter.forbidden("You do not own this traffic source.");
     }
 
     trafficSource.update({ name, trafficDomain });

@@ -1,7 +1,7 @@
 import { ListHttpTrafficRecordsUseCase } from "../../../app/useCases/httpTrafficRecord/listHttpTrafficRecordsUseCase";
 import { ListHttpTrafficRecordsController } from "../../../infra/controllers/httpTrafficRecord/listHttpTrafficRecordsController";
-import { PrismaHttpTrafficRecordDAL } from "../../../infra/data/dal/httpTrafficRecord";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaHttpTrafficRecordDAL } from "../../../infra/dal/httpTrafficRecord";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaHttpTrafficRecordDAL = new PrismaHttpTrafficRecordDAL();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

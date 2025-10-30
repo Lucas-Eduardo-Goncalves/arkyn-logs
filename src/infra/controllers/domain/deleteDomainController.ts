@@ -13,8 +13,7 @@ class DeleteDomainController {
       const domainId = route.request.params?.domainId;
 
       if (!domainId) {
-        const httpAdapter = new HttpAdapter();
-        throw httpAdapter.badRequest("Domain ID is required");
+        throw HttpAdapter.badRequest("Domain ID is required");
       }
 
       const domain = await this.deleteDomainUseCase.execute(domainId, userId);

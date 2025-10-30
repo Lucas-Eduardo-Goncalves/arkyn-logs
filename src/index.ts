@@ -17,7 +17,6 @@ import { pathnameRoutes } from "./main/routes/pathname.routes";
 import { requestRoutes } from "./main/routes/request.routes";
 import { responseRoutes } from "./main/routes/response.routes";
 import { trafficSourceRoutes } from "./main/routes/trafficSource.routes";
-import { userRoutes } from "./main/routes/user.routes";
 import { webhookRoutes } from "./main/routes/webhook.route";
 
 const app = new Hono();
@@ -41,7 +40,6 @@ app.route("/pathnames", pathnameRoutes);
 app.route("/requests", requestRoutes);
 app.route("/responses", responseRoutes);
 app.route("/traffic-sources", trafficSourceRoutes);
-app.route("/users", userRoutes);
 app.route("/webhooks", webhookRoutes);
 
 export default {

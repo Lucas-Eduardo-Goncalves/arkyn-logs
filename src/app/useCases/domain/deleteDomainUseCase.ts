@@ -12,8 +12,7 @@ class DeleteDomainUseCase {
     const domain = await this.domainRepository.findById(domainId);
 
     if (!domain) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Domain not found");
+      throw HttpAdapter.notFound("Domain not found");
     }
 
     const trafficSource = await this.trafficSourceRepository.findById(
@@ -21,13 +20,11 @@ class DeleteDomainUseCase {
     );
 
     if (!trafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (trafficSource.userId !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.forbidden("You do not own this traffic source.");
+      throw HttpAdapter.forbidden("You do not own this traffic source.");
     }
 
     await this.domainRepository.deleteDomain(domain.id);

@@ -20,20 +20,17 @@ class ListWebhooksUseCase {
     );
 
     if (!trafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (trafficSource.userId !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.forbidden("You do not own this traffic source.");
+      throw HttpAdapter.forbidden("You do not own this traffic source.");
     }
 
     const webhook = await this.webhookRepository.findAll(trafficSourceId);
 
     if (!webhook) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Webhook not found for this traffic source");
+      throw HttpAdapter.notFound("Webhook not found for this traffic source");
     }
 
     return webhook.map((w) => w.toJson());

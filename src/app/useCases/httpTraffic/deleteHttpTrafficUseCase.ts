@@ -14,8 +14,7 @@ class DeleteHttpTrafficUseCase {
     );
 
     if (!httpTraffic) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Http traffic not found");
+      throw HttpAdapter.notFound("Http traffic not found");
     }
 
     const trafficSource = await this.trafficSourceRepository.findById(
@@ -23,13 +22,11 @@ class DeleteHttpTrafficUseCase {
     );
 
     if (!trafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (trafficSource.userId !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.forbidden("You do not own this traffic source.");
+      throw HttpAdapter.forbidden("You do not own this traffic source.");
     }
 
     await this.httpTrafficRepository.deleteHttpTraffic(httpTraffic.id);

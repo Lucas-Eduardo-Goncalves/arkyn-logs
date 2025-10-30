@@ -23,8 +23,7 @@ class CreateCorePathnameUseCase {
     ]);
 
     if (!existsTrafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (existsCorePathname) return existsCorePathname.toJson();

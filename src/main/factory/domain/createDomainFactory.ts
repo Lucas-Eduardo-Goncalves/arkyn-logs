@@ -1,5 +1,5 @@
-import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaDomainRepository } from "../../../infra/repositories/domain";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 import { CreateDomainUseCase } from "../../../app/useCases/domain/createDomainUseCase";
 import { CreateDomainController } from "../../../infra/controllers/domain/createDomainController";
 

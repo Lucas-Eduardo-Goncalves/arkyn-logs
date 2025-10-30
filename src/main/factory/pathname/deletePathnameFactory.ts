@@ -1,7 +1,7 @@
-import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathname";
+import { PrismaPathnameRepository } from "../../../infra/repositories/pathname";
 import { DeletePathnameUseCase } from "../../../app/useCases/pathname/deletePathnameUseCase";
 import { DeletePathnameController } from "../../../infra/controllers/pathname/deletePathnameController";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaPathnameRepository = new PrismaPathnameRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

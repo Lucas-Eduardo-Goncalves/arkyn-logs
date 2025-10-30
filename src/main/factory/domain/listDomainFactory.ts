@@ -1,7 +1,7 @@
 import { ListDomainsUseCase } from "../../../app/useCases/domain/listDomainsUseCase";
 import { ListDomainsController } from "../../../infra/controllers/domain/listDomainsController";
-import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaDomainRepository } from "../../../infra/repositories/domain";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaDomainRepository = new PrismaDomainRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

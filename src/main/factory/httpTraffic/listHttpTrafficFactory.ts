@@ -1,7 +1,7 @@
-import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
+import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
 import { ListHttpTrafficsUseCase } from "../../../app/useCases/httpTraffic/listHttpTrafficsUseCase";
 import { ListHttpTrafficsController } from "../../../infra/controllers/httpTraffic/listHttpTrafficsController";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaHttpTrafficRepository = new PrismaHttpTrafficRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

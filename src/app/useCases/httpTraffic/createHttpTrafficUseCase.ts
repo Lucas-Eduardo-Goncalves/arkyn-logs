@@ -55,33 +55,27 @@ class CreateHttpTrafficUseCase {
       ]);
 
     if (!trafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (trafficSource.userId !== userId) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.forbidden("You do not own this traffic source.");
+      throw HttpAdapter.forbidden("You do not own this traffic source.");
     }
 
     if (!domain) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Domain not found");
+      throw HttpAdapter.notFound("Domain not found");
     }
 
     if (!pathname) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Pathname not found");
+      throw HttpAdapter.notFound("Pathname not found");
     }
 
     if (!request) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Request not found");
+      throw HttpAdapter.notFound("Request not found");
     }
 
     if (!response) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Response not found");
+      throw HttpAdapter.notFound("Response not found");
     }
 
     const httpTraffic = HttpTraffic.create({

@@ -15,6 +15,9 @@ const environmentVariablesSchema = z.object({
   DATABASE_URL: z.string().url(),
   DIRECT_URL: z.string().url(),
 
+  // MICRO SERVICES
+  MICRO_AUTH_URL: z.string().url(),
+
   // REDIS URL
   REDIS_HOST: z.string().min(1),
   REDIS_PASSWORD: z.string().min(1),

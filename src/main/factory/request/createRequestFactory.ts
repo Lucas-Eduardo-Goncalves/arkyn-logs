@@ -1,6 +1,6 @@
 import { CreateRequestUseCase } from "../../../app/useCases/request/createRequestUseCase";
 import { CreateRequestController } from "../../../infra/controllers/request/createRequestController";
-import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
+import { PrismaRequestRepository } from "../../../infra/repositories/request";
 import { FileStorageService } from "../../../infra/service/fileStorageService";
 
 const prismaRequestRepository = new PrismaRequestRepository();

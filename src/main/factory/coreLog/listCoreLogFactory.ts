@@ -1,7 +1,7 @@
 import { ListCoreLogsUseCase } from "../../../app/useCases/coreLog/listCoreLogsUseCase";
 import { ListCoreLogsController } from "../../../infra/controllers/coreLog/listCoreLogsController";
-import { PrismaCoreLogRepository } from "../../../infra/data/repositories/coreLog";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaCoreLogRepository } from "../../../infra/repositories/coreLog";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaCoreLogRepository = new PrismaCoreLogRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();

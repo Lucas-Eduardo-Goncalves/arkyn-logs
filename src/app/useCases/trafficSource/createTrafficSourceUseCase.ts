@@ -1,6 +1,6 @@
 import { TrafficSource } from "../../../domain/entities/trafficSource";
+import { UserGatewayDTO } from "../../../domain/gateways/user";
 import { TrafficSourceRepository } from "../../../domain/repositories/trafficSource";
-import { UserRepository } from "../../../domain/repositories/user";
 import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 
 type InputProps = {
@@ -12,25 +12,23 @@ type InputProps = {
 class CreateTrafficSourceUseCase {
   constructor(
     private trafficSourceRepository: TrafficSourceRepository,
-    private userRepository: UserRepository
+    private userGateway: UserGatewayDTO
   ) {}
 
   async execute(input: InputProps) {
     const { name, trafficDomain, userId } = input;
 
-    const [existsUser, existsDomain] = await Promise.all([
-      await this.userRepository.findById(userId),
+    const [isValidUser, existsDomain] = await Promise.all([
+      await this.userGateway.validateUserId(userId),
       await this.trafficSourceRepository.findByDomain(trafficDomain),
     ]);
 
-    if (!existsUser) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("User not found");
+    if (!isValidUser) {
+      throw HttpAdapter.notFound("Invalid user ID");
     }
 
     if (existsDomain) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.conflict("Traffic domain already exists");
+      throw HttpAdapter.conflict("Traffic domain already exists");
     }
 
     const trafficSource = TrafficSource.create({ name, userId, trafficDomain });

@@ -5,13 +5,13 @@ import { CreateHttpTrafficUseCase } from "../../../app/useCases/httpTraffic/crea
 import { CreatePathnameUseCase } from "../../../app/useCases/pathname/createPathnameUseCase";
 import { CreateRequestUseCase } from "../../../app/useCases/request/createRequestUseCase";
 import { CreateResponseUseCase } from "../../../app/useCases/response/createResponseUseCase";
-import { PrismaDomainRepository } from "../../../infra/data/repositories/domain";
-import { PrismaHttpTrafficRepository } from "../../../infra/data/repositories/httpTraffic";
-import { PrismaPathnameRepository } from "../../../infra/data/repositories/pathname";
-import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
-import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
-import { PrismaWebhookRepository } from "../../../infra/data/repositories/webhook";
+import { PrismaDomainRepository } from "../../../infra/repositories/domain";
+import { PrismaHttpTrafficRepository } from "../../../infra/repositories/httpTraffic";
+import { PrismaPathnameRepository } from "../../../infra/repositories/pathname";
+import { PrismaRequestRepository } from "../../../infra/repositories/request";
+import { PrismaResponseRepository } from "../../../infra/repositories/response";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
+import { PrismaWebhookRepository } from "../../../infra/repositories/webhook";
 import { FileStorageService } from "../../../infra/service/fileStorageService";
 
 const prismaDomainRepository = new PrismaDomainRepository();

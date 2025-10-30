@@ -52,23 +52,19 @@ class CreateCoreLogUseCase {
     ]);
 
     if (!existsTrafficSource) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Traffic source not found");
+      throw HttpAdapter.notFound("Traffic source not found");
     }
 
     if (!existsCorePathname) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Core pathname not found");
+      throw HttpAdapter.notFound("Core pathname not found");
     }
 
     if (!existsRequest) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Request not found");
+      throw HttpAdapter.notFound("Request not found");
     }
 
     if (!existsResponse) {
-      const httpAdapter = new HttpAdapter();
-      throw httpAdapter.notFound("Response not found");
+      throw HttpAdapter.notFound("Response not found");
     }
 
     const coreLog = CoreLog.create({

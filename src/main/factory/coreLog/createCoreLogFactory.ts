@@ -1,10 +1,10 @@
 import { CreateCoreLogUseCase } from "../../../app/useCases/coreLog/createCoreLogUseCase";
 import { CreateCoreLogController } from "../../../infra/controllers/coreLog/createCoreLogController";
-import { PrismaCoreLogRepository } from "../../../infra/data/repositories/coreLog";
-import { PrismaCorePathnameRepository } from "../../../infra/data/repositories/corePathname";
-import { PrismaRequestRepository } from "../../../infra/data/repositories/request";
-import { PrismaResponseRepository } from "../../../infra/data/repositories/response";
-import { PrismaTrafficSourceRepository } from "../../../infra/data/repositories/trafficSource";
+import { PrismaCoreLogRepository } from "../../../infra/repositories/coreLog";
+import { PrismaCorePathnameRepository } from "../../../infra/repositories/corePathname";
+import { PrismaRequestRepository } from "../../../infra/repositories/request";
+import { PrismaResponseRepository } from "../../../infra/repositories/response";
+import { PrismaTrafficSourceRepository } from "../../../infra/repositories/trafficSource";
 
 const prismaCoreLogRepository = new PrismaCoreLogRepository();
 const prismaTrafficSourceRepository = new PrismaTrafficSourceRepository();
