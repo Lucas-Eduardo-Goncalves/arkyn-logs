@@ -11,7 +11,7 @@ class AuthMiddleware {
     const jwtAdapter = new JwtAdapter();
     const { userId } = await jwtAdapter.verify(token);
 
-    return { userId };
+    return { userId, token };
   }
 }
 

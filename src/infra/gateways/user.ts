@@ -3,15 +3,20 @@ import { HttpAdapter } from "../adapters/httpAdapter";
 import { microAuth } from "../https/microAuth";
 
 class UserGateway implements UserGatewayDTO {
-  async validateUserId(userId: string): Promise<boolean> {
-    const apiResponse = await microAuth.post(`/users/${userId}/valid`, {});
+  async validateUserId(token: string): Promise<string> {
+    const apiResponse = await microAuth.post(`/users/validate`, { token });
 
     if (!apiResponse.success) {
-      throw HttpAdapter.badRequest(apiResponse.message, apiResponse.cause);
+      throw HttpAdapter.badGateway(apiResponse.message, apiResponse.cause);
     }
 
-    const isValidUserId = apiResponse.response?.isValid === true;
-    return isValidUserId;
+    const userId = apiResponse.response?.userId;
+
+    if (typeof userId !== "string") {
+      throw HttpAdapter.badRequest("Invalid user ID");
+    }
+
+    return userId;
   }
 }
 

@@ -1,4 +1,5 @@
 import {
+  BadGateway,
   BadRequest,
   Conflict,
   Forbidden,
@@ -8,6 +9,10 @@ import {
 } from "@arkyn/server";
 
 class HttpAdapter {
+  static badGateway(message: string, cause?: any) {
+    throw new BadGateway(message, cause);
+  }
+
   static badRequest(message: string, cause?: any) {
     throw new BadRequest(message, cause);
   }

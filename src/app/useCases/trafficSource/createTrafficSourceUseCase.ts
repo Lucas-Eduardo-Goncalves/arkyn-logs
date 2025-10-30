@@ -5,7 +5,7 @@ import { HttpAdapter } from "../../../infra/adapters/httpAdapter";
 
 type InputProps = {
   name: string;
-  userId: string;
+  token: string;
   trafficDomain: string;
 };
 
@@ -16,16 +16,12 @@ class CreateTrafficSourceUseCase {
   ) {}
 
   async execute(input: InputProps) {
-    const { name, trafficDomain, userId } = input;
+    const { name, trafficDomain, token } = input;
 
-    const [isValidUser, existsDomain] = await Promise.all([
-      await this.userGateway.validateUserId(userId),
+    const [userId, existsDomain] = await Promise.all([
+      await this.userGateway.validateUserId(token),
       await this.trafficSourceRepository.findByDomain(trafficDomain),
     ]);
-
-    if (!isValidUser) {
-      throw HttpAdapter.notFound("Invalid user ID");
-    }
 
     if (existsDomain) {
       throw HttpAdapter.conflict("Traffic domain already exists");

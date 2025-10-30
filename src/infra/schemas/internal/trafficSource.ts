@@ -7,7 +7,7 @@ const createTrafficSourceSchema = z.object({
     .string()
     .min(1, "Traffic domain is required")
     .url("Invalid URL format"),
-  userId: z.string().uuid("Invalid user id format"),
+  token: z.string().min(1, "Authentication token is required"),
 });
 
 const updateTrafficSourceSchema = z.object({

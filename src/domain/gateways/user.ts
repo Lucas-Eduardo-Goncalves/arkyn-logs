@@ -1,5 +1,5 @@
 type UserGatewayDTO = {
-  validateUserId: (id: string) => Promise<boolean>;
+  validateUserId: (id: string) => Promise<string>;
 };
 
 export type { UserGatewayDTO };
