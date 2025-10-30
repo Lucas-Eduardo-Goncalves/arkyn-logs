@@ -5,7 +5,7 @@ services:
     container_name: store-app-1
     hostname: store-app-1
     networks:
-      - balancer-net
+      - store-net
     env_file:
       - .env
 
@@ -15,7 +15,7 @@ services:
     container_name: store-app-2
     hostname: store-app-2
     networks:
-      - balancer-net
+      - store-net
     env_file:
       - .env
 
@@ -32,8 +32,8 @@ services:
     ports:
       - "8083:80"
     networks:
-      - balancer-net
+      - store-net
 
 networks:
-  balancer-net:
+  store-net:
     driver: bridge
