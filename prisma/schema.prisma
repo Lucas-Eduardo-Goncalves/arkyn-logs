@@ -38,6 +38,8 @@ model TrafficSource {
   coreLog       CoreLog[]
   webhook       Webhook[]
   shares        TrafficSourceShare[]
+
+  @@index([userId])
 }
 
 enum WebhookType {
@@ -70,8 +72,7 @@ model TrafficSourceShare {
   trafficSource   TrafficSource   @relation(fields: [trafficSourceId], references: [id])
 
   @@unique([ownerId, sharedWithId, trafficSourceId])
-  @@index([sharedWithId])
-  @@index([trafficSourceId])
+  @@index([sharedWithId, trafficSourceId])
 }
 
 enum Protocol {

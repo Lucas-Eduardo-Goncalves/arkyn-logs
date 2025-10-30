@@ -4,7 +4,10 @@ import { RouteDTO } from "../../main/types/RouteDTO";
 
 class AuthMiddleware {
   static async authenticate(route: RouteDTO) {
-    const token = route?.request?.headers?.authorization;
+    const token = route?.request?.headers?.authorization?.replace(
+      "Bearer ",
+      ""
+    );
 
     if (!token) throw HttpAdapter.badRequest("No token provided");
 
